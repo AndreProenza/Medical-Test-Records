@@ -16,6 +16,14 @@ Suggested references:
 - [XACML](https://github.com/wso2/balana) library -- example XACML implementation (there are other libraries)
 
 
+## Introdução em Português
+
+As instituições de saúde recolhem e armazenam informação sensível dos doentes. Os sistemas de informação devem permitir o acesso fino e contextualizado aos registos ao pessoal relevante, como Médicos e Enfermeiros. Outro pessoal com diferentes necessidades de acesso aos dados inclui: assistentes clínicos (cuidam da limpeza da enfermaria), assistentes de serviços aos doentes (trazem refeições e bebidas), carregadores (cuidam do levantamento e transporte dos doentes), voluntários (ajudam na angariação de fundos e visitas à enfermaria), e funcionários da enfermaria (pessoal das mesas de recepção da enfermaria).
+
+Um dos tipos de dados relevantes armazenados são os resultados dos testes. Alguns dos testes médicos podem ser realizados dentro de um laboratório hospitalar, mas em muitos casos, os testes são realizados em laboratórios parceiros, que têm uma infra-estrutura distinta, distante da infra-estrutura do hospital, que precisa de estar interligada. Além disso, os dados dos testes médicos têm de ser arquivados de forma a que a sua autenticidade possa ser verificada mais tarde, se necessário.
+
+É obrigatório que a solução externalize a política de segurança com uma linguagem de política, como a XACML, com pontos de autoria e aplicação de políticas separados, e diferentes partes do registo do paciente podem ser acedidas por pessoas diferentes e em contextos diferentes. Para demonstrar a vantagem desta separação, a solução deve ter um modo normal de funcionamento e um modo pandémico, onde as regras de acesso aos dados são significativamente diferentes. A mudança entre modos deve ser feita com alterações aos documentos da apólice, mas sem alterações ao código da aplicação.
+
 ---
 
 ## [Project Overview](https://github.com/tecnico-sec/Project-Overview-2022_1)
