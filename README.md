@@ -116,5 +116,7 @@ The advanced version should address more attacks.
 Include a Gantt chart describing the planned tasks and how much time is allocated to the implementation
 (for example, consider a total of ~180 Person/hour, i.e., 3 weeks for a team of 3 people, each with 50% allocation of a 40-hour work week).
 This Gantt chart should illustrate the tasks for the different milestones and the expected conclusion date for each.
-References
+
+### References
+
 Bibliographic references cited in the project proposal.
