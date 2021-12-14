@@ -101,13 +101,18 @@ Identify the security properties to ensure.
 What keys will exist and how will they be distributed?
 Considered technologies
 Succinctly describe the technologies that are being considered, e.g., programming languages, frameworks, libraries, tools, etc.
-Plan
-4.1. Milestones
+
+### Plan
+
+### Milestones
+
 Describe basic, intermediate and advanced versions of the work and when are they expected to be achieved.
 The basic version is the minimum security functionality.
 The intermediate version includes the most important security mechanisms.
 The advanced version should address more attacks.
-4.2. Effort commitments
+
+### Effort commitments
+
 Include a Gantt chart describing the planned tasks and how much time is allocated to the implementation
 (for example, consider a total of ~180 Person/hour, i.e., 3 weeks for a team of 3 people, each with 50% allocation of a 40-hour work week).
 This Gantt chart should illustrate the tasks for the different milestones and the expected conclusion date for each.
