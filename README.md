@@ -43,12 +43,15 @@ You can bring a draft of the proposal to your lab session or office hours to pre
 The planned project will need to have, at least:
 
 a set of separate (virtual) machines, with network isolation;
+
 a secure communication tunnel (e.g. TLS, SSH) using correct configuration;
+
 the design and deployment of one mechanism using a custom security protocol.
 
 ### Document requirements
 
 PDF format;
+
 Mandatory file name CXX_WWW_HHMM_L_proposal.pdf (where C is A for Alameda, T for Tagus, XX is the Fenix group number with two digits, WWW is the weekday of the lab shift – Mon, Tue, Wed, Thu, Fri – HHMM is the time – Hours and Minutes – and L is the lab room number);
 Report cover: Project title. Headed by course name, group campus, group number. In the next row: group members sorted by ascending student number. For each student, include the number, name and professional photo with face clearly visible;
 Report body: The font should be no smaller than 11pt, with standard line and character spacing;
@@ -58,7 +61,8 @@ The use of UML diagrams (or other standard notations) is recommended for clear a
 
 ### Document structure (mandatory)
 
-Problem
+### Problem
+
 Given the chosen scenario, where is security necessary?
 What is the main problem being solved?
 Use around 200 words.
