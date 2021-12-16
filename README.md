@@ -124,3 +124,29 @@ This Gantt chart should illustrate the tasks for the different milestones and th
 ### References
 
 Bibliographic references cited in the project proposal.
+
+---
+---
+---
+
+### Problem
+
+### Solution Requirements
+
+### Trust assumptions
+
+### Overview
+
+### Deployment
+
+### Secure channel(s) to configure
+
+### Secure protocol(s) to develop
+
+### Plan
+
+### Milestones
+
+### Effort commitments
+
+### References
