@@ -160,7 +160,7 @@ healthcare anywhere and at any time. Therefore, the data should be protected fro
 
 #### As a Patient service assistants, Volunteers I should be able to:
 
-- Read your medical record
+- Read specific information.
 
 #### As a Patient I should be able to:
 
@@ -184,11 +184,9 @@ As a system, I must:
 - Allow user A to change the privileges of user B, if user A is a system administrator;
 - Ensure successful authentication of users;
 - Mitigate brute force attacks on the authentication system (e.g. blocking IP’s);
-- Minimize the impact of failures within the system (solution: do an "I'm alive with timeout" to the
-backup server);
+- Minimize the impact of failures within the system (solution: do an "I'm alive with timeout" to the backup server);
 - Minimize the impact of attacks inside the system.
-2
-As a user, I cannot repudiate my actions
+- Users cannot repudiate their actions
 
 ### Trust assumptions
 
