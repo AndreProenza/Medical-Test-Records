@@ -131,7 +131,64 @@ Bibliographic references cited in the project proposal.
 
 ### Problem
 
+Patient's medical records are extremely sensitive data. The historical records made by doctors
+facilitate the process of diagnosing a patient, ensuring their quality, which helps clinical staff to treat
+quickly and accordingly.
+This data should be kept private, allowing only the discriminating staff to access it. We believe, that
+all healthcare facilities should have access to this type of information so that patients can receive
+healthcare anywhere and at any time. Therefore, the data should be protected from external agents
+(i.e., outside the medical institutions) and from unauthorised people within the institutions.
+
 ### Solution Requirements
+
+#### As a user (depending on my privilege) I should be able to:
+
+- Read/write medical records (send requests to the system);
+- Receive responses from the system (receive replies from the system).
+
+#### As a Doctor, Nurse I should be able to:
+
+- Read/Update medical records
+
+#### As a Patient service assistants, Porters I should be able to:
+
+- Read patients specific information in the medical records
+
+#### As a Ward clerk I should be able to:
+
+- Register a patient in the system
+
+#### As a Patient service assistants, Volunteers I should be able to:
+
+- Read your medical record
+
+#### As a Patient I should be able to:
+
+- Read my medical record
+
+#### As the system administrator I should be able to:
+
+- Modify/set user privileges.
+- Create new personnel records within the institutions
+
+#### Security requirements:
+
+As a system, I must:
+
+- Ensure confidentiality and integrity of medical records;
+- Ensure confidentiality and integrity of communications with the web application;
+- Ensure that only authorised medical staff and patients have an account;
+- Ensure different “roles” have access to different privileges;
+- Ensure there is only one account per citizen;
+- Prevent access to medical records if the user does not have privileges;
+- Allow user A to change the privileges of user B, if user A is a system administrator;
+- Ensure successful authentication of users;
+- Mitigate brute force attacks on the authentication system (e.g. blocking IP’s);
+- Minimize the impact of failures within the system (solution: do an "I'm alive with timeout" to the
+backup server);
+- Minimize the impact of attacks inside the system.
+2
+As a user, I cannot repudiate my actions
 
 ### Trust assumptions
 
