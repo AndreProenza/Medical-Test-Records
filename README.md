@@ -230,7 +230,7 @@ Who will be communicating?
 
 Which keys will exist and how will they be distributed?
 
-- Each Health Institution will be a certifying entity that issues its own certificate. Each of these institutions will also have an asymmetric key pair, which will be used to communicate and establish secure connections. The keys and certificates are stored in the respective virtual machines of the servers of the health institutions.
+- Each Health Institution will be a certifying entity that issues its own certificate. Each of these institutions will also have an asymmetric key pair, which will be used to communicate and establish secure connections. The keys and certificates are stored in their respective health institutions virtual machines.
 
 - The virtual machine, where users will access the webservers, will also have an asymmetric key pair and a certificate.
 
