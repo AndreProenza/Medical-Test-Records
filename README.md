@@ -223,6 +223,18 @@ In order to simulate real systems and their interconnection, our solution is bas
 
 ### Secure channel(s) to configure
 
+Who will be communicating?
+
+- The health institutions (Hospital and Laboratory) via secure TLS communication, to send medical records securely.
+- The remote and local users with the health institutions, (Hospital and Laboratory) via TLS secure communication, to perform a certain action. (For example, consulting medical records, etc...)
+
+Which keys will exist and how will they be distributed?
+
+- Each Health Institution will be a certifying entity that issues its own certificate. Each of these institutions will also have an asymmetric key pair, which will be used to communicate and establish secure connections. The keys and certificates are stored in the respective virtual machines of the servers of the health institutions.
+
+- The virtual machine, where users will access the webservers, will also have an asymmetric key pair and a certificate.
+
+
 ### Secure protocol(s) to develop
 
 
