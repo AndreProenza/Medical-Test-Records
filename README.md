@@ -30,36 +30,14 @@ Um dos tipos de dados relevantes armazenados são os resultados dos testes. Algu
 
 ---
 
-## TODO until 17/12/2021
-
-### Write proposal
-
-After having a topic assigned, your group should prepare a proposal document. The project proposal should describe the problem and the proposed solution.
-
-You can bring a draft of the proposal to your lab session or office hours to present it and receive feedback.
-
 ### Technical core requirements
 
 The planned project will need to have, at least:
 
-a set of separate (virtual) machines, with network isolation;
+- a set of separate (virtual) machines, with network isolation;
+- a secure communication tunnel (e.g. TLS, SSH) using correct configuration;
+- the design and deployment of one mechanism using a custom security protocol.
 
-a secure communication tunnel (e.g. TLS, SSH) using correct configuration;
-
-the design and deployment of one mechanism using a custom security protocol.
-
-### Document requirements
-
-PDF format;
-
-Mandatory file name CXX_WWW_HHMM_L_proposal.pdf (where C is A for Alameda, T for Tagus, XX is the Fenix group number with two digits, WWW is the weekday of the lab shift – Mon, Tue, Wed, Thu, Fri – HHMM is the time – Hours and Minutes – and L is the lab room number);
-Report cover: Project title. Headed by course name, group campus, group number. In the next row: group members sorted by ascending student number. For each student, include the number, name and professional photo with face clearly visible;
-Report body: The font should be no smaller than 11pt, with standard line and character spacing;
-Limit of 4 pages (excluding cover);
-Pages should be numbered (preferably with a label like Page X of Y);
-The use of UML diagrams (or other standard notations) is recommended for clear and concise communication.
-
-### Document structure (mandatory)
 
 ### Problem
 
@@ -103,7 +81,8 @@ Identify communication entities and the messages they exchange with a sequence o
 Which security properties will be protected?
 Identify the security properties to ensure.
 What keys will exist and how will they be distributed?
-Considered technologies
+
+### Considered technologies
 Succinctly describe the technologies that are being considered, e.g., programming languages, frameworks, libraries, tools, etc.
 
 ### Plan
@@ -124,3 +103,168 @@ This Gantt chart should illustrate the tasks for the different milestones and th
 ### References
 
 Bibliographic references cited in the project proposal.
+
+---
+---
+---
+
+## Problem
+
+Patient's medical records are extremely sensitive data. The historical records made by doctors
+facilitate the process of diagnosing a patient, ensuring their quality, which helps clinical staff to treat
+quickly and accordingly.
+This data should be kept private, allowing only the discriminating staff to access it. We believe, that
+all healthcare facilities should have access to this type of information so that patients can receive
+healthcare anywhere and at any time. Therefore, the data should be protected from external agents
+(i.e., outside the medical institutions) and from unauthorised people within the institutions.
+
+---
+
+### Solution Requirements
+
+#### As a user (depending on my privilege) I should be able to:
+
+- Read/write medical records (send requests to the system);
+- Receive responses from the system (receive replies from the system).
+
+#### As a Doctor, Nurse I should be able to:
+
+- Read/Update medical records
+
+#### As a Patient service assistants, Porters I should be able to:
+
+- Read patients specific information in the medical records
+
+#### As a Ward clerk I should be able to:
+
+- Register a patient in the system
+
+#### As a Patient service assistants, Volunteers I should be able to:
+
+- Read specific information.
+
+#### As a Patient I should be able to:
+
+- Read my medical record
+
+#### As the system administrator I should be able to:
+
+- Modify/set user privileges.
+- Create new personnel records within the institutions
+
+#### Security requirements:
+
+- Ensure confidentiality and integrity of medical records;
+- Ensure confidentiality and integrity of communications with the web application;
+- Ensure that only authorised medical staff and patients have an account;
+- Ensure different “roles” have access to different privileges;
+- Ensure there is only one account per citizen;
+- Prevent access to medical records if the user does not have privileges;
+- Allow user A to change the privileges of user B, if user A is a system administrator;
+- Ensure successful authentication of users;
+- Mitigate brute force attacks on the authentication system (e.g. blocking IP’s);
+- Minimize the impact of failures within the system (solution: do an "I'm alive with timeout" to the backup server);
+- Minimize the impact of attacks inside the system.
+- Users cannot repudiate their actions
+
+---
+
+### Trust assumptions
+
+Fully trusted
+- Hospital Server
+- Partner Lab server
+
+Partially trusted
+- Certified user machine
+
+Not Trusted
+- Not Certified user machine
+
+---
+
+## Proposed solution
+
+### Overview
+
+In order to simulate real systems and their interconnection, our solution is based on the development of two systems representing healthcare institutions. A hospital and a partner laboratory. The goal is to simulate two institutions sending confidential medical records of patients in a secure way from one side to the other. Authorised hospital and laboratory staff will be able to access their respective hospital and laboratory remotely or locally. Patients will also have remote or local access to the system in order to consult their medical records.
+
+## Solution Architecture
+
+![image](https://user-images.githubusercontent.com/78174997/146469335-202be089-0044-4781-bafb-2aa34ade9cf1.png)
+
+
+## Security Policy AuthzForce
+
+In the AuthzForce area, the service analyses the request and then generates an XACML authorisation request, which is "fed" into the AuthzForce PDP Engine. Then the PDP evaluates the request according to the policies it is configured with, and, if necessary, also retrieves other attribute values from the database in order to execute its decision (PIP). This decision is then sent back from the engine, and depending on the result, the server generates a response and sends it to the client application
+
+![image](https://user-images.githubusercontent.com/78174997/146477605-f48aa3c2-85bd-4c03-9e40-32d21c4d4ade.png)
+
+
+---
+
+### Deployment
+
+4 virtual machines will be deployed.
+- 1 for the router that will simulate the internet
+- 1 for the hospital, where the frontend, backend and database servers will run.
+- 1 for the partner laboratory, where the frontend, backend and database servers will run.
+- 1 for local or remote users which will access the frontend servers. To change the location of users on the network, just change the properties of the vm in the hypervisor (VirtualBox for example). This way we avoid creating multiple VM's for each local and remote user.
+
+![image](https://user-images.githubusercontent.com/78174997/146469861-03fce8aa-a633-438b-82f2-2412270c7fa4.png)
+
+---
+
+### Secure channel(s) to configure
+
+Who will be communicating?
+
+- The health institutions (Hospital and Laboratory) via secure TLS communication, to send medical records securely.
+- The remote and local users with the health institutions, (Hospital and Laboratory) via TLS secure communication, to perform a certain action. (For example, consulting medical records, etc...)
+
+Which keys will exist and how will they be distributed?
+
+- Each Health Institution will be a certifying entity that issues its own certificate. Each of these institutions will also have an asymmetric key pair, which will be used to communicate and establish secure connections. The keys and certificates are stored in their respective health institutions virtual machines.
+
+- The virtual machine, where users will access the webservers, will also have an asymmetric key pair and a certificate.
+
+---
+
+### Secure protocol(s) to develop
+
+Who will be communicating?
+
+- The health institutions (Hospital and Laboratory) via this secure communication, to send medical records securely.
+
+Security properties to ensure
+- The Protocol must ensure integrity, confidentiality and non-repudiation.
+
+---
+
+## Considered technologies
+
+- Frontend: Angular, Java
+- Backend: NodeJS, Java
+- Database: SQL, MongoDB
+- Security policy language: XACML
+
+---
+
+## Plan
+
+### Milestones
+
+#### Basic version
+- Design system, set up the login method in Health Institutions frontend servers, set up and configure AuthzForce PDP engine.
+
+#### Intermediate Version
+- Ensure secure communication via TLS, Use asymmetric cryptography for communication establishment, custom protocol development, encrypt server databases
+
+#### Advanced Version
+- Backup servers, database replication,  fault tolerance.
+
+---
+
+## References
+
+- [AuthzForce (Community Edition)](https://authzforce.ow2.org/#)
