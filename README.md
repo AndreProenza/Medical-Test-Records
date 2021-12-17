@@ -39,75 +39,6 @@ The planned project will need to have, at least:
 - the design and deployment of one mechanism using a custom security protocol.
 
 
-### Problem
-
-Given the chosen scenario, where is security necessary?
-What is the main problem being solved?
-Use around 200 words.
-
-### Solution Requirements
-
-Which security requirements were identified for the solution?
-Present as a list. Identify each requirement with R1, R2, ...
-
-### Trust assumptions
-
-Who will be fully trusted, partially trusted, or untrusted?
-Write down the trust relationships to make them explicit.
-Proposed solution
-
-### Overview
-
-What are the main components of the solution? How do they relate?
-Diagram and explanation with, at most, 200 words.
-If you do not use UML or another standard notation, include a legend.
-
-### Deployment
-
-Describe distinct machines and how they will be interconnected.
-
-### Secure channel(s) to configure
-
-Who will communicate?
-Identify communication entities.
-What existing security protocol will be used?
-Choose existing TLS or SSH library/tool to use.
-What keys will exist and how will they be distributed?
-
-### Secure protocol(s) to develop
-
-Who will communicate?
-Identify communication entities and the messages they exchange with a sequence or collaboration diagram.
-Which security properties will be protected?
-Identify the security properties to ensure.
-What keys will exist and how will they be distributed?
-
-### Considered technologies
-Succinctly describe the technologies that are being considered, e.g., programming languages, frameworks, libraries, tools, etc.
-
-### Plan
-
-### Milestones
-
-Describe basic, intermediate and advanced versions of the work and when are they expected to be achieved.
-The basic version is the minimum security functionality.
-The intermediate version includes the most important security mechanisms.
-The advanced version should address more attacks.
-
-### Effort commitments
-
-Include a Gantt chart describing the planned tasks and how much time is allocated to the implementation
-(for example, consider a total of ~180 Person/hour, i.e., 3 weeks for a team of 3 people, each with 50% allocation of a 40-hour work week).
-This Gantt chart should illustrate the tasks for the different milestones and the expected conclusion date for each.
-
-### References
-
-Bibliographic references cited in the project proposal.
-
----
----
----
-
 ## Problem
 
 Patient's medical records are extremely sensitive data. The historical records made by doctors
@@ -122,35 +53,7 @@ healthcare anywhere and at any time. Therefore, the data should be protected fro
 
 ### Solution Requirements
 
-#### As a user (depending on my privilege) I should be able to:
-
-- Read/write medical records (send requests to the system);
-- Receive responses from the system (receive replies from the system).
-
-#### As a Doctor, Nurse I should be able to:
-
-- Read/Update medical records
-
-#### As a Patient service assistants, Porters I should be able to:
-
-- Read patients specific information in the medical records
-
-#### As a Ward clerk I should be able to:
-
-- Register a patient in the system
-
-#### As a Patient service assistants, Volunteers I should be able to:
-
-- Read specific information.
-
-#### As a Patient I should be able to:
-
-- Read my medical record
-
-#### As the system administrator I should be able to:
-
-- Modify/set user privileges.
-- Create new personnel records within the institutions
+Since this is a system that protects confidential information, the processing of data must be secure. Therefore, the solution must ensure the following security requirements.
 
 #### Security requirements:
 
@@ -187,11 +90,41 @@ Not Trusted
 
 ### Overview
 
-In order to simulate real systems and their interconnection, our solution is based on the development of two systems representing healthcare institutions. A hospital and a partner laboratory. The goal is to simulate two institutions sending confidential medical records of patients in a secure way from one side to the other. Authorised hospital and laboratory staff will be able to access their respective hospital and laboratory remotely or locally. Patients will also have remote or local access to the system in order to consult their medical records.
+In order to simulate real systems and their interconnection, our solution is based on the development of two systems representing healthcare institutions. A hospital and a partner laboratory. The goal is to simulate two institutions sending confidential medical records of patients in a secure way from one side to the other. Authorised hospital and laboratory staff will be able to access their respective hospital and laboratory remotely or locally. Patients will also have remote or local access to the system in order to consult their medical records. To make our vision clearer, we present the following system requirements:
+
+#### As a user (depending on my privilege) I should be able to:
+
+- Read/write medical records (send requests to the system);
+- Receive responses from the system (receive replies from the system).
+
+#### As a Doctor, Nurse I should be able to:
+
+- Read/Update medical records
+
+#### As a Patient service assistants, Porters I should be able to:
+
+- Read patients specific information in the medical records
+
+#### As a Ward clerk I should be able to:
+
+- Register a patient in the system
+
+#### As a Patient service assistants, Volunteers I should be able to:
+
+- Read specific information.
+
+#### As a Patient I should be able to:
+
+- Read my medical record
+
+#### As the system administrator I should be able to:
+
+- Modify/set user privileges.
+- Create new personnel records within the institutions
 
 ## Solution Architecture
 
-![image](https://user-images.githubusercontent.com/78174997/146469335-202be089-0044-4781-bafb-2aa34ade9cf1.png)
+![image](https://user-images.githubusercontent.com/78174997/146569869-6563902a-f73b-4118-8c51-d9eac52f1a04.png)
 
 
 ## Security Policy AuthzForce
@@ -211,7 +144,7 @@ In the AuthzForce area, the service analyses the request and then generates an X
 - 1 for the partner laboratory, where the frontend, backend and database servers will run.
 - 1 for local or remote users which will access the frontend servers. To change the location of users on the network, just change the properties of the vm in the hypervisor (VirtualBox for example). This way we avoid creating multiple VM's for each local and remote user.
 
-![image](https://user-images.githubusercontent.com/78174997/146469861-03fce8aa-a633-438b-82f2-2412270c7fa4.png)
+![image](https://user-images.githubusercontent.com/78174997/146569662-0b11f253-7375-4a5e-a726-84b5bc438af3.png)
 
 ---
 
