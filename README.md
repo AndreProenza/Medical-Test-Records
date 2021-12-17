@@ -203,7 +203,12 @@ Not Trusted
 
 ### Overview
 
-In order to simulate real systems and their interconnection, our solution is based on the development of two systems representing healthcare institutions. A hospital and a partner laboratory. The goal is to simulate two institutions sending confidential medical records of patients in a secure way from one side to the other.
+In order to simulate real systems and their interconnection, our solution is based on the development of two systems representing healthcare institutions. A hospital and a partner laboratory. The goal is to simulate two institutions sending confidential medical records of patients in a secure way from one side to the other. Authorised hospital and laboratory staff will be able to access their respective hospital and laboratory remotely or locally. Patients will also have remote or local access to the system in order to consult their medical records.
+
+## Solution Architecture
+
+![image](https://user-images.githubusercontent.com/78174997/146469335-202be089-0044-4781-bafb-2aa34ade9cf1.png)
+
 
 ### Deployment
 
