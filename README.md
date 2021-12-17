@@ -240,3 +240,5 @@ In order to simulate real systems and their interconnection, our solution is bas
 ### Effort commitments
 
 ## References
+
+- [AuthzForce (Community Edition)](https://authzforce.ow2.org/#)
