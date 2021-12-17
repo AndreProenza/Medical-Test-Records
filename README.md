@@ -268,13 +268,14 @@ Security properties to ensure
 
 ### Milestones
 
-Basic version
-Ensure secure communication via TLS, Use asymmetric cryptography for communication establishment, and custom protocol development.
+#### Basic version
+- Ensure secure communication via TLS, Use asymmetric cryptography for communication establishment, and custom protocol development.
 
-Intermediate Version
+#### Intermediate Version
+- 
 
-Advanced Version
-Backup servers, database replication.
+#### Advanced Version
+- Backup servers, database replication.
 
 ---
 
