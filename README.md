@@ -190,6 +190,16 @@ As a system, I must:
 
 ### Trust assumptions
 
+Fully trusted
+- Hospital Server
+- Partner Lab server
+
+Partially trusted
+- Certified user machine
+
+Not Trusted
+- Not Certified user machine
+
 ### Overview
 
 ### Deployment
