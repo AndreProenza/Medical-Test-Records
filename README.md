@@ -122,7 +122,7 @@ healthcare anywhere and at any time. Therefore, the data should be protected fro
 
 ### Solution Requirements
 
-Since this is a system that protects confidential information, the processing of data and its security must be secure. Therefore, the solution must ensure the following security requirements.
+Since this is a system that protects confidential information, the processing of data must be secure. Therefore, the solution must ensure the following security requirements.
 
 #### Security requirements:
 
