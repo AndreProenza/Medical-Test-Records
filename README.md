@@ -124,7 +124,7 @@ In order to simulate real systems and their interconnection, our solution is bas
 
 ## Solution Architecture
 
-![image](https://user-images.githubusercontent.com/78174997/146469335-202be089-0044-4781-bafb-2aa34ade9cf1.png)
+![image](https://user-images.githubusercontent.com/78174997/146569869-6563902a-f73b-4118-8c51-d9eac52f1a04.png)
 
 
 ## Security Policy AuthzForce
