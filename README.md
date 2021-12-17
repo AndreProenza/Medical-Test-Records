@@ -237,6 +237,12 @@ Which keys will exist and how will they be distributed?
 
 ### Secure protocol(s) to develop
 
+Who will be communicating?
+
+- The health institutions (Hospital and Laboratory) via this secure communication, to send medical records securely.
+
+Security properties to ensure
+- The Protocol must ensure integrity, confidentiality and non-repudiation.
 
 ## Considered technologies
 
