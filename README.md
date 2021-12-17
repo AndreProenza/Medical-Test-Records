@@ -212,6 +212,17 @@ In order to simulate real systems and their interconnection, our solution is bas
 
 ### Deployment
 
+4 virtual machines will be deployed.
+- 1 for the router that will simulate the internet
+- 1 for the hospital, where the frontend, backend and database servers will run.
+- 1 for the partner laboratory, where the frontend, backend and database servers will run.
+- 1 for local or remote users which will access the frontend servers. (To change the location of users on the network, just change the properties of the vm in the hypervisor (VirtualBox for example). This way we avoid creating multiple VM's for each local and remote user.
+
+Translated with www.DeepL.com/Translator (free version)
+
+![image](https://user-images.githubusercontent.com/78174997/146469861-03fce8aa-a633-438b-82f2-2412270c7fa4.png)
+
+
 ### Secure channel(s) to configure
 
 ### Secure protocol(s) to develop
@@ -219,10 +230,10 @@ In order to simulate real systems and their interconnection, our solution is bas
 
 ## Considered technologies
 
-Frontend: Angular, Java
-Backend: NodeJS, Java
-Database: SQL, MongoDB
-Security policy language: XACML
+- Frontend: Angular, Java
+- Backend: NodeJS, Java
+- Database: SQL, MongoDB
+- Security policy language: XACML
 
 ## Plan
 
