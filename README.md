@@ -103,7 +103,8 @@ Identify communication entities and the messages they exchange with a sequence o
 Which security properties will be protected?
 Identify the security properties to ensure.
 What keys will exist and how will they be distributed?
-Considered technologies
+
+### Considered technologies
 Succinctly describe the technologies that are being considered, e.g., programming languages, frameworks, libraries, tools, etc.
 
 ### Plan
@@ -129,7 +130,7 @@ Bibliographic references cited in the project proposal.
 ---
 ---
 
-### Problem
+## Problem
 
 Patient's medical records are extremely sensitive data. The historical records made by doctors
 facilitate the process of diagnosing a patient, ensuring their quality, which helps clinical staff to treat
@@ -200,7 +201,11 @@ Partially trusted
 Not Trusted
 - Not Certified user machine
 
+## Proposed solution
+
 ### Overview
+
+
 
 ### Deployment
 
@@ -208,10 +213,15 @@ Not Trusted
 
 ### Secure protocol(s) to develop
 
-### Plan
+
+## Considered technologies
+
+Succinctly describe the technologies that are being considered, e.g., programming languages, frameworks, libraries, tools, etc.
+
+## Plan
 
 ### Milestones
 
 ### Effort commitments
 
-### References
+## References
