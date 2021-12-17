@@ -269,13 +269,13 @@ Security properties to ensure
 ### Milestones
 
 #### Basic version
-- Ensure secure communication via TLS, Use asymmetric cryptography for communication establishment, and custom protocol development.
+- Design system, set up the login method in Health Institutions frontend servers, set up and configure AuthzForce PDP engine.
 
 #### Intermediate Version
-- 
+- Ensure secure communication via TLS, Use asymmetric cryptography for communication establishment, custom protocol development, encrypt server databases
 
 #### Advanced Version
-- Backup servers, database replication.
+- Backup servers, database replication,  fault tolerance.
 
 ---
 
