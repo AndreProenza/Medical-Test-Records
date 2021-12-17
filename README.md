@@ -140,6 +140,8 @@ all healthcare facilities should have access to this type of information so that
 healthcare anywhere and at any time. Therefore, the data should be protected from external agents
 (i.e., outside the medical institutions) and from unauthorised people within the institutions.
 
+---
+
 ### Solution Requirements
 
 #### As a user (depending on my privilege) I should be able to:
@@ -187,6 +189,8 @@ healthcare anywhere and at any time. Therefore, the data should be protected fro
 - Minimize the impact of attacks inside the system.
 - Users cannot repudiate their actions
 
+---
+
 ### Trust assumptions
 
 Fully trusted
@@ -199,6 +203,8 @@ Partially trusted
 Not Trusted
 - Not Certified user machine
 
+---
+
 ## Proposed solution
 
 ### Overview
@@ -209,6 +215,7 @@ In order to simulate real systems and their interconnection, our solution is bas
 
 ![image](https://user-images.githubusercontent.com/78174997/146469335-202be089-0044-4781-bafb-2aa34ade9cf1.png)
 
+---
 
 ### Deployment
 
@@ -220,6 +227,7 @@ In order to simulate real systems and their interconnection, our solution is bas
 
 ![image](https://user-images.githubusercontent.com/78174997/146469861-03fce8aa-a633-438b-82f2-2412270c7fa4.png)
 
+---
 
 ### Secure channel(s) to configure
 
@@ -234,6 +242,7 @@ Which keys will exist and how will they be distributed?
 
 - The virtual machine, where users will access the webservers, will also have an asymmetric key pair and a certificate.
 
+---
 
 ### Secure protocol(s) to develop
 
@@ -244,6 +253,8 @@ Who will be communicating?
 Security properties to ensure
 - The Protocol must ensure integrity, confidentiality and non-repudiation.
 
+---
+
 ## Considered technologies
 
 - Frontend: Angular, Java
@@ -251,11 +262,15 @@ Security properties to ensure
 - Database: SQL, MongoDB
 - Security policy language: XACML
 
+---
+
 ## Plan
 
 ### Milestones
 
 ### Effort commitments
+
+---
 
 ## References
 
