@@ -215,6 +215,14 @@ In order to simulate real systems and their interconnection, our solution is bas
 
 ![image](https://user-images.githubusercontent.com/78174997/146469335-202be089-0044-4781-bafb-2aa34ade9cf1.png)
 
+
+## Security Policy AuthzForce
+
+In the AuthzForce area, the service analyses the request and then generates an XACML authorisation request, which is "fed" into the AuthzForce PDP Engine. Then the PDP evaluates the request according to the policies it is configured with, and, if necessary, also retrieves other attribute values from the database in order to execute its decision (PIP). This decision is then sent back from the engine, and depending on the result, the server generates a response and sends it to the client application
+
+![image](https://user-images.githubusercontent.com/78174997/146477605-f48aa3c2-85bd-4c03-9e40-32d21c4d4ade.png)
+
+
 ---
 
 ### Deployment
