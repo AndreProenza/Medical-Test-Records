@@ -268,7 +268,13 @@ Security properties to ensure
 
 ### Milestones
 
-### Effort commitments
+Basic version
+Ensure secure communication via TLS, Use asymmetric cryptography for communication establishment, and custom protocol development.
+
+Intermediate Version
+
+Advanced Version
+Backup servers, database replication.
 
 ---
 
