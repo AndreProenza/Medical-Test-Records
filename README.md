@@ -174,8 +174,6 @@ healthcare anywhere and at any time. Therefore, the data should be protected fro
 
 #### Security requirements:
 
-As a system, I must:
-
 - Ensure confidentiality and integrity of medical records;
 - Ensure confidentiality and integrity of communications with the web application;
 - Ensure that only authorised medical staff and patients have an account;
@@ -205,7 +203,7 @@ Not Trusted
 
 ### Overview
 
-
+In order to simulate real systems and their interconnection, our solution is based on the development of two systems representing healthcare institutions. A hospital and a partner laboratory. The goal is to simulate two institutions sending confidential medical records of patients in a secure way from one side to the other.
 
 ### Deployment
 
@@ -216,7 +214,10 @@ Not Trusted
 
 ## Considered technologies
 
-Succinctly describe the technologies that are being considered, e.g., programming languages, frameworks, libraries, tools, etc.
+Frontend: Angular, Java
+Backend: NodeJS, Java
+Database: SQL, MongoDB
+Security policy language: XACML
 
 ## Plan
 
