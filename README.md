@@ -122,35 +122,7 @@ healthcare anywhere and at any time. Therefore, the data should be protected fro
 
 ### Solution Requirements
 
-#### As a user (depending on my privilege) I should be able to:
-
-- Read/write medical records (send requests to the system);
-- Receive responses from the system (receive replies from the system).
-
-#### As a Doctor, Nurse I should be able to:
-
-- Read/Update medical records
-
-#### As a Patient service assistants, Porters I should be able to:
-
-- Read patients specific information in the medical records
-
-#### As a Ward clerk I should be able to:
-
-- Register a patient in the system
-
-#### As a Patient service assistants, Volunteers I should be able to:
-
-- Read specific information.
-
-#### As a Patient I should be able to:
-
-- Read my medical record
-
-#### As the system administrator I should be able to:
-
-- Modify/set user privileges.
-- Create new personnel records within the institutions
+Since this is a system that protects confidential information, the processing of data and its security must be secure. Therefore, the solution must ensure the following security requirements.
 
 #### Security requirements:
 
@@ -187,7 +159,37 @@ Not Trusted
 
 ### Overview
 
-In order to simulate real systems and their interconnection, our solution is based on the development of two systems representing healthcare institutions. A hospital and a partner laboratory. The goal is to simulate two institutions sending confidential medical records of patients in a secure way from one side to the other. Authorised hospital and laboratory staff will be able to access their respective hospital and laboratory remotely or locally. Patients will also have remote or local access to the system in order to consult their medical records.
+In order to simulate real systems and their interconnection, our solution is based on the development of two systems representing healthcare institutions. A hospital and a partner laboratory. The goal is to simulate two institutions sending confidential medical records of patients in a secure way from one side to the other. Authorised hospital and laboratory staff will be able to access their respective hospital and laboratory remotely or locally. Patients will also have remote or local access to the system in order to consult their medical records. To make our vision clearer, we present the following system requirements:
+
+#### As a user (depending on my privilege) I should be able to:
+
+- Read/write medical records (send requests to the system);
+- Receive responses from the system (receive replies from the system).
+
+#### As a Doctor, Nurse I should be able to:
+
+- Read/Update medical records
+
+#### As a Patient service assistants, Porters I should be able to:
+
+- Read patients specific information in the medical records
+
+#### As a Ward clerk I should be able to:
+
+- Register a patient in the system
+
+#### As a Patient service assistants, Volunteers I should be able to:
+
+- Read specific information.
+
+#### As a Patient I should be able to:
+
+- Read my medical record
+
+#### As the system administrator I should be able to:
+
+- Modify/set user privileges.
+- Create new personnel records within the institutions
 
 ## Solution Architecture
 
