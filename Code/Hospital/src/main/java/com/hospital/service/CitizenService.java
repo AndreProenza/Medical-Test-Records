@@ -56,4 +56,13 @@ public interface CitizenService {
 	 * @param id the citizen Record id
 	 */
 	void deleteCitizen(String id);
+	
+	
+	/**
+	 * Check if citizen exixst in database
+	 * 
+	 * @param id the citizen id
+	 * @return true if citizen exists in database, false otherwise
+	 */
+	boolean existsCitizenById(String id);
 }

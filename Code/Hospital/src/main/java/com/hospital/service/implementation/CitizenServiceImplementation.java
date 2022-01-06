@@ -29,6 +29,8 @@ public class CitizenServiceImplementation implements CitizenService {
 	@Override
 	public List<Citizen> getAllCitizens() {
 		return citizenRepository.findAll();
+		
+		
 	}
 
 	@Override
@@ -80,6 +82,12 @@ public class CitizenServiceImplementation implements CitizenService {
 		citizenRepository.findById(id).orElseThrow(
 				() -> new ResourceNotFoundException("Citizen", "Citizen ID", id));
 		citizenRepository.deleteById(id);
+		
+	}
+
+	@Override
+	public boolean existsCitizenById(String id) {
+		return citizenRepository.existsById(id);
 	}
 	
 }
