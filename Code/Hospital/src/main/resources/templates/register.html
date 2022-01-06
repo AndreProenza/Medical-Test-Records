@@ -28,21 +28,21 @@
 
               <!-- Register Form -->
               <form action="#" th:action="@{/api/register}" th:object="${citizen}" method="post">
-                <div class="form-group first">
-                  <label for="username">Username</label>
-                  <input type="text" class="form-control" placeholder="username" id="username" required th:field="*{username}">
-                </div>
-                <p class="alert alert-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
                 <div class="form-group">
                     <label for="username">Citizen Card</label>
                     <input type="number" class="form-control" placeholder="ex: 15720676" id="username" required th:field="*{id}">
                 </div>
                 <p class="alert alert-danger" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></p>
+                <p class="alert alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+                <div class="form-group first">
+                  <label for="role">Role</label>
+                  <input type="text" class="form-control" placeholder="ex: Patient, Doctor, Nurse..." id="role" required th:field="*{role}">
+                </div>
+                <p class="alert alert-danger" th:if="${#fields.hasErrors('role')}" th:errors="*{role}"></p>
                 <div class="form-group last mb-3">
                   <label for="password">Password</label>
                   <input type="password" class="form-control" placeholder="password" id="password" required th:field="*{password}">
                 </div>
-                <p class="alert alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
                 <!--
                 <div class="form-group last mb-3">
                     <label for="password">Re-type Password</label>

@@ -28,14 +28,17 @@
 
               <!-- Login Form -->
               <form action="#" th:action="@{/api/login}" th:object="${citizen}" method="post">
-                <div class="form-group first">
-                  <label for="username">Username</label>
-                  <input type="text" th:field="*{username}" class="form-control" placeholder="username" id="username" required>
+                <div class="form-group last">
+                    <label for="username">Citizen Card</label>
+                    <input type="number" class="form-control" placeholder="ex: 15720676" id="username" required th:field="*{id}">
                 </div>
-                <div class="form-group last mb-3">
+                <p class="alert alert-danger" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></p>
+                <div class="form-group last">
                   <label for="password">Password</label>
                   <input type="password" th:field="*{password}" class="form-control" placeholder="password" id="password" required>
                 </div>
+                <p class="alert alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+                <br>
                 <input type="submit" value="Login" class="btn btn-block btn-primary">
                 <p class="register">
                   Don't have an account yet? <a th:href="@{/api/register}">Register</a>

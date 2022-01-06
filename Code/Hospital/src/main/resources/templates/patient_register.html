@@ -34,7 +34,13 @@
             <div class="col-md-7">
               
               <form action="#" th:action="@{/api/patient/register}" th:object="${citizen}" method="post">
-
+				
+				<p>Citizen Card</p>
+				<div class="form-group last mb-3">
+                    <label for="username">Citizen Card</label>
+                    <input type="number" class="form-control" placeholder="ex: 15720676" id="username" required th:field="*{id}">
+                </div>
+                <p class="alert alert-danger" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></p>
                 <p>Name</p>
                 <div class="form-group last mb-3">
                     <label for="first-name">First Name</label>

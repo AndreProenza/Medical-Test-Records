@@ -19,14 +19,15 @@ public class Citizen {
 	@Pattern(regexp = ("^[0-9]{8}$"), message = "Citizen ID should have 8 numbers")
 	private String id;
 	
-	@NotNull(message = "Username cannot be null")
-	@Size(min = 1, max = 15, message = "Username should not be greater than 15 characters")
-	private String username;
-	
-	@NotNull(message = "password cannot be null")
+	/*
 	@Pattern(regexp = ("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$"), 
-	message = "Password should contain at least eight characters, one uppercase letter, "
-			+ "one lowercase letter, one number and one special character")
+			message = "Password should contain at least eight characters, one uppercase letter, "
+					+ "one lowercase letter, one number and one special character")
+	*/
+	
+	@NotNull(message = "Password cannot be null")
+	@Pattern(regexp = ("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$"), 
+	message = "Incorrect citizen id and password combination")
 	private String password;
 	
 	@NotNull(message = "Citizen role cannot be null")
@@ -56,11 +57,10 @@ public class Citizen {
 	@Size(min = 1, max = 15, message = "City name should not be greater than 15 characters")
 	private String city;
 	
-	public Citizen(String id, String username, String password, String role, String firstName, String lastName, String email,
+	public Citizen(String id, String password, String role, String firstName, String lastName, String email,
 			String phoneNumber, String birthday, String city) {
 		super();
 		this.id = id;
-		this.username = username;
 		this.password = password;
 		this.role = role;
 		this.firstName = firstName;
@@ -83,13 +83,6 @@ public class Citizen {
 		this.id = id;
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
 
 	public String getPassword() {
 		return password;
@@ -157,7 +150,7 @@ public class Citizen {
 
 	@Override
 	public String toString() {
-		return "Citizen [id=" + id + ", username=" + username + ", password=" + password + ", role=" + role
+		return "Citizen [id=" + id + ", password=" + password + ", role=" + role
 				+ ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", phoneNumber="
 				+ phoneNumber + ", birthday=" + birthday + ", city=" + city + "]";
 	}
