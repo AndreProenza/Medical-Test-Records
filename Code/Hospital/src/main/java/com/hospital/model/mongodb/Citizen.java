@@ -1,5 +1,10 @@
 package com.hospital.model.mongodb;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,20 +15,49 @@ import lombok.Data;
 public class Citizen {
 	
 	@Id
-	private int id;
+	@NotNull(message = "Citizen ID cannot be null")
+	@Pattern(regexp = ("^[0-9]{8}$"), message = "Citizen ID should have 8 numbers")
+	private String id;
 	
+	@NotNull(message = "Username cannot be null")
+	@Size(min = 1, max = 15, message = "Username should not be greater than 15 characters")
 	private String username;
+	
+	@NotNull(message = "password cannot be null")
+	@Pattern(regexp = ("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$"), 
+	message = "Password should contain at least eight characters, one uppercase letter, "
+			+ "one lowercase letter, one number and one special character")
 	private String password;
+	
+	@NotNull(message = "Citizen role cannot be null")
 	private String role;
+	
+	@NotNull(message = "First name cannot be null")
+	@Size(min = 1, max = 15, message = "First name should not be greater than 15 characters")
 	private String firstName;
+	
+	@NotNull(message = "Last name cannot be null")
+	@Size(min = 1, max = 15, message = "Last name should not be greater than 15 characters")
 	private String lastName;
+	
+	@NotNull(message = "Email cannot be null")
+	@Pattern(regexp = "^(.+)@(.+)$", message = "Email should be valid")
+	@Email(message = "Email should be valid")
 	private String email;
-	private int phoneNumber;
+
+	@NotNull(message = "Phone number cannot be null")
+	@Pattern(regexp = "^[0-9]{9}$", message = "Phone number should have 9 digits")
+	private String phoneNumber;
+	
+	@NotNull(message = "Birthday cannot be null")
 	private String birthday;
+	
+	@NotNull(message = "City cannot be null")
+	@Size(min = 1, max = 15, message = "City name should not be greater than 15 characters")
 	private String city;
 	
-	public Citizen(int id, String username, String password, String role, String firstName, String lastName, String email,
-			int phoneNumber, String birthday, String city) {
+	public Citizen(String id, String username, String password, String role, String firstName, String lastName, String email,
+			String phoneNumber, String birthday, String city) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -37,11 +71,15 @@ public class Citizen {
 		this.city = city;
 	}
 
-	public int getId() {
+	public Citizen() {
+		//Does Nothing
+	}
+
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -93,11 +131,11 @@ public class Citizen {
 		this.email = email;
 	}
 
-	public int getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(int phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
@@ -115,6 +153,13 @@ public class Citizen {
 
 	public void setCity(String city) {
 		this.city = city;
+	}
+
+	@Override
+	public String toString() {
+		return "Citizen [id=" + id + ", username=" + username + ", password=" + password + ", role=" + role
+				+ ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", phoneNumber="
+				+ phoneNumber + ", birthday=" + birthday + ", city=" + city + "]";
 	}
 	
 	

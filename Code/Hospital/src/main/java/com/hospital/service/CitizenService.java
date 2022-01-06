@@ -27,7 +27,7 @@ public interface CitizenService {
 	 * @param id the citizen id
 	 * @return a citizen record
 	 */
-	Citizen getCitizenById(int id);
+	Citizen getCitizenById(String id);
 	
 	/**
 	 * Updates a citizen record
@@ -37,7 +37,7 @@ public interface CitizenService {
 	 * @param id the citizen id
 	 * @return an updated citizen Record
 	 */
-	Citizen updateCitizenAsWardClerk(Citizen citizen, int id);
+	Citizen updateCitizenAsWardClerk(Citizen citizen, String id);
 	
 	/**
 	 * Updates a citizen record
@@ -47,7 +47,7 @@ public interface CitizenService {
 	 * @param id the citizen id
 	 * @return an updated citizen Record
 	 */
-	Citizen updateCitizenAsAdministrator(Citizen citizen, int id);
+	Citizen updateCitizenAsAdministrator(Citizen citizen, String id);
 	
 	/**
 	 * Deletes a citizen record
@@ -55,5 +55,5 @@ public interface CitizenService {
 	 * 
 	 * @param id the citizen Record id
 	 */
-	void deleteCitizen(int id);
+	void deleteCitizen(String id);
 }

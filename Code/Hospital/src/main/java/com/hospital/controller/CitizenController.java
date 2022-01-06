@@ -38,27 +38,27 @@ public class CitizenController {
 	}
 	
 	@GetMapping("/get/{id}")
-	public ResponseEntity<Citizen> getCitizenById(@PathVariable("id") int id) {
+	public ResponseEntity<Citizen> getCitizenById(@PathVariable("id") String id) {
 		return new ResponseEntity<Citizen>(citizenService.getCitizenById(id), HttpStatus.OK);
 	}
 	
 	/* Ward clerks (staff the ward reception desks)*/
 	@PutMapping("/update/{id}")
-	public ResponseEntity<Citizen> updateCitizenAsWardClerk(@RequestBody Citizen citizen, @PathVariable("id") int id) {
+	public ResponseEntity<Citizen> updateCitizenAsWardClerk(@RequestBody Citizen citizen, @PathVariable("id") String id) {
 		return new ResponseEntity<Citizen>(
 				citizenService.updateCitizenAsWardClerk(citizen, id), HttpStatus.OK);
 	}
 	
 	/* Administrator can modify citizen roles*/	
 	@PutMapping("/admin/update/{id}")
-	public ResponseEntity<Citizen> updateCitizenAsAdministrator(@RequestBody Citizen citizen, @PathVariable("id") int id) {
+	public ResponseEntity<Citizen> updateCitizenAsAdministrator(@RequestBody Citizen citizen, @PathVariable("id") String id) {
 		return new ResponseEntity<Citizen>(
 				citizenService.updateCitizenAsAdministrator(citizen, id), HttpStatus.OK);
 	}
 	
 	/* Administrator can delete citizen*/	
 	@DeleteMapping("/admin/delete/{id}")
-	public ResponseEntity<String> deleteCitizen(@PathVariable("id") int id) {
+	public ResponseEntity<String> deleteCitizen(@PathVariable("id") String id) {
 		//Delete from Database
 		citizenService.deleteCitizen(id);
 		return new ResponseEntity<String>("Citizen deleted Sucessfully", HttpStatus.OK);

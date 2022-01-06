@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,12 +13,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hospital.model.mongodb.MedicalRecord;
 import com.hospital.service.MedicalRecordService;
 
 @Controller
-@RequestMapping("api/medical/record")
+@RequestMapping("api/medical/records")
 public class MedicalRecordController {
 	
 	private MedicalRecordService medicalRecordService;
@@ -26,6 +28,32 @@ public class MedicalRecordController {
 		super();
 		this.medicalRecordService = medicalRecordService;
 	}
+	
+	
+	@GetMapping("")
+	public String loadAllRecords(Model model) {
+		List<MedicalRecord> records = medicalRecordService.getAllRecords();
+		model.addAttribute("records", records);
+		return "medical_records";
+	}
+	
+	//----------- NOT WORKING ------------//
+	
+	@GetMapping("/get")
+	public String getCitizenRecords(Model model, @RequestParam(name = "cid") String cid) {
+		System.out.println("CID = " + cid);
+		List<MedicalRecord> records = medicalRecordService.getAllRecords();
+		model.addAttribute("records", records);
+		return "patient";
+	}
+	
+	//------------------------------------//
+	
+	
+	
+
+	
+	
 	
 	@PostMapping("/add")
 	public ResponseEntity<MedicalRecord> saveMedicalRecord(@RequestBody MedicalRecord record) {

@@ -32,7 +32,7 @@ public class CitizenServiceImplementation implements CitizenService {
 	}
 
 	@Override
-	public Citizen getCitizenById(int id) {
+	public Citizen getCitizenById(String id) {
 		Optional<Citizen> citizen = citizenRepository.findById(id);
 		if(citizen.isPresent()) {
 			return citizen.get();
@@ -43,7 +43,7 @@ public class CitizenServiceImplementation implements CitizenService {
 	
 	/* Ward clerks (staff the ward reception desks)*/
 	@Override
-	public Citizen updateCitizenAsWardClerk(Citizen citizen, int id) {
+	public Citizen updateCitizenAsWardClerk(Citizen citizen, String id) {
 		Citizen existingCitizen = citizenRepository.findById(id).orElseThrow(
 				() -> new ResourceNotFoundException("Citizen", "Citizen ID", id));
 		existingCitizen.setFirstName(citizen.getFirstName());
@@ -59,7 +59,7 @@ public class CitizenServiceImplementation implements CitizenService {
 	
 	/* Administrator can modify citizen roles*/	
 	@Override
-	public Citizen updateCitizenAsAdministrator(Citizen citizen, int id) {
+	public Citizen updateCitizenAsAdministrator(Citizen citizen, String id) {
 		Citizen existingCitizen = citizenRepository.findById(id).orElseThrow(
 				() -> new ResourceNotFoundException("Citizen", "Citizen ID", id));
 		
@@ -76,7 +76,7 @@ public class CitizenServiceImplementation implements CitizenService {
 	}
 
 	@Override
-	public void deleteCitizen(int id) {
+	public void deleteCitizen(String id) {
 		citizenRepository.findById(id).orElseThrow(
 				() -> new ResourceNotFoundException("Citizen", "Citizen ID", id));
 		citizenRepository.deleteById(id);
