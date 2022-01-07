@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hospital.model.mongodb.Citizen;
 import com.hospital.service.CitizenService;
+import com.hospital.utils.PasswordGenerator;
 
 @Controller
 @RequestMapping("api/patient/register")
@@ -33,6 +34,7 @@ public class PatientRegisterController {
 	public String showForm(Model model) {
 		Citizen citizen = new Citizen();
 		model.addAttribute("citizen", citizen);
+		
 		return "patient_register";
 	}
 	
@@ -44,7 +46,8 @@ public class PatientRegisterController {
 			return "patient_register";
 		}
 		//Generate password and send to citizen email
-		citizen.setPassword("5JTXUOB108AUL15A");
+		String new_password = PasswordGenerator.generate(16);
+		citizen.setPassword(new_password);
 		
 		//Atribute Role to citizen
 		citizen.setRole("Patient");
