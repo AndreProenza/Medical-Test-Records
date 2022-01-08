@@ -19,7 +19,7 @@ import com.hospital.model.mongodb.MedicalRecord;
 import com.hospital.service.MedicalRecordService;
 
 @Controller
-@RequestMapping("api/medical/records")
+@RequestMapping("medical/records")
 public class MedicalRecordController {
 	
 	private MedicalRecordService medicalRecordService;
@@ -28,7 +28,6 @@ public class MedicalRecordController {
 		super();
 		this.medicalRecordService = medicalRecordService;
 	}
-	
 	
 	@GetMapping("")
 	public String loadAllRecords(Model model) {
@@ -39,14 +38,14 @@ public class MedicalRecordController {
 	
 	//----------- NOT WORKING ------------//
 	
-	@GetMapping("/get")
-	public String getCitizenRecords(Model model, @RequestParam(name = "cid") String cid) {
-		System.out.println("CID = " + cid);
-		List<MedicalRecord> records = medicalRecordService.getAllRecords();
-		model.addAttribute("records", records);
-		return "patient";
-	}
-	
+//	@GetMapping("/get")
+//	public String getCitizenRecords(Model model, @RequestParam(name = "cid") String cid) {
+//		System.out.println("CID = " + cid);
+//		List<MedicalRecord> records = medicalRecordService.getAllRecords();
+//		model.addAttribute("records", records);
+//		return "patient";
+//	}
+//	
 	//------------------------------------//
 	
 	

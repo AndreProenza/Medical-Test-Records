@@ -10,38 +10,36 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <title>Hospital</title>
+    
+    <div id="mySidenav" class="sidenav">
+	  <a href="/home" id="about">Home</a>
+	  <a href="#" id="blog">Blog</a>
+	  <a href="#" id="projects">Projects</a>
+	  <a href="/login" id="contact">Logout</a>
+	</div>
   </head>
   <body>
   
-    <header class="header header-records">
+	<header class="header">
         <div>
-            <!--
-			<h1><form class="home-form" action="#" th:action="@{/api/home}" method="get">
-            	<button type="submit" class="hospital-button">Hospital</button>
-            	</form>
-            	<form action="#" th:action="@{/api/home}" method="get">
-            	<button type="submit" class="btn btn-primary logout-btn">Logout</button>
-            	</form>
-        	</h1>
-        	-->
-            <h1><button onclick="location.href='/api/home'" class="hospital-button">Hospital</button><button onclick="location.href='/login'" class="btn btn-primary logout-btn">Logout</button></h1>
+			<h1>Hospital Medical Records 🩺 </h1>
         </div>
     </header>
 
-    <h3 class="title-records">Patient Medical Record</h3>
+    <!--<h3 class="title-records">Patient Medical Record</h3>-->
 	<!--th:field="*{cid}"-->
 	<!--th:action="@{api/medical/record/get}"-->
-    <div class="row align-items-center justify-content-center search-records">
-        <form action="#" method="get">
-            <div class="form-group last mb-3">
-                <label for="search">Search Patient</label>
-                <input type="number" th:value="*{cid}" placeholder="search by citizen number" id="search" name="cid" required>
-                <button type="submit" class="search-button btn-primary"><i class="fa fa-search"></i></button>
-            </div>
-        </form>
-    </div>
-
-    <table class="table table-striped records-table">
+	 
+	<div class="row align-items-center justify-content-center search-records">
+	        <form action="#" method="get">
+	             <input type="number" th:value="*{cid}" placeholder="Search by citizen number..." id="search" name="cid" required>
+	             <button type="submit" class="search-button btn-primary"><i class="fa fa-search"></i></button>
+	        </form>
+	</div>
+	
+<div style="overflow-x:auto center;">	
+	
+    <table class="table center table-striped records-table">
         <thead>
           <tr>
             <th scope="col">Citizen ID</th>
@@ -56,7 +54,6 @@
             <th scope="col">B.Type</th>
             <th scope="col">B.Pressure</th>
             <th scope="col">B.Temp</th>
-            <th scope="col">Diagnosis</th>
             <th scope="col">Record Date</th>
           </tr>
         </thead>
@@ -79,6 +76,7 @@
           </tr>
         </tbody>
       </table>
-
+      </div>
+	</div>
   </body>
 </html>

@@ -27,7 +27,7 @@
               <p class="mb-4">Medical excellence every day.</p>
 
               <!-- Login Form -->
-              <form action="#" th:action="@{/api/login}" th:object="${citizen}" method="post">
+              <form action="#" th:action="@{/login}" th:object="${citizen}" method="post">
                 <div class="form-group last">
                     <label for="username">Citizen Card</label>
                     <input type="number" class="form-control" placeholder="ex: 15720676" id="username" required th:field="*{id}">
@@ -40,9 +40,6 @@
                 <p class="alert alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
                 <br>
                 <input type="submit" value="Login" class="btn btn-block btn-primary">
-                <p class="register">
-                  Don't have an account yet? <a th:href="@{/api/register}">Register</a>
-                </p>
               </form>
 
             </div>

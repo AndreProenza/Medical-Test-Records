@@ -9,17 +9,32 @@
     <link rel="stylesheet" href="/CSS/style.css">
 
     <title>Hospital</title>
+    
   </head>
-  <body>
   
-    <header class="header">
+	<div id="mySidenav" class="sidenav">
+	  <a href="/home" id="about">Home</a>
+	  <a href="#" id="blog">Blog</a>
+	  <a href="#" id="projects">Projects</a>
+	  <a href="/login" id="contact">Logout</a>
+	</div>
+
+	<header class="header">
         <div>
-          <!-- <h1>Hospital <button class="btn btn-primary logout-btn">Logout</button></h1> -->
-          <h1><button onclick="location.href='/api/home'" class="hospital-button">Hospital</button><button onclick="location.href='/login'" class="btn btn-primary logout-btn">Logout</button></h1>
-          <!-- <h1><button class="btn btn-primary btn-header">Hospital</button><button class="btn btn-primary logout-btn">Logout</button></h1> -->
+			<h1>Hospital Medical Records 🩺 </h1>
         </div>
     </header>
 
+	<script>
+	function openNav() {
+	  document.getElementById("mySidenav").style.width = "250px";
+	}
+	
+	function closeNav() {
+	  document.getElementById("mySidenav").style.width = "0";
+	}
+	</script>
+  
     <div class="d-lg-flex half">
       <div class="bg order-1 order-md-2" style="background-image: url('/IMAGES/home.jpg');"></div>
       <div class="contents order-2 order-md-1">
@@ -27,15 +42,15 @@
         <div class="container container-default">
           <div class="row align-items-center justify-content-center">
             <div class="col-md-7">
-              <h3 class="title-top">Welcome ______</h3>
-              <h4 class="position">Your position: ______</h4>
+              <h3 class="title-top">Welcome!</h3>
+              <h4 class="position">Role: ______</h4>
               <p class="mb-4">Medical excellence every day.</p>
               
               <button class="form-group btn btn-block btn-primary">Update Patient Record</button>
               <br>
-              <button class="form-group btn btn-block btn-primary">Medical Records</button>
+              <button onclick="location.href='medical/records'"class="form-group btn btn-block btn-primary">Medical Records</button>
               <br>
-              <button onclick="location.href='api/patient/register'" class="form-group btn btn-block btn-primary">Register Patient</button>
+              <button onclick="location.href='patient/register'" class="form-group btn btn-block btn-primary">Register Patient</button>
               <br>
               <button class="form-group btn btn-block btn-primary">My Medical Record</button>
               <br>
@@ -46,5 +61,7 @@
         </div>
       </div>
     </div>
+    
+    
   </body>
 </html>

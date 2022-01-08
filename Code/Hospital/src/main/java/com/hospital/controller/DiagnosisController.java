@@ -14,7 +14,7 @@ import com.hospital.model.mongodb.MedicalRecord;
 import com.hospital.service.MedicalRecordService;
 
 @Controller
-@RequestMapping("api/patient/diagnosis")
+@RequestMapping("patient/diagnosis")
 public class DiagnosisController {
 	
 	private MedicalRecordService medicalRecordService;

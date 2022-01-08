@@ -17,7 +17,7 @@
     <header class="header">
         <div>
             <!-- <h1>Hospital <button class="btn btn-primary logout-btn">Logout</button></h1> -->
-            <h1><button onclick="location.href='/api/home'" class="hospital-button">Hospital</button><button onclick="location.href='/login'" class="btn btn-primary logout-btn">Logout</button></h1>
+            <h1><button onclick="location.href='/home'" class="hospital-button">Hospital</button><button onclick="location.href='/login'" class="btn btn-primary logout-btn">Logout</button></h1>
         </div>
     </header>
 
@@ -26,18 +26,17 @@
       
       <div class="contents order-2 order-md-1">
 
-        <h3 class="title1">Patient Medical Record</h3>
         <h4 class="title2">Register Patient</h4>
         
         <div class="container container-register">
           <div class="row align-items-center justify-content-center">
             <div class="col-md-7">
               
-              <form action="#" th:action="@{/api/patient/register}" th:object="${citizen}" method="post">
+              <form action="#" th:action="@{/patient/register}" th:object="${citizen}" method="post">
 				
 				<p>Citizen Card</p>
 				<div class="form-group last mb-3">
-                    <label for="username">Citizen Card</label>
+                    <label for="username">Enter your citizen card..</label>
                     <input type="number" class="form-control" placeholder="ex: 15720676" id="username" required th:field="*{id}">
                 </div>
                 <p class="alert alert-danger" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></p>
