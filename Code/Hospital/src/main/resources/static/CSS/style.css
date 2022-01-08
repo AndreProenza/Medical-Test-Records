@@ -110,14 +110,14 @@ h2 {
       border-bottom-left-radius: 7px;
       border-bottom-right-radius: 7px; }
     .half .contents .form-group label, .half .bg .form-group label {
-      font-size: 12px;
+      font-size: 15px;
       display: block;
       margin-bottom: 0;
       color: #b3b3b3; }
   .half .contents .form-control, .half .bg .form-control {
     border: none;
     padding: 0;
-    font-size: 20px;
+    font-size: 15px;
     border-radius: 0; }
     .half .contents .form-control:active, .half .contents .form-control:focus, .half .bg .form-control:active, .half .bg .form-control:focus {
       outline: none;
@@ -11053,25 +11053,17 @@ header > div > h1 {
   left: 0;
 }
 
-#about {
+#home {
   top: 20px;
   background-image: linear-gradient(to bottom right, rgb(70, 182, 167), rgb(34, 120, 170));
 }
 
-#blog {
+#logout {
   top: 80px;
   background-image: linear-gradient(to bottom right, rgb(70, 182, 167), rgb(34, 120, 170));
 }
 
-#projects {
-  top: 140px;
-  background-image: linear-gradient(to bottom right, rgb(70, 182, 167), rgb(34, 120, 170));
-}
 
-#contact {
-  top: 200px;
-  background-image: linear-gradient(to bottom right, rgb(70, 182, 167), rgb(34, 120, 170));
-}
 
 
 
