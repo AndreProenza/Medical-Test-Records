@@ -15,7 +15,7 @@ import com.hospital.model.mongodb.Citizen;
 import com.hospital.service.CitizenService;
 
 @Controller
-@RequestMapping("api/login")
+@RequestMapping("login")
 public class LoginController {
 	
 	private CitizenService citizenService;
