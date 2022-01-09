@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- Style -->
+    <link rel="stylesheet" href="/CSS/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <title>Laboratory</title>
+  </head>
+  <body>
+  
+    <header class="header">
+        <div>
+            <h1><button onclick="location.href='/home'" class="hospital-button">Laboratory</button>
+              <button onclick="location.href='/login'" class="btn btn-primary logout-btn">Logout</button>
+          </h1>
+        </div>
+    </header>
+
+    <div class="d-lg-flex half">
+      <div class="bg order-1 order-md-2" style="background-image: url('/IMAGES/valid.jpeg');"></div>
+      
+      <div class="contents order-2 order-md-1">
+
+        <div class="container">
+          <div class="row align-items-center justify-content-center">
+            <div class="col-md-7">
+              <h3 class="title-top" align="center">Successful Registration</h3>
+              <p class="mb-4" align="center">Health is the first step to prosperity.</p>
+				
+			  <h4 class="title-top" align="center" th:text="${message}"></h4>
+              <div align="center">
+              	<p>Citizen Card ID: <span th:text="${citizen.id}"></span></p>
+              	<p>First Name: <span th:text="${citizen.firstName}"></span><p>
+              	<p>Last Name: <span th:text="${citizen.lastName}"></span><p>
+
+              	<p>Email: <span th:text="${citizen.email}"></span><p>
+              	<p>Phone number: <span th:text="${citizen.phoneNumber}"></span><p>
+              	<p>Birthday: <span th:text="${citizen.birthday}"></span><p>
+
+              	<p>City: <span th:text="${citizen.city}"></span><p>
+              </div>
+              <br>
+              
+              <button onclick="location.href='/home'" class="btn btn-block btn-primary">OK</button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</h>

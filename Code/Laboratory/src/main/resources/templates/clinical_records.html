@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- Style -->
+    <link rel="stylesheet" href="/CSS/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>Laboratory</title>
+  </head>
+  <body>
+  
+    <header class="header header-records">
+        <div>
+            <!-- <h1>Hospital <button class="btn btn-primary logout-btn">Logout</button></h1> -->
+            <h1><button onclick="location.href='/home'" class="hospital-button">Laboratory</button>
+            	<button onclick="location.href='/login'" class="btn btn-primary logout-btn">Logout</button>
+            </h1>
+        </div>
+    </header>
+
+    <h3 class="title-records">Clinical Records</h3>
+	
+    <div class="row align-items-center justify-content-center search-records">
+    	
+        <form action="#" th:action="@{/clinical/records/get}" th:object="${record}" method="get">
+            <div class="form-group last mb-3">
+                <label for="search">Search Patient</label>
+                <input type="number" placeholder="search by citizen number" id="search" required th:field="*{cid}">
+                <button type="submit" class="search-button btn-primary"><i class="fa fa-search"></i></button>
+            </div>
+        </form>   
+    </div>
+    <div class="row align-items-center justify-content-center ">
+		<p class="alert alert-danger" th:if="${message != ''}" th:text="${message}"></p>
+	</div>
+    <!--
+    <div class="col-md-7" align="center">
+    	<p class="alert alert-danger" th:if="${message != ''}" th:text="${message}"></p>
+    </div>
+    -->
+    <table class="table table-striped records-table">
+        <thead>
+          <tr>
+            <th scope="col">Citizen ID</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Birth Date</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">City</th>
+            <th scope="col">Blood Type</th>
+            <th scope="col">Blood Pres.</th>
+            <th scope="col">Body Temp</th>
+            <th scope="col">Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <tr th:each="record : ${records}">
+            <th scope="row" th:text="${record.id}"></th>
+            <td th:text="${record.firstName}"></td>
+            <td th:text="${record.lastName}"></td>
+            <td th:text="${record.email}"></td>
+            <td th:text="${record.phoneNumber}"></td>
+            <td th:text="${record.birthday}"></td>
+            <td th:text="${record.city}"></td>
+            <td th:text="${record.bloodType}"></td>
+            <td th:text="${record.bloodPressure}"></td>
+            <td th:text="${record.bloodTemperature}"></td>
+            <td th:text="${record.date}"></td>
+          	</tr>
+          </tr>
+        </tbody>
+      </table>
+	
+  </body>
+</html>
