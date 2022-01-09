@@ -34,16 +34,31 @@ public class PatientRegisterController {
 	}
 	
 	
-	
+	/**
+	 * Shows form and set form fields to model
+	 * 
+	 * @param model the model
+	 * @return the page to display
+	 */
 	@GetMapping("")
 	public String showForm(Model model) {
 		Citizen citizen = new Citizen();
 		model.addAttribute("citizen", citizen);
-		
+		model.addAttribute("message", "");
 		return "patient_register";
 	}
 	
-	//TODO
+	
+	/**
+	 * Registers a patient
+	 * Reads form, validate it and saves patient details in database
+	 *
+	 * @requires citizenId not registered in database
+	 * @param citizen
+	 * @param errors the form errors
+	 * @param model the model
+	 * @return the page to display
+	 */
 	@PostMapping("")
 	public String registerPatient(@ModelAttribute("citizen") @Valid Citizen citizen, Errors errors, Model model) {
 		//If form has errors
@@ -61,11 +76,13 @@ public class PatientRegisterController {
 			
 			//Send password details to citizen email
 			emailService.sendHospitalEmail(citizen.getEmail(), citizen.getId(), citizen.getPassword());
-			
-			return "patient_register_success";	
+			model.addAttribute("message", "Patient Details");
+			return "register_success";	
 		}
-		model.addAttribute("citizenAlreadyExists", "Patient is already registered");
-		return "patient_register_error";			
+		else {
+			model.addAttribute("message", "Error when registering patient!\nCitizen ID already registered\n");
+			return "patient_register";						
+		}
 	}
 	
 	private boolean isFormValid(Citizen citizen, Model model) {

@@ -65,4 +65,13 @@ public interface CitizenService {
 	 * @return true if citizen exists in database, false otherwise
 	 */
 	boolean existsCitizenById(String id);
+	
+	/**
+	 * Login to application
+	 * 
+	 * @param citizenId the citizen id
+	 * @param password the citizen id password
+	 * @return the citizen if registered
+	 */
+	Citizen login(String citizenId, String password);
 }

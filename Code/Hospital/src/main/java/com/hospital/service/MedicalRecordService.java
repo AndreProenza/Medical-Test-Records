@@ -46,4 +46,12 @@ public interface MedicalRecordService {
 	 * @param id id the medical Record id
 	 */
 	void deleteRecord(String id);
+	
+	/**
+	 * Get all medical records associated to a citizen Id
+	 * 
+	 * @param id the citizenId
+	 * @return list of medical records associated to a citizen Id
+	 */
+	List<MedicalRecord> getAllRecordsByCitizenId(String cid);
 }

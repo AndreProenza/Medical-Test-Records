@@ -15,40 +15,46 @@
   </head>
   <body>
   
+  <div id="mySidenav" class="sidenav">
+	  <a href="/home" id="home">Home</a>
+	  <a href="/login" id="logout">Logout</a>
+	</div>
+
+	<header class="header">
+        <div>
+			<h1>Hospital Medical Records 🩺 </h1>
+        </div>
+    </header>
+  	<!--
     <header class="header">
         <div>
-            <!-- <h1>Hospital <button class="btn btn-primary logout-btn">Logout</button></h1> -->
             <h1><button onclick="location.href='/home'" class="hospital-button">Hospital</button><button onclick="location.href='/login'" class="btn btn-primary logout-btn">Logout</button></h1>
         </div>
     </header>
-
+	-->
     <div class="d-lg-flex half">
       <div class="bg order-1 order-md-2" style="background-image: url('/IMAGES/diagnosis.jpg');"></div>
       
       <div class="contents order-2 order-md-1">
 
         <h3 class="title1">Patient Medical Record</h3>
-        <h4 class="title2">Patient Diagnosis</h4>
         
         <div class="container container-diagnosis">
           <div class="row align-items-center justify-content-center">
             <div class="col-md-7">
-
-                <p>First Name: _______ </p>
-                <p>Last Name: _______ </p>
-                <p>Citizen ID: _______</p>
-                
-                <form action="#" method="get">
-                    <p>Search</p>
-                    <div class="form-group last mb-3">
-                        <label for="search">Search Patient</label>
-                        <input type="number" placeholder="search by citizen number" id="search" required>
-                        <button type="submit" class="search-button btn-primary"><i class="fa fa-search"></i></button>
-                    </div>
-                </form>
+            
+            	<p class="alert alert-danger" th:if="${message != ''}" th:text="${message}"></p>
               
-                <form action="#" th:action="@{/patient/diagnosis}" th:object="${record}" method="post">
-
+                <form action="#" th:action="@{/patient/medical/record}" th:object="${record}" method="post">
+					
+					
+					<p>Citizen Card</p>
+					<div class="form-group last mb-3">
+	                    <label for="cid">Citizen Card</label>
+	                    <input type="number" class="form-control" placeholder="ex: 15720676" id="cid" required th:field="*{cid}">
+	                </div>
+	                <p class="alert alert-danger" th:if="${#fields.hasErrors('cid')}" th:errors="*{cid}"></p>
+	                
                     <p>Patient Height(cm's)</p>
                     <div class="form-group last mb-3">
                         <label for="height">Height</label>
@@ -106,7 +112,7 @@
                     </div>
                     <p class="alert alert-danger" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></p>
 
-                    <input type="submit" value="Update Patient Diagnosis" class="btn btn-block btn-primary">
+                    <input type="submit" value="Create" class="btn btn-block btn-primary">
                     <br>
               </form>
 

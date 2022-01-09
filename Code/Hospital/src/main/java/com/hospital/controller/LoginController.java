@@ -1,7 +1,5 @@
 package com.hospital.controller;
 
-import java.util.Optional;
-
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -11,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.hospital.model.mongodb.Citizen;
 import com.hospital.service.CitizenService;
 
@@ -25,7 +25,6 @@ public class LoginController {
 		this.citizenService = citizenService;
 	}
 	
-	//---------- ALTERAR HARCODED -----------------//
 	@GetMapping("")
 	public String showLoginForm(Model model) {
 		Citizen citizen = new Citizen();
@@ -33,17 +32,13 @@ public class LoginController {
 		return "login";
 	}
 	
-	//---------- ALTERAR HARCODED -----------------//
+
 	@PostMapping("")
-	public String submitLoginForm(@ModelAttribute("citizen") @Valid Citizen citizen, Errors errors) {
-		if(errors.hasErrors()) {
+	public String submitLoginForm(@ModelAttribute("citizen") @Valid Citizen citizen, Errors errors, Model model) {
+		if(errors.hasFieldErrors("id") && errors.hasFieldErrors("password")) {
 			return "login";
 		}
-	    //Check if exists
-//	    Optional<Citizen> existingCitizen = Optional.ofNullable(citizenService.getCitizenById("16337575"));
-//	    if(existingCitizen.isPresent()) {
-//	    	return "redirect:/home";
-//	    }
-	    return "login";
+		Citizen existingCitizen = citizenService.login(citizen.getId(), citizen.getPassword());
+        return existingCitizen == null ? "login" : "home";
 	}
 }

@@ -89,5 +89,11 @@ public class CitizenServiceImplementation implements CitizenService {
 	public boolean existsCitizenById(String id) {
 		return citizenRepository.existsById(id);
 	}
+
+	@Override
+	public Citizen login(String citizenId, String password) {
+		Citizen citizen = citizenRepository.findByIdAndPassword(citizenId, password);
+		return citizen == null ? null : citizen;
+	}
 	
 }

@@ -63,4 +63,9 @@ public class MedicalRecordsImplementation implements MedicalRecordService {
 		medicalRecordRepository.deleteById(id);
 	}
 
+	@Override
+	public List<MedicalRecord> getAllRecordsByCitizenId(String cid) {
+		return medicalRecordRepository.findByCid(cid);
+	}
+
 }
