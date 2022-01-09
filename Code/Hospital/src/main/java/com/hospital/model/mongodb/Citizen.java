@@ -63,7 +63,7 @@ public class Citizen {
 		this.id = id;
 		this.password = password;
 		this.role = role;
-		this.firstName = firstName;
+		//this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
