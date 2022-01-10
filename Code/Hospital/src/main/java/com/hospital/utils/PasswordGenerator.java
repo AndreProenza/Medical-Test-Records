@@ -4,6 +4,12 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+@Configuration
 public final class PasswordGenerator {
 
     private static final String LOWER = "abcdefghijklmnopqrstuvwxyz";
@@ -47,4 +53,14 @@ public final class PasswordGenerator {
         }
         return new String(password);
     }
+
+    /**
+     * @return a password encoder that uses BCrypt that can be used to
+     * hash a password
+     */
+    @Bean
+    public PasswordEncoder encoder() {
+        return new BCryptPasswordEncoder();
+    }
+
 }

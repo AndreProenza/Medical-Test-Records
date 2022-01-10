@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -24,6 +25,9 @@ import com.hospital.service.EmailSenderService;
 public class PatientRegisterController {
 
 	private CitizenService citizenService;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
 	private EmailSenderService emailService;
@@ -65,9 +69,14 @@ public class PatientRegisterController {
 		if(!(errors.getErrorCount() == 2 && errors.hasFieldErrors("role") && errors.hasFieldErrors("password"))) {
 			return "patient_register";
 		}
-		//Generate password
-		citizen.setPassword(PasswordGenerator.generate(16));
+		// Generate password
+		String clearTextPassword = PasswordGenerator.generate(16);
+
+		// creates the hash of the password used in the regist
+		String hashedPassword = passwordEncoder.encode(clearTextPassword);
 		
+		citizen.setPassword(hashedPassword);
+	
 		//Atribute Role to citizen
 		citizen.setRole("Patient");
 		
@@ -75,7 +84,7 @@ public class PatientRegisterController {
 			citizenService.saveCitizen(citizen);
 			
 			//Send password details to citizen email
-			emailService.sendHospitalEmail(citizen.getEmail(), citizen.getId(), citizen.getPassword());
+			emailService.sendHospitalEmail(citizen.getEmail(), citizen.getId(), clearTextPassword);
 			model.addAttribute("message", "Patient Details");
 			return "register_success";	
 		}
