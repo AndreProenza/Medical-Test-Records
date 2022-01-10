@@ -1,13 +1,13 @@
-package com.labbackup;
+package com.hospitalbackend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class LaboratoryBackupApplication {
+public class HospitalBackendApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(LaboratoryBackupApplication.class, args);
+		SpringApplication.run(HospitalBackendApplication.class, args);
 	}
 
 }
