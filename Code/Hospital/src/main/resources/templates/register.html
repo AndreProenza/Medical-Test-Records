@@ -51,15 +51,15 @@
                     <label for="role">Nurse</label>
                     <input type="radio" id="nurse" name="role" value="Nurse" required th:field="*{role}">
                     <label for="role">Clinical assistant</label>
-                    <input type="radio" id="clinical_assistant" name="role" value="Clinical assistant" required th:field="*{role}">
+                    <input type="radio" id="clinical_assistant" name="role" value="Clinical_Assistant" required th:field="*{role}">
                     <label for="role">Porter</label>
                     <input type="radio" id="porter" name="role" value="Porter" required th:field="*{role}">
                     <label for="role">Volunteer</label>
                     <input type="radio" id="volunteer" name="role" value="Volunteer" required th:field="*{role}">
                     <label for="role">Patient assistant</label>
-                    <input type="radio" id="patient_assistant" name="role" value="Patient assistant" required th:field="*{role}">
+                    <input type="radio" id="patient_assistant" name="role" value="Patient_Assistant" required th:field="*{role}">
                     <label for="role">Ward Clerk</label>
-                    <input type="radio" id="ward_clerk" name="role" value="Ward Clerk" required th:field="*{role}">
+                    <input type="radio" id="ward_clerk" name="role" value="Ward_Clerk" required th:field="*{role}">
                 </div>
                 <p class="alert alert-danger" th:if="${#fields.hasErrors('role')}" th:errors="*{role}"></p>
                 <p>Name</p>
