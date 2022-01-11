@@ -90,11 +90,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //Amanda Júlio -> Patient
 //17645234 -> pB0K!*vF85!0&@60 
 
-	
-	
-//	  "q0y&BGysjT34uNSh" -> "12345678"
-//    "&O$Y05e0m5Ac9a%v" -> "14267653"
-//    "EK&4$?5%Rdc1?n0&" -> "16732784"
-//    "7*5Q%H5R1k9$t5C9" -> "11256472"
-//    "d0p7&9w&433jPP1g" -> "12221749"	
 }
