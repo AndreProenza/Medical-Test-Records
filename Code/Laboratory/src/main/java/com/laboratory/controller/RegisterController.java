@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.laboratory.model.mongodb.Citizen;
 import com.laboratory.service.CitizenService;
 import com.laboratory.service.EmailSenderService;
-import com.laboratory.utils.Hasher;
 import com.laboratory.utils.PasswordGenerator;
 
 @Controller
@@ -28,6 +28,9 @@ public class RegisterController {
 	@Autowired
 	private EmailSenderService emailService;
 
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
 	public RegisterController(CitizenService citizenService) {
 		super();
 		this.citizenService = citizenService;
@@ -69,11 +72,10 @@ public class RegisterController {
 		// Generate password
 		String clearTextPassword = PasswordGenerator.generate(16);
 
-		// creates the hash of the password used in the regist
-		String hashedPassword = Hasher.hash(clearTextPassword);
+		// creates the hash of the password used in the register
+		String hashedPassword = bCryptPasswordEncoder.encode(clearTextPassword);
 		
 		citizen.setPassword(hashedPassword);
-
 		if (isFormValid(citizen, model) && !citizenService.existsCitizenById(citizen.getId())) {
 			citizenService.saveCitizen(citizen);
 
