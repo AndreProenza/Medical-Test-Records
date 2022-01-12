@@ -176,10 +176,10 @@ Security properties to ensure
 
 ## Considered technologies
 
-- Frontend: Angular, Java
-- Backend: NodeJS, Java
-- Database: SQL, MongoDB
-- Security policy language: XACML
+- Frontend: Java Spring Boot
+- Backend: Java Spring Boot
+- Database: MongoDB
+- Security policy language: Spring Boot Security
 
 ---
 
@@ -188,7 +188,7 @@ Security properties to ensure
 ### Milestones
 
 #### Basic version
-- Design system, set up the login method in Health Institutions frontend servers, set up and configure AuthzForce PDP engine.
+- Design system, set up the login method in Health Institutions frontend servers, set up and configure authentication using Spring Boot Security framework.
 
 #### Intermediate Version
 - Ensure secure communication via TLS, Use asymmetric cryptography for communication establishment, custom protocol development, encrypt server databases
