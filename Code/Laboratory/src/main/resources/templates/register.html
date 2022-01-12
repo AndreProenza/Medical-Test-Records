@@ -10,13 +10,15 @@
 
     <title>Laboratory</title>
   </head>
-  <body>
-  
-    <header class="header">
+    <body>
+  	<div id="mySidenav" class="sidenav">
+	  <a th:href="@{/home}" id="home">Home</a>
+	  <a th:href="@{/logout}" id="logout">Logout</a>
+	</div>
+	
+		<header class="header">
         <div>
-          <h1><button onclick="location.href='/home'" class="hospital-button">Laboratory</button>
-              <button onclick="location.href='/login'" class="btn btn-primary logout-btn">Logout</button>
-          </h1>
+			<h1>Laboratory </h1>
         </div>
     </header>
 
@@ -44,8 +46,8 @@
                 <div class="form-group last mb-3">
                     <label for="role">Admin</label>
                     <input type="radio" id="admin" name="role" value="Admin" required th:field="*{role}">
-                    <label for="role">Resposible</label>
-                    <input type="radio" id="resposible" name="role" value="Resposible" required th:field="*{role}">
+                    <label for="role">Responsible</label>
+                    <input type="radio" id="responsible" name="role" value="Responsible" required th:field="*{role}">
                 </div>
                 <p class="alert alert-danger" th:if="${#fields.hasErrors('role')}" th:errors="*{role}"></p>
                 <p>Name</p>

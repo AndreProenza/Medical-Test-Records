@@ -8,9 +8,11 @@
 /* ------------------------ */
 /* ------------------------ */
 
+
+
 header {
   /* background-color: #207bdb; */
-  background-image: linear-gradient(to bottom right, rgb(104, 231, 136), rgb(86, 151, 105));
+  background-image: linear-gradient(to bottom right, rgb(104, 231, 136), rgb(34, 120, 170));
   text-align: center;
   color: white;
   width: 50%;
@@ -32,7 +34,7 @@ header > h1, header > button {
 }
 
 .hospital-button:hover {
-  color: rgb(86, 151, 105);
+  color: rgb(129, 226, 255);
 }
 
 .btn-header {
@@ -110,14 +112,14 @@ h2 {
       border-bottom-left-radius: 7px;
       border-bottom-right-radius: 7px; }
     .half .contents .form-group label, .half .bg .form-group label {
-      font-size: 12px;
+      font-size: 15px;
       display: block;
       margin-bottom: 0;
       color: #b3b3b3; }
   .half .contents .form-control, .half .bg .form-control {
     border: none;
     padding: 0;
-    font-size: 20px;
+    font-size: 15px;
     border-radius: 0; }
     .half .contents .form-control:active, .half .contents .form-control:focus, .half .bg .form-control:active, .half .bg .form-control:focus {
       outline: none;
@@ -1883,7 +1885,7 @@ pre code {
 }
 
 .table {
-  width: 100%;
+
   margin-bottom: 1rem;
   color: #212529;
 }
@@ -1892,6 +1894,7 @@ pre code {
 .table td {
   padding: 0.75rem;
   vertical-align: top;
+  text-align: center;
   border-top: 1px solid #dee2e6;
 }
 
@@ -2829,15 +2832,14 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  /* , rgb(86, 151, 105) */
   background-color: rgb(104, 231, 136);
   border-color: rgb(104, 231, 136);
 }
 
 .btn-primary:hover {
   color: #fff;
-  background-color: rgb(86, 151, 105);
-  border-color: rgb(86, 151, 105);
+  background-color: rgb(34, 120, 170);
+  border-color: rgb(34, 120, 170);
 }
 
 .btn-primary:focus, .btn-primary.focus {
@@ -8814,7 +8816,9 @@ button.bg-dark:focus {
 
 .mb-3,
 .my-3 {
-  margin-bottom: 1rem !important;
+  border: 1px solid gray;
+    margin-bottom: 1rem !important;
+    /*width: 100px;*/
 }
 
 .ml-3,
@@ -10877,7 +10881,7 @@ header > div > h1 {
   font-size: 30px;
   padding: 1%;
   font-style: italic;
-  text-align: left;
+  text-align: c;
   margin-bottom: 0%;
 }
 
@@ -10914,6 +10918,7 @@ header > div > h1 {
   text-align: center;
   color: rgb(131, 131, 131);
   font-size: 21px;
+  margin-top: 15%;
 }
 
 .title1 {
@@ -10943,11 +10948,11 @@ header > div > h1 {
 }
 
 .search-button {
-  min-width: 10%;
-  height: 35px;
-  border-radius: 10%;
-  user-select: none;
-  border: 1px solid transparent;
+	min-width: 15%;
+    height: 50px;
+    border-radius: 10%;
+    user-select: none;
+    border: 1px solid transparent;
 }
 
 .search-button > i {
@@ -10955,9 +10960,10 @@ header > div > h1 {
 }
 
 #search {
-  font-size: 18px;
-  border: none;
-  width: 85%;
+ font-size: 18px;
+ padding: 10px;
+ width: 78%;
+ border: 1px solid #ddd;
 }
 
 /* ------------------------ */
@@ -10976,31 +10982,36 @@ header > div > h1 {
   
 }
 
+/*
 .records-table {
   margin-top: 5%;
 }
+*/
 
 .title-records, .title-records2 {
   text-align: center;
   color: rgb(131, 131, 131);
   font-size: 21px;
+  padding-top: 60px;
 }
 
-.title-records {
-  margin-top: 3%;
-}
+
 
 .title-records2 {
   margin-top: 1%;
 }
 
+/*
 .search-records {
   margin-top: 3%;
 }
+*/
 
 .search-records > form {
-  border: 1px solid gray;
   padding: 15px;
+  width:355px;
+  margin-left: -962px;
+  margin-top: 70px;
 }
 
 /* ------------------------ */
@@ -11022,3 +11033,64 @@ header > div > h1 {
   text-align: center;
   margin-top: 2%;
 }
+
+
+
+
+/* -----------HOME------------- */
+#mySidenav a {
+  position: absolute;
+  left: -80px;
+  transition: 0.3s;
+  padding: 15px;
+  width: 100px;
+  text-decoration: none;
+  font-size: 20px;
+  color: white;
+  border-radius: 0 5px 5px 0;
+  margin-block-start: 10pc;
+}
+
+#mySidenav a:hover {
+  left: 0;
+}
+
+#home {
+  top: 20px;
+  background-image: linear-gradient(to bottom right, rgb(104, 231, 136), rgb(34, 120, 170));
+}
+
+#logout {
+  top: 80px;
+  background-image: linear-gradient(to bottom right, rgb(104, 231, 136), rgb(34, 120, 170));
+}
+
+table.center {
+  margin-left: auto; 
+  margin-right: auto;
+  overflow: auto;
+  border: 1px solid #ddd;
+}
+
+input[type=text] {
+  width: 300px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-image: url('searchicon.png');
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+  align-items: center !important;
+}
+
+input[type=text]:focus {
+  width: 100%;
+}
+
+
+

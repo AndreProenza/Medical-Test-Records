@@ -5,6 +5,8 @@ import java.util.regex.Pattern;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -27,6 +29,9 @@ public class PatientRegisterController {
 		super();
 		this.citizenService = citizenService;
 	}
+	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	
 	/**
@@ -60,8 +65,14 @@ public class PatientRegisterController {
 		if(!(errors.getErrorCount() == 2 && errors.hasFieldErrors("role") && errors.hasFieldErrors("password"))) {
 			return "patient_register";
 		}
-		//Generate password
-		citizen.setPassword(PasswordGenerator.generate(16));
+		// Generate password
+		String clearTextPassword = PasswordGenerator.generate(16);
+
+		// creates the hash of the password used in the regist
+		String hashedPassword = bCryptPasswordEncoder.encode(clearTextPassword);
+		
+		citizen.setPassword(hashedPassword);
+	
 		
 		//Atribute Role to citizen
 		citizen.setRole("Patient");

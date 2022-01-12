@@ -10,14 +10,15 @@
 
     <title>Laboratory</title>
   </head>
-  <body>
-  
-    <header class="header">
+    <body>
+  	<div id="mySidenav" class="sidenav">
+	  <a th:href="@{/home}" id="home">Home</a>
+	  <a th:href="@{/logout}" id="logout">Logout</a>
+	</div>
+	
+		<header class="header">
         <div>
-            <!-- <h1>Hospital <button class="btn btn-primary logout-btn">Logout</button></h1> -->
-            <h1><button onclick="location.href='/home'" class="hospital-button">Laboratory</button>
-            	<button onclick="location.href='/login'" class="btn btn-primary logout-btn">Logout</button>
-            </h1>
+			<h1>Laboratory </h1>
         </div>
     </header>
 
@@ -26,7 +27,6 @@
       
       <div class="contents order-2 order-md-1">
 
-        <h3 class="title1">Patient Clinical Record</h3>
         <h4 class="title2">Register Patient</h4>
         
         <div class="container container-register">

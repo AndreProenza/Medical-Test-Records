@@ -11,29 +11,28 @@
 
     <title>Laboratory</title>
   </head>
-  <body>
-  
-    <header class="header header-records">
+    <body>
+  	<div id="mySidenav" class="sidenav">
+	  <a th:href="@{/home}" id="home">Home</a>
+	  <a th:href="@{/logout}" id="logout">Logout</a>
+	</div>
+	
+		<header class="header">
         <div>
-            <!-- <h1>Hospital <button class="btn btn-primary logout-btn">Logout</button></h1> -->
-            <h1><button onclick="location.href='/home'" class="hospital-button">Laboratory</button>
-            	<button onclick="location.href='/login'" class="btn btn-primary logout-btn">Logout</button>
-            </h1>
+			<h1>Laboratory </h1>
         </div>
     </header>
-
+<br>
     <h3 class="title-records">Clinical Records</h3>
 	
     <div class="row align-items-center justify-content-center search-records">
     	
         <form action="#" th:action="@{/clinical/records/get}" th:object="${record}" method="get">
-            <div class="form-group last mb-3">
-                <label for="search">Search Patient</label>
-                <input type="number" placeholder="search by citizen number" id="search" required th:field="*{cid}">
-                <button type="submit" class="search-button btn-primary"><i class="fa fa-search"></i></button>
-            </div>
-        </form>   
+	             <input type="number" placeholder="Search by citizen number" id="search" required th:field="*{cid}">
+	             <button type="submit" class="search-button btn-primary"><i class="fa fa-search"></i></button>
+	        </form>
     </div>
+    	
     <div class="row align-items-center justify-content-center ">
 		<p class="alert alert-danger" th:if="${message != ''}" th:text="${message}"></p>
 	</div>
@@ -42,7 +41,8 @@
     	<p class="alert alert-danger" th:if="${message != ''}" th:text="${message}"></p>
     </div>
     -->
-    <table class="table table-striped records-table">
+    	<div style="overflow-x:auto center;">	
+    <table class="table center table-striped records-table">
         <thead>
           <tr>
             <th scope="col">Citizen ID</th>
@@ -76,6 +76,6 @@
           </tr>
         </tbody>
       </table>
-	
+	</div>
   </body>
 </html>
