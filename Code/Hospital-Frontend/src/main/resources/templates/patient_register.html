@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- Style -->
+    <link rel="stylesheet" href="/CSS/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <title>Hospital</title>
+  </head>
+  
+	<div id="mySidenav" class="sidenav">
+	  <a th:href="@{/home}" id="home">Home</a>
+	  <a th:href="@{/logout}" id="logout">Logout</a>
+	</div>
+  
+  <body>
+  
+	<header class="header">
+        <div>
+			<h1>Hospital Medical Records 🩺 </h1>
+        </div>
+    </header>
+
+    <div class="d-lg-flex half">
+      <div class="bg order-1 order-md-2" style="background-image: url('/IMAGES/patient_register.jpg');"></div>
+      
+      <div class="contents order-2 order-md-1">
+
+        <h4 class="title2">Register Patient</h4>
+        
+        <div class="container container-register">
+          <div class="row align-items-center justify-content-center">
+            <div class="col-md-7">
+            
+              <p class="alert alert-danger" th:if="${message != ''}" th:text="${message}"></p>
+              
+              <form action="#" th:action="@{/patient/register}" th:object="${citizen}" method="post">
+				
+				<p>Citizen Card</p>
+				<div class="form-group last mb-3">
+                    <label for="username">Enter your citizen card</label>
+                    <input type="number" class="form-control" placeholder="E.g. 15720676" id="username" required th:field="*{id}">
+                </div>
+                <p class="alert alert-danger" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></p>
+                <p>First Name</p>
+                <div class="form-group last mb-3">
+                    <label for="first-name">Enter your first name</label>
+                    <input type="text" class="form-control" placeholder="E.g. John" id="first-name" required th:field="*{firstName}">
+                </div>
+	                <p class="alert alert-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
+				<p>Last Name</p>
+				<div class="form-group last mb-3">
+                    <label for="last-name">Enter your last name</label>
+                    <input type="text" class="form-control" placeholder="E.g. Williams" id="last-name" required th:field="*{lastName}">
+                </div>
+	                <p class="alert alert-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
+                <p>Birth Date</p>
+                <div class="form-group last mb-3">
+                    <label for="birthday">Enter your birthday date</label>
+                    <input type="date" class="form-control" id="birthday" required th:field="*{birthday}">
+                </div>
+                    <p class="alert alert-danger" th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}"></p>
+
+                <p>Email</p>
+                <div class="form-group last mb-3">
+                    <label for="email">Enter your email</label>
+                    <input type="email" class="form-control" placeholder="E.g. yourname@gmail.com" id="email" th:field="*{email}">
+                </div>
+                    <p class="alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+
+                <p>Phone Number</p>
+                <div class="form-group last mb-3">
+                    <label for="phone">Enter your phone number</label>
+                    <input type="number" class="form-control" placeholder="E.g. 938367543" id="phone" required th:field="*{phoneNumber}">
+                </div>
+                    <p class="alert alert-danger" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></p>
+
+                <p>City</p>
+                <div class="form-group last mb-3">
+                    <label for="city">Enter the city you live</label>
+                    <input type="text" class="form-control" placeholder="E.g. Lisbon" id="city" required th:field="*{city}">
+                </div>
+                    <p class="alert alert-danger" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></p>
+
+                <input type="submit" value="Register Patient" class="btn btn-block btn-primary">
+                <br>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</h>
