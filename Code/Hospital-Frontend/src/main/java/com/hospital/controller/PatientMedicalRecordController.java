@@ -18,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.hospital.model.Citizen;
 import com.hospital.model.MedicalRecord;
+import com.hospital.utils.BackendUri;
 
 @Controller
 @RequestMapping("patient/medical/record")
@@ -61,7 +62,7 @@ public class PatientMedicalRecordController {
 		}
 		if(isFormValid(record, model)) {
 			
-			URI uri = new URI("http://localhost:8080/patient/medical/record/register");
+			URI uri = new URI(BackendUri.MEDICAL_RECORD_POST);
 			MedicalRecord medicalRecord = restTemplate.postForObject(uri, record, MedicalRecord.class);
 			
 			//If medical record was not saved sucessfully
@@ -69,8 +70,7 @@ public class PatientMedicalRecordController {
 				model.addAttribute("message", "Error creating medical record!\nCitizen ID not registered\n");
 				return "medical_record";
 			}
-			String uri2 = "citizen/get/{id}";
-			Citizen existingCitizen = restTemplate.getForObject(uri2, Citizen.class, record.getCid());
+			Citizen existingCitizen = restTemplate.getForObject(BackendUri.CITIZEN_GET, Citizen.class, record.getCid());
 			
 			model.addAttribute("message", "Medical Details");
 			model.addAttribute("citizen", existingCitizen);

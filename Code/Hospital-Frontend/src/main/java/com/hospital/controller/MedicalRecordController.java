@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 
+import com.hospital.utils.BackendUri;
 import com.hospital.utils.PatientRecord;
 import com.hospital.model.Citizen;
 import com.hospital.model.MedicalRecord;
@@ -31,8 +32,7 @@ public class MedicalRecordController {
 	@GetMapping("")
 	public String loadAllRecords(Model model) {		
 		
-		String uri = "medical/records";
-		List<PatientRecord> records = Arrays.asList(restTemplate.getForObject(uri, PatientRecord[].class));	
+		List<PatientRecord> records = Arrays.asList(restTemplate.getForObject(BackendUri.MEDICAL_RECORDS_ALL, PatientRecord[].class));	
 		MedicalRecord record = new MedicalRecord();
 		
 		model.addAttribute("records", records);
@@ -51,24 +51,21 @@ public class MedicalRecordController {
 	 */
 	@GetMapping("/get")
 	public String getCitizenRecords(@ModelAttribute("record") MedicalRecord record, Model model) {
-		
-		String uri = "citizen/exists/{id}";
-		Boolean existsCitizen = restTemplate.getForObject(uri, Boolean.class, record.getCid());
+
+		Boolean existsCitizen = restTemplate.getForObject(BackendUri.CITIZEN_EXISTS_GET, Boolean.class, record.getCid());
 		if(!existsCitizen.booleanValue()) {
 			model.addAttribute("message", "Error when searching record!\nCitizen ID not registered\n");
 			return "medical_records";
 		}
 		
-		uri = "medical/records/get/{id}";
-		List<PatientRecord> records = Arrays.asList(restTemplate.getForObject(uri, PatientRecord[].class, record.getCid()));
+		List<PatientRecord> records = Arrays.asList(restTemplate.getForObject(BackendUri.MEDICAL_RECORDS_GET, PatientRecord[].class, record.getCid()));
 
 		if(records.isEmpty()) {
 			model.addAttribute("message", "Error when searching record!\nCitizen ID not registered\n");
 			return "medical_records";
 		}
 		else {
-			uri = "citizen/get/{id}";
-			Citizen existingCitizen = restTemplate.getForObject(uri, Citizen.class, record.getCid());
+			Citizen existingCitizen = restTemplate.getForObject(BackendUri.CITIZEN_GET, Citizen.class, record.getCid());
 			model.addAttribute("records", records);
 			model.addAttribute("citizen", existingCitizen);
 			return "patient_record";			

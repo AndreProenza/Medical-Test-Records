@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 
 import com.hospital.model.Citizen;
+import com.hospital.utils.BackendUri;
 
 @Controller
 @RequestMapping("admin/register")
@@ -62,7 +63,7 @@ public class RegisterController {
 		
 		if(isFormValid(citizen, model)) {
 			
-			URI uri = new URI("http://localhost:8080/admin/register");
+			URI uri = new URI(BackendUri.REGISTER_PERSONNEL_POST);
 			Citizen savedCitizen = restTemplate.postForObject(uri, citizen, Citizen.class);
 			
 			//If citizen was not saved successfully. If savedCitizen is null, citizen already exists in database

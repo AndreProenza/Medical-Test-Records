@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 
 import com.hospital.model.Citizen;
+import com.hospital.utils.BackendUri;
 import com.hospital.utils.PatientRecord;
 
 @Controller
@@ -36,17 +37,14 @@ public class MyMedicalRecordController {
 		String citizenId = authentication.getName();
 		
 		if(citizenId != null) {			
+
+			List<PatientRecord> records = Arrays.asList(restTemplate.getForObject(BackendUri.MY_MEDICAL_RECORDS_GET, PatientRecord[].class, citizenId));
 			
-			String uri = "my/medical/record/get/{id}";
-			List<PatientRecord> records = Arrays.asList(restTemplate.getForObject(uri, PatientRecord[].class, citizenId));
-			
-			uri = "citizen/get/{id}";
-			Citizen existingCitizen = restTemplate.getForObject(uri, Citizen.class, citizenId);
+			Citizen existingCitizen = restTemplate.getForObject(BackendUri.CITIZEN_GET, Citizen.class, citizenId);
 			
 			if(records.isEmpty()) {
-				
-				uri = "my/medical/record/default/{id}";
-				PatientRecord record = restTemplate.getForObject(uri, PatientRecord.class, citizenId);
+
+				PatientRecord record = restTemplate.getForObject(BackendUri.MY_MEDICAL_RECORDS_DEFAULT_GET, PatientRecord.class, citizenId);
 				
 				model.addAttribute("message", "You have no medical records yet!\n");
 				model.addAttribute("records", record);
