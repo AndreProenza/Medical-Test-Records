@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hospital.model.mongodb.MedicalRecord;
-import com.hospital.service.MedicalRecordService;
 import com.hospital.service.CitizenService;
+import com.hospital.service.MedicalRecordService;
 
 @RestController
 @RequestMapping("patient/medical/record")

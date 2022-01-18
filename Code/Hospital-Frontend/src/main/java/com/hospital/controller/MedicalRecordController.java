@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 
-import com.hospital.utils.BackendUri;
-import com.hospital.utils.PatientRecord;
 import com.hospital.model.Citizen;
 import com.hospital.model.MedicalRecord;
+import com.hospital.utils.BackendUri;
+import com.hospital.utils.PatientRecord;
 
 @Controller
 @RequestMapping("medical/records")

@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hospital.model.mongodb.Citizen;
 import com.hospital.service.CitizenService;
-import com.hospital.utils.PasswordGenerator;
 import com.hospital.service.EmailSenderService;
+import com.hospital.utils.PasswordGenerator;
 
 @RestController
 @RequestMapping("patient/register")

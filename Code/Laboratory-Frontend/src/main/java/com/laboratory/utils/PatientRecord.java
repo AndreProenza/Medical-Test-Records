@@ -35,6 +35,10 @@ public class PatientRecord {
 		this.date = date;
 	}
 	
+	public PatientRecord() {
+		
+	}
+	
 	public String getFirstName() {
 		return firstName;
 	}

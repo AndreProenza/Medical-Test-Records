@@ -1,9 +1,12 @@
 package com.laboratory.controller;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.regex.Pattern;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -11,25 +14,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.client.RestTemplate;
 
-import com.laboratory.model.mongodb.ClinicalRecord;
-import com.laboratory.service.CitizenService;
-import com.laboratory.service.ClinicalRecordService;
+import com.laboratory.model.Citizen;
+import com.laboratory.model.ClinicalRecord;
+import com.laboratory.utils.BackendUri;
 
 @Controller
 @RequestMapping("patient/clinical/record")
 public class PatientClinicalRecordController {
 	
-	private ClinicalRecordService clinicalRecordService;
-	private CitizenService citizenService;
+	@Autowired
+	private RestTemplate restTemplate;
 	
-	
-	public PatientClinicalRecordController(ClinicalRecordService clinicalRecordService, CitizenService citizenService) {
-		super();
-		this.clinicalRecordService = clinicalRecordService;
-		this.citizenService = citizenService;
-	}
-
 	/**
 	 * Shows form and set form fields to model
 	 * 
@@ -55,16 +52,27 @@ public class PatientClinicalRecordController {
 	 * @param errors the form errors
 	 * @param model the model
 	 * @return the page to display
+	 * @throws URISyntaxException 
 	 */
 	@PostMapping("")
-	public String submitClinicalRecord(@ModelAttribute("record") @Valid ClinicalRecord record, Errors errors, Model model) {
+	public String submitClinicalRecord(@ModelAttribute("record") @Valid ClinicalRecord record, Errors errors, Model model) throws URISyntaxException {
 		if(errors.hasErrors()) {
 			return "clinical_record";
 		}
-		if(isFormValid(record, model) && citizenService.existsCitizenById(record.getCid())) {
-			clinicalRecordService.saveRecord(record);
+		if(isFormValid(record, model)) {
+			
+			URI uri = new URI(BackendUri.CLINICAL_RECORD_POST);
+			ClinicalRecord clinicalRecord = restTemplate.postForObject(uri, record, ClinicalRecord.class);
+			
+			//If clinical record was not saved sucessfully
+			if(clinicalRecord == null) {
+				model.addAttribute("message", "Error creating clinical record!\nCitizen ID not registered\n");
+				return "clinical_record";
+			}
+			Citizen existingCitizen = restTemplate.getForObject(BackendUri.CITIZEN_GET, Citizen.class, record.getCid());
+			
 			model.addAttribute("message", "Clinical Details");
-			model.addAttribute("citizen",citizenService.getCitizenById(record.getCid()));
+			model.addAttribute("citizen", existingCitizen);
 		}
 		else {
 			model.addAttribute("message", "Error creating clinical record!\nCitizen ID not registered\n");

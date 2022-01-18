@@ -1,4 +1,4 @@
-package com.laboratory.model.mongodb;
+package com.laboratory.model;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -6,12 +6,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
 import lombok.Data;
 
 @Data
-@Document("record")
 public class ClinicalRecord {
 	
 	@NotNull(message = "Citizen ID cannot be null")
