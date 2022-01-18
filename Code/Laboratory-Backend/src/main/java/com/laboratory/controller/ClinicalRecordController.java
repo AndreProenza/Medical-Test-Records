@@ -3,11 +3,8 @@ package com.laboratory.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.laboratory.model.mongodb.Citizen;
 import com.laboratory.model.mongodb.ClinicalRecord;
@@ -24,7 +22,7 @@ import com.laboratory.service.CitizenService;
 import com.laboratory.service.ClinicalRecordService;
 import com.laboratory.utils.PatientRecord;
 
-@Controller
+@RestController
 @RequestMapping("clinical/records")
 public class ClinicalRecordController {
 	

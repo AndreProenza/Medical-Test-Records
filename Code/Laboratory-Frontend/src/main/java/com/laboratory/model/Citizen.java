@@ -1,20 +1,15 @@
-package com.laboratory.model.mongodb;
+package com.laboratory.model;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
 import lombok.Data;
 
 @Data
-@Document("citizen")
 public class Citizen {
 	
-	@Id
 	@NotNull(message = "Citizen ID cannot be null")
 	@Pattern(regexp = ("^[0-9]{8}$"), message = "Citizen ID should have 8 numbers")
 	private String id;
@@ -23,7 +18,7 @@ public class Citizen {
 	@Pattern(regexp = ("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$"), 
 			message = "Password should contain at least eight characters, one uppercase letter, "
 					+ "one lowercase letter, one number and one special character")
-	*/
+	*/ 
 	
 	@NotNull(message = "Password cannot be null")
 	@Pattern(regexp = ("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$"), 

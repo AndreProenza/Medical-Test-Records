@@ -8,7 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.laboratory.model.mongodb.Citizen;
+import com.laboratory.model.Citizen;
 
 public class CitizenDetails implements UserDetails {
 	

@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.hospital.model.Citizen;
 
+@SuppressWarnings("serial")
 public class CitizenDetails implements UserDetails {
 	
 	private Citizen citizen;
