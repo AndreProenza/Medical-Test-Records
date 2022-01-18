@@ -36,6 +36,8 @@ import javax.crypto.SecretKey;
 import javax.net.ServerSocketFactory;
 import javax.net.SocketFactory;
 
+import org.springframework.util.ResourceUtils;
+
 import com.hospitalserver.utils.ByteUtil;
 import com.hospitalserver.utils.FileFunctions;
 
@@ -44,12 +46,10 @@ public class Server {
 	private static final String FS = File.separator;
 
 	// Diretorios
-	private static final String LABSDIR = "Users" + FS;
 	private static final String LABSCERTS = "PubKeys" + FS;
 
 	// autenticacao
-	private static final String USERSAUTH = "labs.txt";
-
+	private static final String AUTHLABS = "AuthorizedLabs.txt";
 
 	// Keystore
 	private static String keystore;
@@ -143,43 +143,46 @@ public class Server {
 			try {
 
 				// O id do lab que se está a ligar
-				labID = (String) inStream.readObject();
+				// labID = (String) inStream.readObject();
 
 				long nonce = getNonce();
 
 				// escreve na socket o nonce
 				outStream.writeObject(nonce);
 
-				File f = new File(LABSDIR + USERSAUTH);
+				// Abre o ficheiro que lista os labs autorizados
+				// File f = ResourceUtils.getFile("classpath:" + AUTHLABS);
 
-				File enc = new File(removeExtensao(f) + ".cif");
+				// File enc = new File(removeExtensao(f) + ".cif");
 
-				decryptFileWithServerKey(enc);
+				// decryptFileWithServerKey(enc);
 
 				// if Lab existe e é reconhecido pelo Hospital
-				if (f.exists() && FileFunctions.contains(labID, f)) {
-					auth = authenticateUser(f, nonce);
-				}
+				// if (f.exists() && FileFunctions.contains(labID, f)) {
+				// auth = authenticateUser(f, nonce);
+				auth = authenticateLab(nonce);
 
-				encryptFileWithServerKey(f);
+				// }
 
-			} catch (ClassNotFoundException | IOException e) {
+				// encryptFileWithServerKey(f);
+
+			} catch (IOException e) {
 				System.out.println("Erro a ler da socket");
 			}
 
 			return auth;
 		}
 
-		private boolean authenticateUser(File f, long nonce) {
+		private boolean authenticateLab(long nonce) {
 			boolean auth = false;
 			try {
 
 				outStream.writeObject(0);
 
-				// recebe o nonce do cliente
+				// clear text nonce from client
 				long nonceRcvd = (long) inStream.readObject();
 
-				// recebe o nonce do cliente
+				// signed nonce from client
 				byte[] assinado = (byte[]) inStream.readObject();
 
 				if (nonceRcvd != nonce) {
@@ -187,13 +190,11 @@ public class Server {
 					outStream.writeObject(1);
 				} else {
 
-					String certName = FileFunctions.getLineContaining(labID + ":", f).split(":")[1];
 					File userCert = new File(LABSCERTS + certName);
 					if (!userCert.exists()) {
 						// Nunca deveria acontecer
 						System.out.println("O certificado foi apagado sem ser removido da lista");
 					}
-					
 
 					String encodedCert = FileFunctions.getFirstLine(userCert);
 
