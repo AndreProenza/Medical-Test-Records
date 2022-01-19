@@ -5,7 +5,7 @@ package com.laboratory.utils;
  */
 public class BackendUri {
 	
-	public final static String BACKEND_API_BASE_URI = "http://localhost:3000/api/";
+	public final static String BACKEND_API_BASE_URI = "https://localhost:3000/api/";
 	public final static String CLINICAL_RECORDS_ALL = "clinical/records";
 	public final static String CLINICAL_RECORDS_GET = "clinical/records/get/{id}";
 	public final static String CITIZEN_EXISTS_GET = "citizen/exists/{id}";

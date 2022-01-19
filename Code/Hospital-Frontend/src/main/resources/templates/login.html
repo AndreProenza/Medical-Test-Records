@@ -29,8 +29,9 @@
             <div class="col-md-7">
               <h3 class="title-top">Login</h3>
               <p class="mb-4">Medical excellence every day.</p>
-    
-			     
+              
+                 <p class="alert alert-danger text-center" th:if="${errorMessage}" th:text="${errorMessage}"></p>
+         
 			      <form method="post" action="#" th:action="@{/login}">
 			      	<div class="form-group last">
 				          <label for="username">Citizen Card</label>

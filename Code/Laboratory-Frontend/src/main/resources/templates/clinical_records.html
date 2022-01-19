@@ -25,7 +25,7 @@
 <br>
     <h3 class="title-records">Clinical Records</h3>
 	
-    <div class="row align-items-center justify-content-center search-records">
+    <div class="row align-items-center justify-content-center search-records form-group">
     	
         <form action="#" th:action="@{/clinical/records/get}" th:object="${record}" method="get">
 	             <input type="number" placeholder="Search by citizen number" id="search" required th:field="*{cid}">
@@ -36,13 +36,8 @@
     <div class="row align-items-center justify-content-center ">
 		<p class="alert alert-danger" th:if="${message != ''}" th:text="${message}"></p>
 	</div>
-    <!--
-    <div class="col-md-7" align="center">
-    	<p class="alert alert-danger" th:if="${message != ''}" th:text="${message}"></p>
-    </div>
-    -->
-    <div style="overflow-x:auto center;">	
-    <table class="table center table-striped records-table">
+    <div >	
+    <table class="table center table-striped records-table w-full overflow-auto rounded-lg shadow">
         <thead>
           <tr>
             <th scope="col">Citizen ID</th>

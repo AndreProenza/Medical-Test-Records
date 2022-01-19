@@ -48,7 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/admin/register").hasAnyAuthority("Admin")
 			.anyRequest().authenticated()
 			.and()
-			.formLogin().loginPage("/login").permitAll()
+			.formLogin().loginPage("/login").permitAll().failureUrl("/login/error")
 			.defaultSuccessUrl("/home", true)
 			.and()
 			.logout().logoutUrl("/logout")
