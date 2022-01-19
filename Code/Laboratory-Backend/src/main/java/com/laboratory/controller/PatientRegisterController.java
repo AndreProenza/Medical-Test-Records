@@ -27,14 +27,11 @@ public class PatientRegisterController {
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	/**
-	 * Registers a patient
-	 * Reads form, validate it and saves patient details in database
+	 * Registers a patient, saves patient details in database
 	 *
 	 * @requires citizenId not registered in database
-	 * @param citizen
-	 * @param errors the form errors
-	 * @param model the model
-	 * @return the page to display
+	 * @param citizen the citizen to save
+	 * @return citizen if it is correctly saved in database, null otherwise.
 	 */
 	@PostMapping("")
 	public Citizen registerPatient(@RequestBody Citizen citizen) {

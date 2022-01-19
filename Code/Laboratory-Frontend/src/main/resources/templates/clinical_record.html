@@ -19,7 +19,7 @@
 	
 		<header class="header">
         <div>
-			<h1>Laboratory </h1>
+			<h1>Laboratory Medical Records</h1>
         </div>
     </header>
 
@@ -34,16 +34,6 @@
           <div class="row align-items-center justify-content-center">
             <div class="col-md-7">
 				
-                <!--
-                <form action="#" method="get">
-                    <p>Search</p>
-                    <div class="form-group last mb-3">
-                        <label for="search">Citizen Card</label>
-                        <input type="number" placeholder="enter citizen id number" id="search" required>
-                        <button type="submit" class="search-button btn-primary"><i class="fa fa-search"></i></button>
-                    </div>
-                </form>
-                -->
                 <p class="alert alert-danger" th:if="${message != ''}" th:text="${message}"></p>
                 
                 <form action="#" th:action="@{/patient/clinical/record}" th:object="${record}" method="post">

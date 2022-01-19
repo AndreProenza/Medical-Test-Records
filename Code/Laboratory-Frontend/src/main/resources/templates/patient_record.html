@@ -19,12 +19,12 @@
 	
 		<header class="header">
         <div>
-			<h1>Laboratory </h1>
+			<h1>Laboratory Medical Records </h1>
         </div>
     </header>
-
-    <h2 class="title-records">Clinical Record</h2>
-	<h2 class="title-records">Patient Details</h2>
+	<br>
+	<p class="title-records">Patient Details<button onclick="location.href='/clinical/records'" class="btn btn-primary logout-btn">Back</button></p>
+	<br>
 	<br>
     <div class="row align-items-center justify-content-center">
 
@@ -36,15 +36,16 @@
          <br>
     </div>
 	
-    <table class="table table-striped records-table">
+  <div style="overflow-x:auto center;">
+    <table class="table center table-striped records-table">
         <thead>
           <tr>
             <th scope="col">Citizen ID</th>
             <th scope="col">First Name</th>
             <th scope="col">Last Name</th>
-            <th scope="col">Birth Date</th>
             <th scope="col">Email</th>
             <th scope="col">Phone</th>
+            <th scope="col">Birth Date</th>
             <th scope="col">City</th>
             <th scope="col">Blood Type</th>
             <th scope="col">Blood Pres.</th>
@@ -70,6 +71,6 @@
           </tr>
         </tbody>
       </table>
-	
+	</div>
   </body>
 </html>

@@ -12,7 +12,7 @@
 
 header {
   /* background-color: #207bdb; */
-  background-image: linear-gradient(to bottom right, rgb(104, 231, 136), rgb(34, 120, 170));
+  background-image: linear-gradient(to bottom right, rgb(57, 180, 208), rgb(61, 90, 151));
   text-align: center;
   color: white;
   width: 50%;
@@ -2832,8 +2832,8 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: rgb(104, 231, 136);
-  border-color: rgb(104, 231, 136);
+  background-color: rgb(57, 180, 208);
+  border-color: rgb(57, 180, 208);
 }
 
 .btn-primary:hover {
@@ -11057,12 +11057,12 @@ header > div > h1 {
 
 #home {
   top: 20px;
-  background-image: linear-gradient(to bottom right, rgb(104, 231, 136), rgb(34, 120, 170));
+  background-image: linear-gradient(to bottom right, rgb(57, 180, 208), rgb(61, 90, 151));
 }
 
 #logout {
   top: 80px;
-  background-image: linear-gradient(to bottom right, rgb(104, 231, 136), rgb(34, 120, 170));
+  background-image: linear-gradient(to bottom right, rgb(57, 180, 208), rgb(61, 90, 151));
 }
 
 table.center {

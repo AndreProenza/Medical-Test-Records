@@ -54,7 +54,7 @@ public class RegisterController {
 	 * @throws URISyntaxException 
 	 */
 	@PostMapping("")
-	public String registerLabResponsible(@ModelAttribute("citizen") @Valid Citizen citizen, Errors errors, Model model) 
+	public String registerPersonnel(@ModelAttribute("citizen") @Valid Citizen citizen, Errors errors, Model model) 
 			throws URISyntaxException {
 		//If form has errors
 		if(!(errors.getErrorCount() == 1 && errors.hasFieldErrors("password"))) {

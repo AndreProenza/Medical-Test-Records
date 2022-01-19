@@ -18,13 +18,11 @@ public class CitizenDetailsServiceImplementation implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
 		Boolean existsCitizen = restTemplate.getForObject(BackendUri.CITIZEN_EXISTS_GET, Boolean.class, username);
-//		System.out.println("existsCitizen: " + existsCitizen);
 		if(!existsCitizen.booleanValue()) {
 			throw new UsernameNotFoundException("Could not find Citizen");
 		}
 		
 		Citizen citizen = restTemplate.getForObject(BackendUri.CITIZEN_GET, Citizen.class, username);
-//		System.out.println("citizen: " + citizen);
 		if(citizen == null) {
 			throw new UsernameNotFoundException("Could not find Citizen");
 		}
