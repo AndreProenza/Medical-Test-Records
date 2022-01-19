@@ -4,6 +4,7 @@ import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -26,6 +27,7 @@ import java.security.cert.CertificateFactory;
 import java.util.Base64;
 import java.util.Random;
 
+import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.CipherInputStream;
 import javax.crypto.CipherOutputStream;
@@ -46,16 +48,17 @@ public class Server {
 	private static final String FS = File.separator;
 
 	// Diretorios
-	private static final String LABSCERTS = "PubKeys" + FS;
+	// private static final String LABSCERTS = "PubKeys" + FS;
 
 	// autenticacao
-	private static final String AUTHLABS = "AuthorizedLabs.txt";
+	// private static final String AUTHLABS = "AuthorizedLabs.txt";
 
 	// Keystore
-	private static String keystore;
-	private static String keystorePassword;
-	private static final String KEYSTORETYPE = "JKS";
-	private static final String ALIAS = "serverRsa";
+	private static String keystore = "hospital-backend-server.p12";
+	private static String keystorePassword = "MedicalRecords";
+	private static final String KEYSTORETYPE = "JCKS";
+	private static final String SERVERALIAS = "hospital-backend-server";
+	private static final String LABALIAS = "laboratory-backend";
 
 	private final static int PORT = 5000;
 
@@ -99,7 +102,7 @@ public class Server {
 		private ObjectInputStream inStream = null;
 
 		// id do laboratorio da thread currente
-		private String labID = null;
+		// private String labID = null;
 
 		/**
 		 * Construtor da classe. Cria uma nova Thread para o cliente que se ligou no
@@ -190,20 +193,15 @@ public class Server {
 					outStream.writeObject(1);
 				} else {
 
-					File userCert = new File(LABSCERTS + certName);
-					if (!userCert.exists()) {
-						// Nunca deveria acontecer
-						System.out.println("O certificado foi apagado sem ser removido da lista");
-					}
+					File keystoreF = ResourceUtils.getFile("classpath:" + keystore);
+					FileInputStream kfile = new FileInputStream(keystoreF);
+					KeyStore kstore = KeyStore.getInstance(KEYSTORETYPE);
+					kstore.load(kfile, keystorePassword.toCharArray());
 
-					String encodedCert = FileFunctions.getFirstLine(userCert);
-
-					byte[] b = Base64.getDecoder().decode(encodedCert);
-					CertificateFactory cf = CertificateFactory.getInstance("X509");
-					Certificate c = cf.generateCertificate(new ByteArrayInputStream(b));
-
-					// Verifica a assinatura
-					PublicKey pk = c.getPublicKey();
+					// Vai buscar a pubkey do lab
+					Certificate cert = kstore.getCertificate(LABALIAS);
+					PublicKey pk = cert.getPublicKey();
+					
 					Signature s = Signature.getInstance("MD5withRSA");
 					s.initVerify(pk);
 					s.update(ByteUtil.longToBytes(nonce));
@@ -218,9 +216,7 @@ public class Server {
 					}
 				}
 
-			} catch (IOException e) {
-				System.out.println("authenticateUser: Erro a escrever na stream");
-			} catch (ClassNotFoundException e) {
+			}catch (ClassNotFoundException e) {
 				System.out.println("authenticateUser: erro a ler da stream");
 			} catch (SignatureException e) {
 				System.out.println("authenticateUser: Erro ao verificar a assinatura");
@@ -230,7 +226,13 @@ public class Server {
 				System.out.println("authenticateUser: A chave não para assinatura não está correta");
 			} catch (CertificateException e1) {
 				System.out.println("authenticateUser: Erro a desserializar o certificado");
-			}
+			}catch (FileNotFoundException e) {
+				System.out.println("authenticateUser: keystore não encontrada");
+			}catch (KeyStoreException e) {
+				System.out.println("authenticateUser: Instancia da keystore diferente da definida");
+			}catch (IOException e) {
+				System.out.println("authenticateUser: Erro a escrever na stream");
+			} 
 
 			return auth;
 
@@ -259,175 +261,93 @@ public class Server {
 		}
 	}
 
-	private static void encryptFileWithServerKey(File f) {
+	private static String encryptMessage(String msg) {
 		try {
-			if (f.exists()) {
-				// gerar uma chave aleatória para utilizar com o AES
 
-				KeyGenerator kg = KeyGenerator.getInstance("AES");
-				kg.init(128);
-				SecretKey sk = kg.generateKey();
+			File keystoreF = ResourceUtils.getFile("classpath:" + keystore);
+			FileInputStream kfile = new FileInputStream(keystoreF);
+			KeyStore kstore = KeyStore.getInstance(KEYSTORETYPE);
+			kstore.load(kfile, keystorePassword.toCharArray());
 
-				Cipher c = Cipher.getInstance("AES");
-				c.init(Cipher.ENCRYPT_MODE, sk);
+			// Vai buscar a pubkey do lab
+			Certificate cert = kstore.getCertificate(LABALIAS);
+			PublicKey labPub = cert.getPublicKey();
 
-				FileInputStream fis = new FileInputStream(f);
-				FileOutputStream fos = new FileOutputStream(removeExtensao(f) + ".cif");
-				CipherOutputStream cos = new CipherOutputStream(fos, c);
+			Cipher c = Cipher.getInstance("AES");
+			c.init(Cipher.ENCRYPT_MODE, labPub);
+			byte[] input = msg.getBytes();
+			byte[] encrypted = c.doFinal(input);
 
-				byte[] b = new byte[16];
-				int i = fis.read(b);
-				while (i != -1) {
-					cos.write(b, 0, i);
-					i = fis.read(b);
-				}
+			return Base64.getEncoder().encodeToString(encrypted);
 
-				cos.close();
-				fis.close();
-				fos.close();
-
-				FileInputStream kfile = new FileInputStream(keystore);
-				KeyStore kstore = KeyStore.getInstance(KEYSTORETYPE);
-				kstore.load(kfile, keystorePassword.toCharArray());
-
-				// Vai buscar a pubkey
-				Certificate cert = kstore.getCertificate(ALIAS);
-				PublicKey publicKey = cert.getPublicKey();
-
-				// Cipher a chave usada para cifrar o ficheiro com a pubkey do server
-				Cipher c1 = Cipher.getInstance("RSA");
-				c1.init(Cipher.WRAP_MODE, publicKey);
-				byte[] wrappedKey = c1.wrap(sk);
-
-				// Guardar a chave
-				File fKey = new File(removeExtensao(f) + ".key"); // armazenar
-
-				if (!fKey.createNewFile()) {
-					System.out.println("Erro a criar o ficheiro " + fKey.getName());
-				}
-				FileFunctions.addNextLineToFile(Base64.getEncoder().encodeToString(wrappedKey), fKey);
-
-				// depois de encryptar apaga o ficheiro de texto
-				if (!f.delete()) {
-					System.out.println("Ficheiro decifrado nao foi apagado!");
-					System.exit(1);// erro de segurança logo o servidor devia desligar (?)
-				}
-			} else {
-				// do nothing
-			}
-		} catch (IOException e) {
-			System.out.println("encryptFile: erro a escrever no ObjectStream");
 		} catch (InvalidKeyException e) {
-			System.out.println("encryptFile: A secret key nao está no formato certo");
+			System.out.println("encryptMessage: A secret key nao está no formato certo");
 		} catch (NoSuchAlgorithmException e) {
-			System.out.println("encryptFile: Algoritmo de encriptacao nao existe");
+			System.out.println("encryptMessage: Algoritmo de encriptacao nao existe");
 		} catch (NoSuchPaddingException e) {
-			System.out.println("encryptFile: O algoritmo escolhido nao pode ser utilizador");
+			System.out.println("encryptMessage: O algoritmo escolhido nao pode ser utilizador");
 		} catch (IllegalBlockSizeException e) {
-			System.out.println("encryptFile: Erro a fazer wrap da chave");
+			System.out.println("encryptMessage: Erro a fazer wrap da chave");
+		} catch (BadPaddingException e) {
+			System.out.println("encryptMessage: Erro a encriptar a mensagem");
+		} catch (FileNotFoundException e) {
+			System.out.println("encryptMessage: keystore não encontrada");
 		} catch (KeyStoreException e) {
-			System.out.println("encryptFile: Erro a ir buscar o certificado");
+			System.out.println("encryptMessage: Instancia da keystore diferente da definida");
 		} catch (CertificateException e) {
-			System.out.println("encryptFile: Erro a ler do keystore");
-		}
-
-	}
-
-	private static void decryptFileWithServerKey(File f) {
-		try {
-			if (f.exists()) {
-
-				// le a chave
-				File fKey = new File(removeExtensao(f) + ".key");
-				String keyB64 = FileFunctions.getFirstLine(fKey);
-
-				byte[] wrappedKey = Base64.getDecoder().decode(keyB64);
-
-				// para apanhar a private key
-				FileInputStream kfile = new FileInputStream(keystore);
-				KeyStore kstore = KeyStore.getInstance(KEYSTORETYPE);
-				kstore.load(kfile, keystorePassword.toCharArray());
-
-				// Vai buscar a privatekey
-				Key privateKey = kstore.getKey(ALIAS, keystorePassword.toCharArray());
-
-				Cipher c = Cipher.getInstance("RSA");
-				c.init(Cipher.UNWRAP_MODE, privateKey);
-
-				Key unwrappedKey = c.unwrap(wrappedKey, "AES", Cipher.SECRET_KEY);
-
-				FileInputStream fis = new FileInputStream(f);
-
-				Cipher c1 = Cipher.getInstance("AES");
-				c1.init(Cipher.DECRYPT_MODE, unwrappedKey);
-				CipherInputStream cis = new CipherInputStream(fis, c1);
-
-				File fDecif = new File(removeExtensao(f) + ".txt");
-				FileOutputStream fos = new FileOutputStream(fDecif);
-				BufferedOutputStream bos = new BufferedOutputStream(fos);
-
-				byte[] b = new byte[16];
-
-				int i = cis.read(b);
-
-				while (i != -1) {
-					bos.write(b, 0, i);
-					i = cis.read(b);
-				}
-
-				cis.close();
-				bos.close();
-
-				// apaga o ficheiro com a chave e com o texto cifrado
-				if (!fKey.delete()) {
-					System.out.println("decryptFile: erro a apagar o ficheiro com a chave");
-					System.exit(1);// erro de segurança logo o servidor devia desligar (?)
-				}
-
-				if (!f.delete()) {
-					System.out.println("decryptFile: erro a apagar o ficheiro cifrado");
-					System.exit(1); // erro de segurança logo o servidor devia desligar (?)
-				}
-
-			} else {
-				// do nothing
-			}
+			System.out.println("encryptMessage: Password da keystore incorreta");
 		} catch (IOException e) {
-			System.out.println("decryptFile: erro a escrever no OnjectStream");
+			System.out.println("encryptMessage: Erro na keystore");
+		}
+		return null;
+	}
+
+	private static String decryptMessage(String msg) {
+		try {
+			
+			// para apanhar a private key 
+			File keystoreF = ResourceUtils.getFile("classpath:" + keystore);
+			FileInputStream kfile = new FileInputStream(keystoreF);
+			KeyStore kstore = KeyStore.getInstance(KEYSTORETYPE); 
+			kstore.load(kfile, keystorePassword.toCharArray());
+			  
+			// Vai buscar a privatekey 
+			Key serverPrivateKey = kstore.getKey(SERVERALIAS, keystorePassword.toCharArray());
+
+			// Vai buscar a pubkey do lab
+			Certificate cert = kstore.getCertificate(LABALIAS);
+			PublicKey labPub = cert.getPublicKey();
+
+			Cipher c = Cipher.getInstance("AES");
+			c.init(Cipher.DECRYPT_MODE, serverPrivateKey);
+			byte[] input = Base64.getDecoder().decode(msg);
+			byte[] decrypted = c.doFinal(input);
+
+			return new String(decrypted);
+
 		} catch (InvalidKeyException e) {
-			System.out.println("decryptFile: A secret key nao está no formato certo");
-			e.printStackTrace();
+			System.out.println("encryptMessage: A secret key nao está no formato certo");
 		} catch (NoSuchAlgorithmException e) {
-			System.out.println("decryptFile: Algoritmo de encriptacao nao existe");
+			System.out.println("encryptMessage: Algoritmo de encriptacao nao existe");
 		} catch (NoSuchPaddingException e) {
-			System.out.println("decryptFile: O algoritmo escolhido nao pode ser utilizador");
+			System.out.println("encryptMessage: O algoritmo escolhido nao pode ser utilizador");
+		} catch (IllegalBlockSizeException e) {
+			System.out.println("encryptMessage: Erro a fazer wrap da chave");
+		} catch (BadPaddingException e) {
+			System.out.println("encryptMessage: Erro a encriptar a mensagem");
+		} catch (FileNotFoundException e) {
+			System.out.println("encryptMessage: keystore não encontrada");
 		} catch (KeyStoreException e) {
-			System.out.println("decryptFile: Erro a ir buscar o certificado");
+			System.out.println("encryptMessage: Instancia da keystore diferente da definida");
 		} catch (CertificateException e) {
-			System.out.println("decryptFile: Erro a ler do keystore");
+			System.out.println("encryptMessage: Password da keystore incorreta");
+		} catch (IOException e) {
+			System.out.println("encryptMessage: Erro na keystore");
 		} catch (UnrecoverableKeyException e) {
-			System.out.println("decryptFile: Erro a tentar ir buscar a chave privada");
+			System.out.println("encryptMessage: Erro a obter chave privada do server");
 		}
+		return null;
 	}
 
-	private static String removeExtensao(File f) {
-
-		if (f.isDirectory())
-			return f.getPath();
-
-		String fName = f.getName();
-
-		int lastPeriodPos = fName.lastIndexOf('.');
-		if (lastPeriodPos <= 0) {
-			// Se o ficheiro não tiver ponto
-			return f.getPath();
-
-		} else {
-
-			// Remove o ponto e tudo a seguir
-			File semExtensao = new File(f.getParent(), fName.substring(0, lastPeriodPos));
-			return semExtensao.getPath();
-		}
-	}
 
 }
