@@ -60,7 +60,7 @@ public class Server {
 	private static final String SERVERALIAS = "hospital-backend-server";
 	private static final String LABALIAS = "laboratory-backend";
 
-	private final static int PORT = 5000;
+	private final static int PORT = 4000;
 
 	public static void run() {
 
@@ -193,49 +193,58 @@ public class Server {
 					outStream.writeObject(1);
 				} else {
 
-					File keystoreF = ResourceUtils.getFile("classpath:" + keystore);
-					FileInputStream kfile = new FileInputStream(keystoreF);
-					KeyStore kstore = KeyStore.getInstance(KEYSTORETYPE);
-					kstore.load(kfile, keystorePassword.toCharArray());
-
-					// Vai buscar a pubkey do lab
-					Certificate cert = kstore.getCertificate(LABALIAS);
-					PublicKey pk = cert.getPublicKey();
-					
-					Signature s = Signature.getInstance("MD5withRSA");
-					s.initVerify(pk);
-					s.update(ByteUtil.longToBytes(nonce));
-
-					if (!s.verify(assinado)) {
-						// assinatura não é correta
-						outStream.writeObject(1);
-					} else {
-						// Autenticado
+					if (verifySignature(nonce, assinado)) {
 						outStream.writeObject(0);
 						auth = true;
+					} else {
+						// not signed
+						outStream.writeObject(1);
 					}
 				}
 
-			}catch (ClassNotFoundException e) {
+			} catch (ClassNotFoundException e) {
 				System.out.println("authenticateUser: erro a ler da stream");
-			} catch (SignatureException e) {
-				System.out.println("authenticateUser: Erro ao verificar a assinatura");
-			} catch (NoSuchAlgorithmException e) {
-				System.out.println("authenticateUser: Erro Algoritmo de signature nao existe");
-			} catch (InvalidKeyException e) {
-				System.out.println("authenticateUser: A chave não para assinatura não está correta");
-			} catch (CertificateException e1) {
-				System.out.println("authenticateUser: Erro a desserializar o certificado");
-			}catch (FileNotFoundException e) {
-				System.out.println("authenticateUser: keystore não encontrada");
-			}catch (KeyStoreException e) {
-				System.out.println("authenticateUser: Instancia da keystore diferente da definida");
-			}catch (IOException e) {
+			} catch (IOException e) {
 				System.out.println("authenticateUser: Erro a escrever na stream");
-			} 
+			}
 
 			return auth;
 
+		}
+
+		private boolean verifySignature(long nonce, byte[] assinado) {
+			try {
+				File keystoreF = ResourceUtils.getFile("classpath:" + keystore);
+				FileInputStream kfile = new FileInputStream(keystoreF);
+				KeyStore kstore = KeyStore.getInstance(KEYSTORETYPE);
+				kstore.load(kfile, keystorePassword.toCharArray());
+
+				// Vai buscar a pubkey do lab
+				Certificate cert = kstore.getCertificate(LABALIAS);
+				PublicKey pk = cert.getPublicKey();
+
+				Signature s = Signature.getInstance("MD5withRSA");
+				s.initVerify(pk);
+				s.update(ByteUtil.longToBytes(nonce));
+
+				return s.verify(assinado);
+				
+			}catch (SignatureException e) {
+				System.out.println("verifySignature: Erro ao verificar a assinatura");
+			} catch (NoSuchAlgorithmException e) {
+				System.out.println("verifySignature: Erro Algoritmo de signature nao existe");
+			} catch (InvalidKeyException e) {
+				System.out.println("verifySignature: A chave não para assinatura não está correta");
+			} catch (CertificateException e1) {
+				System.out.println("verifySignature: Erro a desserializar o certificado");
+			} catch (FileNotFoundException e) {
+				System.out.println("verifySignature: keystore não encontrada");
+			} catch (KeyStoreException e) {
+				System.out.println("verifySignature: Instancia da keystore diferente da definida");
+			} catch (IOException e) {
+				System.out.println("verifySignature: Erro a escrever na stream");
+			}
+			return false;
 		}
 
 		/*
@@ -304,14 +313,14 @@ public class Server {
 
 	private static String decryptMessage(String msg) {
 		try {
-			
-			// para apanhar a private key 
+
+			// para apanhar a private key
 			File keystoreF = ResourceUtils.getFile("classpath:" + keystore);
 			FileInputStream kfile = new FileInputStream(keystoreF);
-			KeyStore kstore = KeyStore.getInstance(KEYSTORETYPE); 
+			KeyStore kstore = KeyStore.getInstance(KEYSTORETYPE);
 			kstore.load(kfile, keystorePassword.toCharArray());
-			  
-			// Vai buscar a privatekey 
+
+			// Vai buscar a privatekey
 			Key serverPrivateKey = kstore.getKey(SERVERALIAS, keystorePassword.toCharArray());
 
 			// Vai buscar a pubkey do lab
@@ -348,6 +357,5 @@ public class Server {
 		}
 		return null;
 	}
-
 
 }
