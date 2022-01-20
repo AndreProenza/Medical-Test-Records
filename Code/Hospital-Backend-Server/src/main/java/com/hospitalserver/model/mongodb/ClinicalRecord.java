@@ -1,40 +1,26 @@
-package com.laboratory.model.mongodb;
+package com.hospitalserver.model.mongodb;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import java.io.Serializable;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
-import lombok.Data;
-
-@Data
-@Document("record")
-public class ClinicalRecord {
+public class ClinicalRecord implements Serializable {
 	
-	@NotNull(message = "Citizen ID cannot be null")
-	@Pattern(regexp = ("^[0-9]{8}$"), message = "Citizen ID should have 8 numbers")
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5271002436696745005L;
+
 	private String cid;
 	
-	@NotNull(message = "Blood type cannot be null")
 	private String bloodType;
 	
-	@Min(value = 1, message = "Blood pressure should not be less than 1")
-    @Max(value = 300, message = "Blood pressure should not be greater than 300")
 	private int bloodPressure;
 	
-	@Min(value = 30, message = "Body temperature should not be less than 30")
-    @Max(value = 45, message = "Body temperature should not be greater than 45")
 	private int bloodTemperature;
 	
-	@NotNull(message = "Date cannot be null")
-	@Size(min = 10, max = 10, message = "Date should be valid")
 	private String date;
 	
 	
-	public ClinicalRecord(String cid, int height, int weight, String bloodType, int bloodPressure, 
+	/*public ClinicalRecord(String cid, int height, int weight, String bloodType, int bloodPressure, 
 			int bloodTemperature, String diagnosis, String date) {
 		super();
 		this.cid = cid;
@@ -42,10 +28,17 @@ public class ClinicalRecord {
 		this.bloodPressure = bloodPressure;
 		this.bloodTemperature = bloodTemperature;
 		this.date = date;
+	}*/
+
+	public ClinicalRecord(String cid, String bloodType, int bloodPressure, 
+			int bloodTemperature, String date) {
+		super();
+		this.cid = cid;
+		this.bloodType = bloodType;
+		this.bloodPressure = bloodPressure;
+		this.bloodTemperature = bloodTemperature;
+		this.date = date;
 	}
-	
-
-
 
 	public ClinicalRecord() {
 		//Does Nothing

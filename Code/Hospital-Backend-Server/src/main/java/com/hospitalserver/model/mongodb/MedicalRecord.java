@@ -1,4 +1,4 @@
-package com.laboratory.model.mongodb;
+package com.hospitalserver.model.mongodb;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -12,11 +12,19 @@ import lombok.Data;
 
 @Data
 @Document("record")
-public class ClinicalRecord {
+public class MedicalRecord {
 	
 	@NotNull(message = "Citizen ID cannot be null")
 	@Pattern(regexp = ("^[0-9]{8}$"), message = "Citizen ID should have 8 numbers")
 	private String cid;
+	
+	@Min(value = 50, message = "Height should not be less than 50cm")
+    @Max(value = 230, message = "Height should not be greater than 230cm")
+	private int height;
+	
+	@Min(value = 1, message = "Weight should not be less than 1kg")
+    @Max(value = 300, message = "Weight should not be greater than 300kg")
+	private int weight;
 	
 	@NotNull(message = "Blood type cannot be null")
 	private String bloodType;
@@ -25,29 +33,34 @@ public class ClinicalRecord {
     @Max(value = 300, message = "Blood pressure should not be greater than 300")
 	private int bloodPressure;
 	
-	@Min(value = 30, message = "Body temperature should not be less than 30")
-    @Max(value = 45, message = "Body temperature should not be greater than 45")
+	@Min(value = 30, message = "Blood temperature should not be less than 30")
+    @Max(value = 45, message = "Blood temperature should not be greater than 45")
 	private int bloodTemperature;
+	
+	@NotNull(message = "Diagnosis cannot be null")
+	@Size(min = 0, max = 50, message = "Diagnosis should not be greater than 50 characters")
+	private String diagnosis;
 	
 	@NotNull(message = "Date cannot be null")
 	@Size(min = 10, max = 10, message = "Date should be valid")
 	private String date;
 	
 	
-	public ClinicalRecord(String cid, int height, int weight, String bloodType, int bloodPressure, 
+	public MedicalRecord(String cid, int height, int weight, String bloodType, int bloodPressure, 
 			int bloodTemperature, String diagnosis, String date) {
 		super();
 		this.cid = cid;
+		this.height = height;
+		this.weight = weight;
 		this.bloodType = bloodType;
 		this.bloodPressure = bloodPressure;
 		this.bloodTemperature = bloodTemperature;
+		this.diagnosis = diagnosis;
 		this.date = date;
 	}
-	
 
 
-
-	public ClinicalRecord() {
+	public MedicalRecord() {
 		//Does Nothing
 	}
 
@@ -59,6 +72,26 @@ public class ClinicalRecord {
 
 	public void setCid(String cid) {
 		this.cid = cid;
+	}
+
+
+	public int getHeight() {
+		return height;
+	}
+
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+
+	public int getWeight() {
+		return weight;
+	}
+
+
+	public void setWeight(int weight) {
+		this.weight = weight;
 	}
 
 
@@ -92,6 +125,16 @@ public class ClinicalRecord {
 	}
 
 
+	public String getDiagnosis() {
+		return diagnosis;
+	}
+
+
+	public void setDiagnosis(String diagnosis) {
+		this.diagnosis = diagnosis;
+	}
+
+
 	public String getDate() {
 		return date;
 	}
@@ -104,9 +147,10 @@ public class ClinicalRecord {
 
 	@Override
 	public String toString() {
-		return "ClinicalRecord [cid=" + cid + ", bloodType=" + bloodType + ", bloodPressure=" + bloodPressure
-				+ ", bloodTemperature=" + bloodTemperature + ", date=" + date + "]";
+		return "MedicalRecord [cid=" + cid + ", height=" + height + ", weight=" + weight + ", bloodType=" + bloodType
+				+ ", bloodPressure=" + bloodPressure + ", bloodTemperature=" + bloodTemperature + ", diagnosis="
+				+ diagnosis + ", date=" + date + "]";
 	}
-
+	
 }
 
