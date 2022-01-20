@@ -1,11 +1,14 @@
 package com.hospitalserver.server;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.security.InvalidKeyException;
 import java.security.Key;
@@ -17,6 +20,7 @@ import java.security.Signature;
 import java.security.SignatureException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.Certificate;
+import java.security.cert.CertificateEncodingException;
 import java.security.cert.CertificateException;
 import java.util.Base64;
 import java.util.Random;
@@ -40,7 +44,6 @@ import com.hospitalserver.utils.ByteUtil;
 
 public class Server {
 
-
 	// Keystore
 	private static String keystore = "hospital-backend-server.p12";
 	private static String truststore = "hospital-backend-server-truststore.p12";
@@ -54,17 +57,17 @@ public class Server {
 
 	public static void run() {
 
-		SSLServerSocket socket = null;
+		ServerSocket socket = null;
 
 		try {
-			File keystoreF = ResourceUtils.getFile("classpath:" + keystore);
-			
-			System.setProperty("javax.net.ssl.keyStore", keystoreF.getCanonicalPath());
-			System.setProperty("javax.net.ssl.keyStorePassword", keystorePassword);
-			System.setProperty("java.net.debug","SSL:handshake"); 
-			System.setProperty("https.protocols", "TLSv1.2");
-			ServerSocketFactory ssf = SSLServerSocketFactory.getDefault();
-			socket = (SSLServerSocket) ssf.createServerSocket(PORT);
+			// File keystoreF = ResourceUtils.getFile("classpath:" + keystore);
+
+			// System.setProperty("javax.net.ssl.keyStore", keystoreF.getCanonicalPath());
+			// System.setProperty("javax.net.ssl.keyStorePassword", keystorePassword);
+			// System.setProperty("java.net.debug", "SSL:handshake");
+			// System.setProperty("https.protocols", "TLSv1.2");
+			ServerSocketFactory ssf = ServerSocketFactory.getDefault();
+			socket = (ServerSocket) ssf.createServerSocket(PORT);
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.err.println(e.getMessage());
@@ -72,7 +75,7 @@ public class Server {
 
 		while (true) {
 			try {
-				SSLSocket inSoc = (SSLSocket) socket.accept();
+				Socket inSoc = (Socket) socket.accept();
 				ServerThread newServerThread = new ServerThread(inSoc);
 				newServerThread.start();
 			} catch (NullPointerException e) {
@@ -110,17 +113,17 @@ public class Server {
 		public ServerThread(Socket inSoc) {
 			socket = inSoc;
 			System.out.println("thread do server para cada cliente");
-			
+
 		}
 
 		public void start() {
 			try {
 				outStream = new ObjectOutputStream(socket.getOutputStream());
 				inStream = new ObjectInputStream(socket.getInputStream());
-
-				if (authenticateLab()) {
+				
+				if (authServer() && authenticateLab()) {
 					System.out.println("Autenticado");
-					
+
 					ClinicalRecord record = receiveRecord();
 					System.out.println(record.toString());
 				}
@@ -135,33 +138,59 @@ public class Server {
 			}
 		}
 
-
-		private boolean authenticateLab() {
-			boolean auth = false;
+		private boolean authServer() {
 			try {
 				// O id do lab que se está a ligar
 				@SuppressWarnings("unused")
 				String helloFromLab = (String) inStream.readObject();
+
+				// server sends its certificate for authentication
+				Certificate cert = getServerCertificate();
+				byte[] encodedCert = cert.getEncoded();
+
+				// write encodedCert
+				String encodedCertB64 = new String(Base64.getEncoder().encode(encodedCert));
+				outStream.writeObject(encodedCertB64);
+
+				String OK = (String) inStream.readObject();
+				if (OK.equals("OK")) {
+					return true;
+				}
+		
+			} catch (ClassNotFoundException e) {
+				System.out.println("authenticateUser: erro a ler da stream");
+			} catch (IOException e) {
+				System.out.println("authenticateUser: Erro a escrever na stream");
+			} catch (CertificateEncodingException e) {
+				System.out.println("authenticateUser: encodificação do certificado falhou");
+			}
+			return false;
+		}
+
+		private boolean authenticateLab() {
+			try {
 
 				long nonce = getNonce();
 
 				// escreve na socket o nonce
 				outStream.writeObject(nonce);
 
-
 				// clear text nonce from client
 				long nonceRcvd = (long) inStream.readObject();
 
 				// signed nonce from client
+				// recebe o nonce do cliente
+				//String assinadoB64 = (String) inStream.readObject();
+				//byte[] assinado = Base64.getDecoder().decode(assinadoB64);
+				// byte[] assinado = (byte[]) inStream.readObject();
+				
+				// recebe o nonce do cliente
 				byte[] assinado = (byte[]) inStream.readObject();
-
-				if (nonceRcvd != nonce) {
-					// nonces não sao iguais por isso não vai autenticar
-					outStream.writeObject(1);
-				} else {
-
+				outStream.flush(); 
+				if (nonceRcvd == nonce) {
 					if (verifySignature(nonce, assinado)) {
-						outStream.writeObject(0);
+						
+						//outStream.writeObject("0");
 
 						PublicKey labkey = getLabPubKey();
 						// Generate simetrikey
@@ -172,12 +201,10 @@ public class Server {
 						String encodedSimetricKey = Base64.getEncoder().encodeToString(wrappedKey);
 						outStream.writeObject(encodedSimetricKey);
 
-						auth = true;
-					} else {
-						// not valid
-						outStream.writeObject(1);
+						return true;
 					}
 				}
+				outStream.writeObject("1");
 
 			} catch (ClassNotFoundException e) {
 				System.out.println("authenticateUser: erro a ler da stream");
@@ -185,7 +212,7 @@ public class Server {
 				System.out.println("authenticateUser: Erro a escrever na stream");
 			}
 
-			return auth;
+			return false;
 
 		}
 
@@ -231,17 +258,20 @@ public class Server {
 			return new Random().nextLong();
 		}
 
-
-		/*private static Key getServerPrivateKey() {
+		/**
+		 * Obtains a server certificate to send to remote lab for autentication
+		 * 
+		 * @return the server certificate
+		 */
+		private static Certificate getServerCertificate() {
 			try {
-				// para apanhar a private key
+
 				File keystoreF = ResourceUtils.getFile("classpath:" + keystore);
 				FileInputStream kfile = new FileInputStream(keystoreF);
 				KeyStore kstore = KeyStore.getInstance(KEYSTORETYPE);
 				kstore.load(kfile, keystorePassword.toCharArray());
 
-				// Vai buscar a privatekey
-				return kstore.getKey(SERVERALIAS, keystorePassword.toCharArray());
+				return kstore.getCertificate(SERVERALIAS);
 
 			} catch (NoSuchAlgorithmException e) {
 				System.out.println("getServerPrivateKey: Algoritmo de encriptacao nao existe");
@@ -253,11 +283,33 @@ public class Server {
 				System.out.println("getServerPrivateKey: Password da keystore incorreta");
 			} catch (IOException e) {
 				System.out.println("getServerPrivateKey: Erro na keystore");
-			} catch (UnrecoverableKeyException e) {
-				System.out.println("getServerPrivateKey: Wasnt able to recover private key");
 			}
 			return null;
-		}*/
+		}
+		/*
+		 * private static Key getServerPrivateKey() { try { // para apanhar a private
+		 * key File keystoreF = ResourceUtils.getFile("classpath:" + keystore);
+		 * FileInputStream kfile = new FileInputStream(keystoreF); KeyStore kstore =
+		 * KeyStore.getInstance(KEYSTORETYPE); kstore.load(kfile,
+		 * keystorePassword.toCharArray());
+		 * 
+		 * // Vai buscar a privatekey return kstore.getKey(SERVERALIAS,
+		 * keystorePassword.toCharArray());
+		 * 
+		 * } catch (NoSuchAlgorithmException e) {
+		 * System.out.println("getServerPrivateKey: Algoritmo de encriptacao nao existe"
+		 * ); } catch (FileNotFoundException e) {
+		 * System.out.println("getServerPrivateKey: keystore não encontrada"); } catch
+		 * (KeyStoreException e) { System.out.
+		 * println("getServerPrivateKey: Instancia da keystore diferente da definida");
+		 * } catch (CertificateException e) {
+		 * System.out.println("getServerPrivateKey: Password da keystore incorreta"); }
+		 * catch (IOException e) {
+		 * System.out.println("getServerPrivateKey: Erro na keystore"); } catch
+		 * (UnrecoverableKeyException e) {
+		 * System.out.println("getServerPrivateKey: Wasnt able to recover private key");
+		 * } return null; }
+		 */
 
 		private static PublicKey getLabPubKey() {
 			try {
@@ -285,53 +337,47 @@ public class Server {
 			return null;
 		}
 
-		/*private static String encryptMessage(String msg) {
-			try {
-
-				Cipher c = Cipher.getInstance("AES");
-				c.init(Cipher.ENCRYPT_MODE, simetricKey);
-				byte[] input = msg.getBytes( );
-				byte[] encrypted = c.doFinal(input);
-				
-				return Base64.getEncoder().encodeToString(encrypted);
-
-			} catch (InvalidKeyException e) {
-				System.out.println("encryptMessage: A secret key nao está no formato certo");
-			} catch (NoSuchAlgorithmException e) {
-				System.out.println("encryptMessage: Algoritmo de encriptacao nao existe");
-			} catch (NoSuchPaddingException e) {
-				System.out.println("encryptMessage: O algoritmo escolhido nao pode ser utilizador");
-			} catch (IllegalBlockSizeException e) {
-				System.out.println("encryptMessage: Erro a fazer wrap da chave");
-			} catch (BadPaddingException e) {
-				System.out.println("encryptMessage: Erro a encriptar a mensagem");
-			}
-			return null;
-		}
-
-		private static String decryptMessage(String msg) {
-			try {
-
-				Cipher c = Cipher.getInstance("AES");
-				c.init(Cipher.DECRYPT_MODE, simetricKey);
-				byte[] input = Base64.getDecoder().decode(msg);
-				byte[] decrypted = c.doFinal(input);
-
-				return new String(decrypted);
-
-			} catch (InvalidKeyException e) {
-				System.out.println("encryptMessage: A secret key nao está no formato certo");
-			} catch (NoSuchAlgorithmException e) {
-				System.out.println("encryptMessage: Algoritmo de encriptacao nao existe");
-			} catch (NoSuchPaddingException e) {
-				System.out.println("encryptMessage: O algoritmo escolhido nao pode ser utilizador");
-			} catch (IllegalBlockSizeException e) {
-				System.out.println("encryptMessage: Erro a fazer wrap da chave");
-			} catch (BadPaddingException e) {
-				System.out.println("encryptMessage: Erro a encriptar a mensagem");
-			}
-			return null;
-		}*/
+		/*
+		 * private static String encryptMessage(String msg) { try {
+		 * 
+		 * Cipher c = Cipher.getInstance("AES"); c.init(Cipher.ENCRYPT_MODE,
+		 * simetricKey); byte[] input = msg.getBytes( ); byte[] encrypted =
+		 * c.doFinal(input);
+		 * 
+		 * return Base64.getEncoder().encodeToString(encrypted);
+		 * 
+		 * } catch (InvalidKeyException e) {
+		 * System.out.println("encryptMessage: A secret key nao está no formato certo");
+		 * } catch (NoSuchAlgorithmException e) {
+		 * System.out.println("encryptMessage: Algoritmo de encriptacao nao existe"); }
+		 * catch (NoSuchPaddingException e) { System.out.
+		 * println("encryptMessage: O algoritmo escolhido nao pode ser utilizador"); }
+		 * catch (IllegalBlockSizeException e) {
+		 * System.out.println("encryptMessage: Erro a fazer wrap da chave"); } catch
+		 * (BadPaddingException e) {
+		 * System.out.println("encryptMessage: Erro a encriptar a mensagem"); } return
+		 * null; }
+		 * 
+		 * private static String decryptMessage(String msg) { try {
+		 * 
+		 * Cipher c = Cipher.getInstance("AES"); c.init(Cipher.DECRYPT_MODE,
+		 * simetricKey); byte[] input = Base64.getDecoder().decode(msg); byte[]
+		 * decrypted = c.doFinal(input);
+		 * 
+		 * return new String(decrypted);
+		 * 
+		 * } catch (InvalidKeyException e) {
+		 * System.out.println("encryptMessage: A secret key nao está no formato certo");
+		 * } catch (NoSuchAlgorithmException e) {
+		 * System.out.println("encryptMessage: Algoritmo de encriptacao nao existe"); }
+		 * catch (NoSuchPaddingException e) { System.out.
+		 * println("encryptMessage: O algoritmo escolhido nao pode ser utilizador"); }
+		 * catch (IllegalBlockSizeException e) {
+		 * System.out.println("encryptMessage: Erro a fazer wrap da chave"); } catch
+		 * (BadPaddingException e) {
+		 * System.out.println("encryptMessage: Erro a encriptar a mensagem"); } return
+		 * null; }
+		 */
 
 		/**
 		 * Creates a simetric key using AES 128 bits
@@ -371,7 +417,7 @@ public class Server {
 			}
 			return null;
 		}
-		
+
 		public ClinicalRecord receiveRecord() {
 			try {
 				Cipher c = Cipher.getInstance("AES");
@@ -379,7 +425,6 @@ public class Server {
 
 				SealedObject sealedObject = (SealedObject) inStream.readObject();
 				return (ClinicalRecord) sealedObject.getObject(c);
-			
 
 			} catch (InvalidKeyException e) {
 				System.out.println("encryptMessage: A secret key nao está no formato certo");
@@ -399,6 +444,5 @@ public class Server {
 			return null;
 		}
 
-		
 	}
 }
