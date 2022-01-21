@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.laboratory.hospitalservice.HospitalService;
 //import com.laboratory.hospitalservice.HospitalService;
 import com.laboratory.model.mongodb.ClinicalRecord;
 import com.laboratory.service.CitizenService;
@@ -38,7 +39,7 @@ public class PatientClinicalRecordController {
 		if(citizenService.existsCitizenById(record.getCid())) {
 			if (clinicalRecordService.saveRecord(record) != null) {
 				// send clinical record to hospital
-//				HospitalService.sendRecord(record);
+				HospitalService.sendRecord(record);
 			}
 			return record;
 		}

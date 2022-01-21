@@ -42,6 +42,7 @@ import javax.net.ssl.SSLSocket;
 import org.springframework.util.ResourceUtils;
 
 import com.hospitalserver.model.mongodb.ClinicalRecord;
+import com.hospitalserver.model.mongodb.MedicalRecord;
 import com.hospitalserver.utils.ByteUtil;
 
 public class Server {
@@ -117,11 +118,13 @@ public class Server {
 			try {
 				outStream = new ObjectOutputStream(socket.getOutputStream());
 				inStream = new ObjectInputStream(socket.getInputStream());
-				
+
 				if (authServer() && authenticateLab()) {
 					System.out.println("Autenticado");
 
-					ClinicalRecord record = receiveRecord();
+					MedicalRecord record = receiveRecord();
+					
+					// TODO put in BD
 					System.out.println(record.toString());
 				}
 
@@ -153,7 +156,7 @@ public class Server {
 				if (OK.equals("OK")) {
 					return true;
 				}
-		
+
 			} catch (ClassNotFoundException e) {
 				System.out.println("authenticateUser: erro a ler da stream");
 			} catch (IOException e) {
@@ -174,39 +177,29 @@ public class Server {
 
 				// clear text nonce from client
 				long nonceRcvd = (long) inStream.readObject();
-				System.out.println(nonceRcvd);
+
 				// signed nonce from client
 				String assinadoB64 = (String) inStream.readObject();
 
-				System.out.println(assinadoB64);
 				byte[] assinado = Base64.getDecoder().decode(assinadoB64);
 
-
 				int n = 1;
-				if (nonceRcvd == nonce) {
-					n=0;
+				if (nonceRcvd == nonce && verifySignature(nonce, assinado)) {
+					n = 0;
+
 					outStream.writeObject(n);
-					boolean valid = verifySignature(nonce, assinado);
-					System.out.println(valid);
-					if (valid) {
-						System.out.println("TRUE");
-					}
-					if (valid) {
+					PublicKey labkey = getLabPubKey();
+					// Generate simetrikey
+					simetricKey = createSimetricKey();
+					// sends the new Simetric key for the comunication
+					byte[] wrappedKey = encryptSimetricKey(simetricKey, labkey);
 
-						PublicKey labkey = getLabPubKey();
-						// Generate simetrikey
-						simetricKey = createSimetricKey();
-						System.out.println(simetricKey.getAlgorithm());
-						// sends the new Simetric key for the comunication
-						byte[] wrappedKey = encryptSimetricKey(simetricKey, labkey);
+					// outStream.writeObject(wrappedKey);
+					String encodedSimetricKey = new String(Base64.getEncoder().encode(wrappedKey));
+					outStream.writeObject(encodedSimetricKey);
 
-						//outStream.writeObject(wrappedKey);
-						String encodedSimetricKey = new String(Base64.getEncoder().encode(wrappedKey));
-						System.out.println(encodedSimetricKey);
-						outStream.writeObject(encodedSimetricKey);
-						
-						return true;
-					}
+					return true;
+
 				}
 				outStream.writeLong(n);
 
@@ -222,22 +215,21 @@ public class Server {
 
 		private static boolean verifySignature(long nonce, byte[] assinado) {
 			try {
-				System.out.println(1);
 				File keystoreF = ResourceUtils.getFile("classpath:" + truststore);
-				System.out.println(2);
+
 				FileInputStream kfile = new FileInputStream(keystoreF);
-				System.out.println(3);
+
 				KeyStore kstore = KeyStore.getInstance(KEYSTORETYPE);
 				kstore.load(kfile, truststorePassword.toCharArray());
-				System.out.println(4);
+
 				// Vai buscar a pubkey do lab
 				Certificate cert = kstore.getCertificate(LABALIAS);
 				PublicKey pk = cert.getPublicKey();
-				System.out.println(5);
+
 				Signature s = Signature.getInstance("MD5withRSA");
 				s.initVerify(pk);
 				s.update(ByteUtil.longToBytes(nonce));
-				System.out.println(6);
+
 				return s.verify(assinado);
 
 			} catch (SignatureException e) {
@@ -261,7 +253,7 @@ public class Server {
 		/*
 		 * Gera um long aleatorio
 		 */
-		private long getNonce() {
+		private static long getNonce() {
 			return new Random().nextLong();
 		}
 
@@ -294,7 +286,6 @@ public class Server {
 			return null;
 		}
 
-
 		private static PublicKey getLabPubKey() {
 			try {
 
@@ -321,7 +312,6 @@ public class Server {
 			return null;
 		}
 
-		
 		/**
 		 * Creates a simetric key using AES 128 bits
 		 * 
@@ -361,13 +351,13 @@ public class Server {
 			return null;
 		}
 
-		public ClinicalRecord receiveRecord() {
+		public MedicalRecord receiveRecord() {
 			try {
 				Cipher c = Cipher.getInstance("AES");
 				c.init(Cipher.DECRYPT_MODE, simetricKey);
 
 				SealedObject sealedObject = (SealedObject) inStream.readObject();
-				return (ClinicalRecord) sealedObject.getObject(c);
+				return (MedicalRecord) sealedObject.getObject(c);
 
 			} catch (InvalidKeyException e) {
 				System.out.println("receiveRecord: A secret key nao está no formato certo");
@@ -380,7 +370,8 @@ public class Server {
 			} catch (IOException e) {
 				System.out.println("receiveRecord: Erro a encriptar a mensagem");
 			} catch (ClassNotFoundException e) {
-				System.out.println("receiveRecord: Erro a dar cas para SealedObject");
+				System.out.println("receiveRecord: Erro a dar cast para SealedObject");
+				e.printStackTrace();
 			} catch (BadPaddingException e) {
 				System.out.println("receiveRecord falha a decifrar a mensagem");
 			}
