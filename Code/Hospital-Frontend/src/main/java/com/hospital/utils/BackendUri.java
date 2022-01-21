@@ -5,7 +5,7 @@ package com.hospital.utils;
  */
 public class BackendUri {
 	
-	public final static String BACKEND_API_BASE_URI = "https://localhost:3000/";
+	public final static String BACKEND_API_BASE_URI = "https://localhost:3000/api/";
 	public final static String MEDICAL_RECORDS_ALL = "medical/records";
 	public final static String MEDICAL_RECORDS_GET = "medical/records/get/{id}";
 	public final static String CITIZEN_EXISTS_GET = "citizen/exists/{id}";
@@ -15,4 +15,5 @@ public class BackendUri {
 	public final static String MEDICAL_RECORD_POST = BACKEND_API_BASE_URI + "patient/medical/record/register";
 	public final static String PATIENT_REGISTER_POST = BACKEND_API_BASE_URI + "patient/register";
 	public final static String REGISTER_PERSONNEL_POST = BACKEND_API_BASE_URI + "admin/register";
+	public final static String CHANGE_PASSWORD_POST = BACKEND_API_BASE_URI + "citizen/change/password";
 }

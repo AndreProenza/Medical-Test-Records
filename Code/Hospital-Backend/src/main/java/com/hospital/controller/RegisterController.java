@@ -13,7 +13,7 @@ import com.hospital.service.EmailSenderService;
 import com.hospital.utils.PasswordGenerator;
 
 @RestController
-@RequestMapping("admin/register")
+@RequestMapping("api/admin/register")
 public class RegisterController {
 	
 private CitizenService citizenService;

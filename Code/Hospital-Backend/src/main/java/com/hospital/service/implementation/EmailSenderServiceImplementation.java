@@ -27,10 +27,16 @@ public class EmailSenderServiceImplementation implements EmailSenderService {
 
 	@Override
 	public void sendHospitalEmail(String toEmail, String citizenId, String password) {
-		sendEmail(toEmail, "Hospital Credentials", "Here are your credentials to access our Hospital.\n"
+		sendEmail(toEmail, "Hospital Medical Records Credentials", "Here are your credentials to access our Hospital.\n"
 				+ "Citizen Card ID: " + citizenId + "\n"
 				+ "Password: " + password);
 		
+	}
+
+	@Override
+	public void sendHospitalChangePasswordEmail(String toEmail) {
+		sendEmail(toEmail, "Hospital Medical Records", "Your password has been changed.\n"
+				+ "If you are not aware of this, please contact one of our services immediately.");
 	}
 
 }

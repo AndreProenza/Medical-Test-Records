@@ -43,6 +43,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 			.antMatchers("/home").hasAnyAuthority("Admin", "Doctor", "Nurse", "Porter", "Volunteer",
 					"Patient_Assistant", "Clinical_Assistant", "Ward_Clerk", "Patient")
+			.antMatchers("/change/password").hasAnyAuthority("Admin", "Doctor", "Nurse", "Porter", "Volunteer",
+					"Patient_Assistant", "Clinical_Assistant", "Ward_Clerk", "Patient")
 			.antMatchers("/medical/records/**").hasAnyAuthority("Doctor", "Nurse")
 			.antMatchers("/my/medical/record").hasAnyAuthority("Admin", "Doctor", "Nurse", "Porter", "Volunteer",
 					"Patient_Assistant", "Clinical_Assistant", "Ward_Clerk", "Patient")
@@ -64,7 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 //Joana Ferreira -> Admin
-//16478937 -> Q9$88twJBd1%3G0!
+//16478937 -> Joana123??
 	
 //Filipe Santos -> Doctor
 //17593826 -> e$C18d!2$&*SzX5L

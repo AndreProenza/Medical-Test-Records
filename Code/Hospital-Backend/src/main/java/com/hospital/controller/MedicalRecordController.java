@@ -15,7 +15,7 @@ import com.hospital.service.MedicalRecordService;
 import com.hospital.utils.PatientRecord;
 
 @RestController
-@RequestMapping("medical/records")
+@RequestMapping("api/medical/records")
 public class MedicalRecordController {
 	
 	private MedicalRecordService medicalRecordService;

@@ -19,4 +19,14 @@ public interface EmailSenderService {
 	 * @param password the password
 	 */
 	void sendHospitalEmail(String toEmail,  String citizenId, String password);
+	
+	
+	/**
+	 * Sends an email with static subject and body informing the citizen, that
+	 * password has been changed
+	 * 
+	 * @param toEmail the email to send the email
+	 * @param citizenId the citizen card id
+	 */
+	void sendHospitalChangePasswordEmail(String toEmail);
 }

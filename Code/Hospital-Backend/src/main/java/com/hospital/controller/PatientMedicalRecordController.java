@@ -10,7 +10,7 @@ import com.hospital.service.CitizenService;
 import com.hospital.service.MedicalRecordService;
 
 @RestController
-@RequestMapping("patient/medical/record")
+@RequestMapping("api/patient/medical/record")
 public class PatientMedicalRecordController {
 	
 	private MedicalRecordService medicalRecordService;
