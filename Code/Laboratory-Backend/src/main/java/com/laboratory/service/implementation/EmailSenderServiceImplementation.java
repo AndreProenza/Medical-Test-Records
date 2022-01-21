@@ -27,10 +27,16 @@ public class EmailSenderServiceImplementation implements EmailSenderService {
 
 	@Override
 	public void sendLaboratoryEmail(String toEmail, String citizenId, String password) {
-		sendEmail(toEmail, "Laboratory Credentials", "Here are your credentials to access our laboratory.\n"
+		sendEmail(toEmail, "Laboratory Clinical Records Credentials", "Here are your credentials to access our laboratory.\n"
 				+ "Citizen Card ID: " + citizenId + "\n"
 				+ "Password: " + password);
 		
+	}
+
+	@Override
+	public void sendLaboratoryChangePasswordEmail(String toEmail) {
+		sendEmail(toEmail, "Laboratory Clinical Records", "Your password has been changed.\n"
+				+ "If you are not aware of this, please contact one of our services immediately.");
 	}
 
 }

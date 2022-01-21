@@ -21,7 +21,7 @@
 	
 		<header class="header">
         <div>
-			<h1>Laboratory Medical Records</h1>
+			<h1>Laboratory Clinical Records</h1>
         </div>
     </header>
     
@@ -51,8 +51,11 @@
               </div>
               <div sec:authorize="hasAuthority('Admin')">
               	<button th:onclick="|window.location.href='@{/admin/register}'|" class="form-group btn btn-block btn-primary">Register Personnel</button>
+              	<br>
               </div>
-              
+	          <div sec:authorize="isAuthenticated()">
+	            <button th:onclick="|window.location.href='@{/change/password}'|" class="form-group btn btn-block btn-primary">Change Password</button>
+	          </div>
             </div>
           </div>
         </div>
