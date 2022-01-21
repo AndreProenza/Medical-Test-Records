@@ -1,8 +1,6 @@
 package com.laboratory.hospitalservice;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -24,8 +22,6 @@ import java.security.UnrecoverableKeyException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
-import java.security.cert.X509Certificate;
-import java.util.Arrays;
 import java.util.Base64;
 
 import javax.crypto.Cipher;
@@ -33,9 +29,6 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SealedObject;
 import javax.net.SocketFactory;
-import javax.net.ssl.SSLSession;
-import javax.net.ssl.SSLSocket;
-import javax.net.ssl.SSLSocketFactory;
 
 import org.springframework.util.ResourceUtils;
 
@@ -43,7 +36,6 @@ import org.springframework.util.ResourceUtils;
 import com.hospitalserver.model.mongodb.MedicalRecord;
 import com.laboratory.utils.ByteUtil;
 
-import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
 
 public class Client {
 
@@ -66,20 +58,6 @@ public class Client {
 	public Client(String ip, int porta) {
 		this.ip = ip;
 		this.porta = porta;
-
-		/*
-		 * try { File keystoreF = ResourceUtils.getFile("classpath:" + keystore); File
-		 * truststoreF = ResourceUtils.getFile("classpath:" + truststore);
-		 * 
-		 * System.setProperty("javax.net.ssl.trustStore",
-		 * truststoreF.getAbsolutePath());
-		 * System.setProperty("javax.net.ssl.trustStorePassword", keystorePassword);
-		 * System.setProperty("javax.net.ssl.keyStore", keystoreF.getAbsolutePath());
-		 * System.setProperty("javax.net.ssl.keyStorePassword", keystorePassword);
-		 * 
-		 * } catch (FileNotFoundException e) {
-		 * System.out.println("Missing keystore or truststore"); }
-		 */
 	}
 
 	public Socket connect() {
@@ -106,34 +84,6 @@ public class Client {
 		}
 		return clientSocket;
 	}
-
-	/*
-	 * public Socket connect() { clientSocket = null; SocketFactory sf =
-	 * SocketFactory.getDefault(); try { // InetAddress serverAddr =
-	 * InetAddress.getByName("192.168.1.2"); clientSocket = (Socket)
-	 * sf.createSocket(ip, porta); clientSocket.startHandshake(); // Verify Server
-	 * identity SSLSession sess = clientSocket.getSession(); X509Certificate[] certs
-	 * = (X509Certificate[]) sess.getPeerCertificates(); String dnRemote =
-	 * certs[0].getSubjectX500Principal().getName();
-	 * 
-	 * if (dnRemote.
-	 * equals("CN=Hospital Backend Server,OU=IST,O=IST,L=Lisbon,ST=Lisbon,C=PT")) {
-	 * System.out.println("Certificado do servidor: " + dnRemote); } else {
-	 * System.out.println("Certificado do servidor está errado! Abortando");
-	 * clientSocket.close(); }
-	 * 
-	 * } catch (UnknownHostException e) { System.out.println("Host não conhecido!");
-	 * } catch (IOException e) { System.out.println("Ligação falhou!"); }
-	 * 
-	 * if (clientSocket == null) {
-	 * System.out.println("Conexão falhou, possiveis motivos:");
-	 * System.out.println("+   server em baixo");
-	 * System.out.println("+   ip incorreto");
-	 * System.out.println("+   password da keystore incorreto"); System.out.
-	 * println("Por favor verifique se os argumentos inseridos estão corretos");
-	 * 
-	 * System.exit(-1); } return clientSocket; }
-	 */
 
 	public boolean authenticate() {
 		try {
@@ -321,47 +271,6 @@ public class Client {
 		return null;
 	}
 
-	/*
-	 * private static String encryptMessage(String msg) { try {
-	 * 
-	 * Cipher c = Cipher.getInstance("AES"); c.init(Cipher.ENCRYPT_MODE,
-	 * simetricKey); byte[] input = msg.getBytes(); byte[] encrypted =
-	 * c.doFinal(input);
-	 * 
-	 * return Base64.getEncoder().encodeToString(encrypted);
-	 * 
-	 * } catch (InvalidKeyException e) {
-	 * System.out.println("encryptMessage: A secret key nao está no formato certo");
-	 * } catch (NoSuchAlgorithmException e) {
-	 * System.out.println("encryptMessage: Algoritmo de encriptacao nao existe"); }
-	 * catch (NoSuchPaddingException e) { System.out.
-	 * println("encryptMessage: O algoritmo escolhido nao pode ser utilizador"); }
-	 * catch (IllegalBlockSizeException e) {
-	 * System.out.println("encryptMessage: Erro a fazer wrap da chave"); } catch
-	 * (BadPaddingException e) {
-	 * System.out.println("encryptMessage: Erro a encriptar a mensagem"); } return
-	 * null; }
-	 * 
-	 * private static String decryptMessage(String msg) { try {
-	 * 
-	 * Cipher c = Cipher.getInstance("AES"); c.init(Cipher.DECRYPT_MODE,
-	 * simetricKey); byte[] input = Base64.getDecoder().decode(msg); byte[]
-	 * decrypted = c.doFinal(input);
-	 * 
-	 * return new String(decrypted);
-	 * 
-	 * } catch (InvalidKeyException e) {
-	 * System.out.println("encryptMessage: A secret key nao está no formato certo");
-	 * } catch (NoSuchAlgorithmException e) {
-	 * System.out.println("encryptMessage: Algoritmo de encriptacao nao existe"); }
-	 * catch (NoSuchPaddingException e) { System.out.
-	 * println("encryptMessage: O algoritmo escolhido nao pode ser utilizador"); }
-	 * catch (IllegalBlockSizeException e) {
-	 * System.out.println("encryptMessage: Erro a fazer wrap da chave"); } catch
-	 * (BadPaddingException e) {
-	 * System.out.println("encryptMessage: Erro a encriptar a mensagem"); } return
-	 * null; }
-	 */
 
 	/**
 	 * Closes socket connection
