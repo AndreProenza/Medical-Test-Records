@@ -1,31 +1,16 @@
 package com.hospitalserver.utils;
 
-
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
-
-import javax.crypto.Cipher;
-import javax.crypto.CipherInputStream;
-import javax.crypto.CipherOutputStream;
-import javax.crypto.KeyGenerator;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
 
 import java.util.ArrayList;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-
 
 
 public class FileFunctions {

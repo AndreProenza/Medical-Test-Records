@@ -194,8 +194,11 @@ public class Client {
 				String msg = (String) in.readObject();
 				String ok = decryptMessage(msg);
 				if (ok.equals("OK")) {
+					System.out.println("Medical Records was put in BD");
 					return true;
 				}
+			} else {
+				System.out.println("Citizen not registered in hospital");
 			}
 			
 			

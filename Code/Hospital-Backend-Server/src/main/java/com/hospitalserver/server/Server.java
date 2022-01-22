@@ -141,6 +141,9 @@ public class Server {
 						medicalRecordCollection.insertOne(record);
 						outStream.writeObject(encryptMessage("OK"));
 					}
+					else {
+						outStream.writeObject(encryptMessage("0"));
+					}
 				}
 
 				// Close conections
