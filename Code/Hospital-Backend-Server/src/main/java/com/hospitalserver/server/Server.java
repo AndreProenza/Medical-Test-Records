@@ -32,10 +32,12 @@ import javax.net.ServerSocketFactory;
 
 import org.springframework.util.ResourceUtils;
 
-import com.hospitalserver.service.CitizenService;
-import com.hospitalserver.service.MedicalRecordService;
+import com.hospitalserver.model.mongodb.Citizen;
 import com.hospitalserver.model.mongodb.MedicalRecord;
 import com.hospitalserver.utils.ByteUtil;
+import com.mongodb.client.MongoCollection;
+
+
 
 public class Server {
 
@@ -49,19 +51,9 @@ public class Server {
 	private static final String LABALIAS = "laboratory-backend";
 
 	private final static int PORT = 4000;
-	
-	
-	private static CitizenService citizenService;
-	private static MedicalRecordService medicalRecordService;
-	
-	public Server(CitizenService citizenService, MedicalRecordService medicalRecordService) {
-		super();
-		this.citizenService = citizenService;
-		this.medicalRecordService = medicalRecordService;
-	}
-	
-	
-	public static void run() {
+
+
+	public static void run(MongoCollection<Citizen> citizenCollection, MongoCollection<MedicalRecord> medicalRecordCollection) {
 
 		ServerSocket socket = null;
 
@@ -77,7 +69,7 @@ public class Server {
 		while (true) {
 			try {
 				Socket inSoc = (Socket) socket.accept();
-				ServerThread newServerThread = new ServerThread(inSoc, citizenService, medicalRecordService);
+				ServerThread newServerThread = new ServerThread(inSoc, citizenCollection, medicalRecordCollection);
 				newServerThread.start();
 			} catch (NullPointerException e) {
 				System.out.println("Server socket é null");
@@ -104,19 +96,20 @@ public class Server {
 
 		// id do laboratorio da thread currente
 		// private String labID = null;
-		private static CitizenService citizenService;
-		private static MedicalRecordService medicalRecordService;
+		private static MongoCollection<Citizen> citizenCollection;
+		private static MongoCollection<MedicalRecord> medicalRecordCollection;
+		
 		/**
 		 * Construtor da classe. Cria uma nova Thread para o cliente que se ligou no
 		 * momento
 		 * 
 		 * @param inSoc a socket da ligação estabelecida
 		 */
-		public ServerThread(Socket inSoc, CitizenService citizenService, MedicalRecordService medicalRecordService) {
+		public ServerThread(Socket inSoc, MongoCollection<Citizen> citizenCollection,  MongoCollection<MedicalRecord> medicalRecordCollection) {
 			socket = inSoc;
 			System.out.println("thread do server para cada cliente");
-			this.citizenService = citizenService;
-			this.medicalRecordService = medicalRecordService;
+			ServerThread.citizenCollection = citizenCollection;
+			ServerThread.medicalRecordCollection = medicalRecordCollection;
 
 		}
 
@@ -129,14 +122,23 @@ public class Server {
 					System.out.println("Autenticado");
 					
 					String encryptedCid = (String) inStream.readObject();
-					String cid = decryptMessage(encryptedCid);
 					
-					if (citizenService.existsCitizenById(cid)) {
+					String cid = decryptMessage(encryptedCid);
+					boolean foundCid = false;
+					for (Citizen c : citizenCollection.find()) {
+						if (c.getId().equals(cid)) {
+							foundCid = true;
+							break;
+						}
+					}
+					
+					if (foundCid) {
+				    	
 						outStream.writeObject(encryptMessage("1"));
 						MedicalRecord record = receiveRecord();	
 						
 						// write OK
-						medicalRecordService.saveRecord(record);
+						medicalRecordCollection.insertOne(record);
 						outStream.writeObject(encryptMessage("OK"));
 					}
 				}
