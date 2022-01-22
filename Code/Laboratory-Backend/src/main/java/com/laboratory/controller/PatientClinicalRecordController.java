@@ -39,7 +39,7 @@ public class PatientClinicalRecordController {
 		if(citizenService.existsCitizenById(record.getCid())) {
 			if (clinicalRecordService.saveRecord(record) != null) {
 				// send clinical record to hospital
-				HospitalService.sendRecord(record);
+				boolean response = HospitalService.sendRecord(record);
 			}
 			return record;
 		}

@@ -24,6 +24,7 @@ import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.util.Base64;
 
+import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
@@ -173,13 +174,31 @@ public class Client {
 	}
 	
 
-	public void sendRecord(MedicalRecord record) {
+	public boolean communication(MedicalRecord record) {
 		try {
-			Cipher c = Cipher.getInstance("AES");
-			c.init(Cipher.ENCRYPT_MODE, simetricKey);
-			SealedObject sealedRecord = new SealedObject(record, c);
-			// sends records
-			out.writeObject(sealedRecord);
+			
+			out.writeObject(encryptMessage(record.getCid()));
+			
+			String encExists = (String) in.readObject();
+			String exists = decryptMessage(encExists);
+			
+			if (exists.equals("1")) {
+				// send encrypted record
+				Cipher c = Cipher.getInstance("AES");
+				c.init(Cipher.ENCRYPT_MODE, simetricKey);
+				SealedObject sealedRecord = new SealedObject(record, c);
+				// sends records
+				out.writeObject(sealedRecord);	
+				
+				// was put in BD?
+				String msg = (String) in.readObject();
+				String ok = decryptMessage(msg);
+				if (ok.equals("OK")) {
+					return true;
+				}
+			}
+			
+			
 
 		} catch (InvalidKeyException e) {
 			System.out.println("sendRecord: A secret key nao está no formato certo");
@@ -191,7 +210,11 @@ public class Client {
 			System.out.println("sendRecord: Erro a fazer wrap da chave");
 		} catch (IOException e) {
 			System.out.println("sendRecord: Erro a encriptar a mensagem");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return false;
 	}
 
 	private static Key getLabPrivateKey() {
@@ -284,5 +307,53 @@ public class Client {
 			System.out.println("close: failed closing socket");
 		}
 
+	}
+	
+	private static String encryptMessage(String msg) {
+		try {
+
+			Cipher c = Cipher.getInstance("AES");
+			c.init(Cipher.ENCRYPT_MODE, simetricKey);
+			byte[] input = msg.getBytes();
+			byte[] encrypted = c.doFinal(input);
+
+			return Base64.getEncoder().encodeToString(encrypted);
+
+		} catch (InvalidKeyException e) {
+			System.out.println("encryptMessage: A secret key nao está no formato certo");
+		} catch (NoSuchAlgorithmException e) {
+			System.out.println("encryptMessage: Algoritmo de encriptacao nao existe");
+		} catch (NoSuchPaddingException e) {
+			System.out.println("encryptMessage: O algoritmo escolhido nao pode ser utilizador");
+		} catch (IllegalBlockSizeException e) {
+			System.out.println("encryptMessage: Erro a fazer wrap da chave");
+		} catch (BadPaddingException e) {
+			System.out.println("encryptMessage: Erro a encriptar a mensagem");
+		}
+		return null;
+	}
+
+	private static String decryptMessage(String msg) {
+		try {
+
+			Cipher c = Cipher.getInstance("AES");
+			c.init(Cipher.DECRYPT_MODE, simetricKey);
+			byte[] input = Base64.getDecoder().decode(msg);
+			byte[] decrypted = c.doFinal(input);
+
+			return new String(decrypted);
+
+		} catch (InvalidKeyException e) {
+			System.out.println("encryptMessage: A secret key nao está no formato certo");
+		} catch (NoSuchAlgorithmException e) {
+			System.out.println("encryptMessage: Algoritmo de encriptacao nao existe");
+		} catch (NoSuchPaddingException e) {
+			System.out.println("encryptMessage: O algoritmo escolhido nao pode ser utilizador");
+		} catch (IllegalBlockSizeException e) {
+			System.out.println("encryptMessage: Erro a fazer wrap da chave");
+		} catch (BadPaddingException e) {
+			System.out.println("encryptMessage: Erro a encriptar a mensagem");
+		}
+		return null;
 	}
 }

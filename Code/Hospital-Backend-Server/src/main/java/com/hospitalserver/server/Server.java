@@ -32,6 +32,8 @@ import javax.net.ServerSocketFactory;
 
 import org.springframework.util.ResourceUtils;
 
+import com.hospitalserver.service.CitizenService;
+import com.hospitalserver.service.MedicalRecordService;
 import com.hospitalserver.model.mongodb.MedicalRecord;
 import com.hospitalserver.utils.ByteUtil;
 
@@ -47,7 +49,18 @@ public class Server {
 	private static final String LABALIAS = "laboratory-backend";
 
 	private final static int PORT = 4000;
-
+	
+	
+	private static CitizenService citizenService;
+	private static MedicalRecordService medicalRecordService;
+	
+	public Server(CitizenService citizenService, MedicalRecordService medicalRecordService) {
+		super();
+		this.citizenService = citizenService;
+		this.medicalRecordService = medicalRecordService;
+	}
+	
+	
 	public static void run() {
 
 		ServerSocket socket = null;
@@ -64,7 +77,7 @@ public class Server {
 		while (true) {
 			try {
 				Socket inSoc = (Socket) socket.accept();
-				ServerThread newServerThread = new ServerThread(inSoc);
+				ServerThread newServerThread = new ServerThread(inSoc, citizenService, medicalRecordService);
 				newServerThread.start();
 			} catch (NullPointerException e) {
 				System.out.println("Server socket é null");
@@ -91,16 +104,19 @@ public class Server {
 
 		// id do laboratorio da thread currente
 		// private String labID = null;
-
+		private static CitizenService citizenService;
+		private static MedicalRecordService medicalRecordService;
 		/**
 		 * Construtor da classe. Cria uma nova Thread para o cliente que se ligou no
 		 * momento
 		 * 
 		 * @param inSoc a socket da ligação estabelecida
 		 */
-		public ServerThread(Socket inSoc) {
+		public ServerThread(Socket inSoc, CitizenService citizenService, MedicalRecordService medicalRecordService) {
 			socket = inSoc;
 			System.out.println("thread do server para cada cliente");
+			this.citizenService = citizenService;
+			this.medicalRecordService = medicalRecordService;
 
 		}
 
@@ -111,11 +127,18 @@ public class Server {
 
 				if (authServer() && authenticateLab()) {
 					System.out.println("Autenticado");
-
-					MedicalRecord record = receiveRecord();
 					
-					// TODO put in BD
-					System.out.println(record.toString());
+					String encryptedCid = (String) inStream.readObject();
+					String cid = decryptMessage(encryptedCid);
+					
+					if (citizenService.existsCitizenById(cid)) {
+						outStream.writeObject(encryptMessage("1"));
+						MedicalRecord record = receiveRecord();	
+						
+						// write OK
+						medicalRecordService.saveRecord(record);
+						outStream.writeObject(encryptMessage("OK"));
+					}
 				}
 
 				// Close conections
@@ -123,7 +146,7 @@ public class Server {
 				outStream.close();
 				socket.close();
 
-			} catch (IOException e) {
+			} catch (IOException | ClassNotFoundException e) {
 				e.printStackTrace();
 			}
 		}
@@ -368,5 +391,54 @@ public class Server {
 			return null;
 		}
 
+		private static String encryptMessage(String msg) {
+			try {
+
+				Cipher c = Cipher.getInstance("AES");
+				c.init(Cipher.ENCRYPT_MODE, simetricKey);
+				byte[] input = msg.getBytes();
+				byte[] encrypted = c.doFinal(input);
+
+				return Base64.getEncoder().encodeToString(encrypted);
+
+			} catch (InvalidKeyException e) {
+				System.out.println("encryptMessage: A secret key nao está no formato certo");
+			} catch (NoSuchAlgorithmException e) {
+				System.out.println("encryptMessage: Algoritmo de encriptacao nao existe");
+			} catch (NoSuchPaddingException e) {
+				System.out.println("encryptMessage: O algoritmo escolhido nao pode ser utilizador");
+			} catch (IllegalBlockSizeException e) {
+				System.out.println("encryptMessage: Erro a fazer wrap da chave");
+			} catch (BadPaddingException e) {
+				System.out.println("encryptMessage: Erro a encriptar a mensagem");
+			}
+			return null;
+		}
+
+		private static String decryptMessage(String msg) {
+			try {
+
+				Cipher c = Cipher.getInstance("AES");
+				c.init(Cipher.DECRYPT_MODE, simetricKey);
+				byte[] input = Base64.getDecoder().decode(msg);
+				byte[] decrypted = c.doFinal(input);
+
+				return new String(decrypted);
+
+			} catch (InvalidKeyException e) {
+				System.out.println("encryptMessage: A secret key nao está no formato certo");
+			} catch (NoSuchAlgorithmException e) {
+				System.out.println("encryptMessage: Algoritmo de encriptacao nao existe");
+			} catch (NoSuchPaddingException e) {
+				System.out.println("encryptMessage: O algoritmo escolhido nao pode ser utilizador");
+			} catch (IllegalBlockSizeException e) {
+				System.out.println("encryptMessage: Erro a fazer wrap da chave");
+			} catch (BadPaddingException e) {
+				System.out.println("encryptMessage: Erro a encriptar a mensagem");
+			}
+			return null;
+		}
+
 	}
+
 }
