@@ -1,6 +1,5 @@
 package com.hospitalserver.model.mongodb;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -43,7 +42,7 @@ public class Citizen {
 	
 	@NotNull(message = "Email cannot be null")
 	@Pattern(regexp = "^(.+)@(.+)$", message = "Email should be valid")
-	@Email(message = "Email should be valid")
+	//@Email(message = "Email should be valid")
 	private String email;
 
 	@NotNull(message = "Phone number cannot be null")
