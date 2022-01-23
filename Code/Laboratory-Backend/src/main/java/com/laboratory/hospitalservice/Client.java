@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.security.InvalidKeyException;
@@ -65,8 +66,8 @@ public class Client {
 		clientSocket = null;
 		SocketFactory sf = SocketFactory.getDefault();
 		try {
-			// InetAddress serverAddr = InetAddress.getByName("192.168.1.2");
-			clientSocket = (Socket) sf.createSocket(ip, porta);
+			InetAddress serverAddr = InetAddress.getByName("10.0.0.6");
+			clientSocket = (Socket) sf.createSocket(serverAddr, porta);
 
 		} catch (UnknownHostException e) {
 			System.out.println("Host não conhecido!");
