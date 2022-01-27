@@ -1,23 +1,33 @@
-# Project Title
+# Medical-Test-Records
 
-Place logos here, if they exist
 
-Begin with an introductory paragraph that tells readers the purpose of your software and its major benefits. 
-Give them a summary of the information you will include in your ReadMe using clearly defined sections.
 
-## General Information
+## Problem
 
-This section expands on the introductory paragraph to give readers a better understanding of your project. 
-Include a brief description and answer the question, "what problem does this project solve?"
+- Health care institutions gather and store sensitive information from patients such as medical test records.
+- Patients can not always access their medical records in a secure manner
+- Information systems do not always ensure fine-grained and contextualized access to medical records for relevant staff.
+- Lack of connection and access to medical records of different partner institutions, with different infrastructures.
+
+
+## Solution
+
+- Provide a secure system to allow safe and confidential access to patient's medical records
+- Ensure authentication and access control to certain resources for authorized personnel
+- Ensure secure interconnection (sending and receiving medical records) between partner health organizations
+
+
 
 ### Built With
 
-Include an outline of the technologies in the project, such as framework (Rails/iOS/Android), as well as programming language, database,  links to any related projects (for example, whether this API has corresponding iOS or Android clients), links to online tools related to the application (such as the project web site, the shared file storage).
-If you mention something, please provide links.
-
-* [Java](https://openjdk.java.net/) - Programming Language and Platform
+* [Java](https://openjdk.java.net/) - Programming Language
 * [Maven](https://maven.apache.org/) - Build Tool and Dependency Management
-* ...
+* [Spring Boot](https://spring.io/projects/spring-boot) - Create Java stand-alone Spring applications
+* [Spring Boot Security](https://spring.io/projects/spring-security) - A highly customizable authentication and access-control framework
+* [Mongo DB Atlas](https://www.mongodb.com/) - Cloud Database
+* [Ubuntu Server](https://ubuntu.com/download/server) - Virtual Machines to run the Servers
+* [UFW - Uncomplicated Firewall](https://www.linux.com/training-tutorials/introduction-uncomplicated-firewall-ufw/) - Firewall
+
 
 ## Getting Started
 
