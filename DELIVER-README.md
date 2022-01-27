@@ -83,9 +83,9 @@ Provide instructions for connecting to servers and tell clients how to obtain ne
 
 ### Authors
 
-* **Ana Albuquerque** - ** ist ** - [GitHub](https://github.com/albuana)
-* **André Proença** - [GitHub](https://github.com/AndreProenza)
-* **Joel Russo** - [GitHub](https://github.com/jolick)
+* **Ana Albuquerque** - ** ist1102209 ** - [GitHub](https://github.com/albuana)
+* **André Proença** - ** ist1102327 ** - [GitHub](https://github.com/AndreProenza)
+* **Joel Russo** -  ** ist1102098 ** - [GitHub](https://github.com/jolick)
 
 
 ### Versioning
