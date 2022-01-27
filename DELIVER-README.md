@@ -83,17 +83,11 @@ Provide instructions for connecting to servers and tell clients how to obtain ne
 
 ### Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Ana Albuquerque** - ** ist ** - [GitHub](https://github.com/albuana)
+* **André Proença** - [GitHub](https://github.com/AndreProenza)
+* **Joel Russo** - [GitHub](https://github.com/jolick)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ### Versioning
 
 We used [GitHub](https://github.com/) for versioning. 
-For the versions available, see the [on this repository](https://github.com/AndreProenza/Medical-Test-Records/). 
-
-### Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
