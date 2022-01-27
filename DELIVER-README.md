@@ -89,8 +89,8 @@ See also the list of [contributors](https://github.com/your/project/contributors
 
 ### Versioning
 
-We used [SemVer](http://semver.org/) for versioning. 
-For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+We used [GitHub](https://github.com/) for versioning. 
+For the versions available, see the [on this repository](https://github.com/AndreProenza/Medical-Test-Records/). 
 
 ### Acknowledgments
 
