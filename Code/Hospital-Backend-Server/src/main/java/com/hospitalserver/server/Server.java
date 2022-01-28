@@ -233,7 +233,7 @@ public class Server {
 
 		private static boolean verifySignature(long nonce, byte[] assinado) {
 			try {
-				File keystoreF = ResourceUtils.getFile("classpath:" + truststore);
+				File keystoreF = ResourceUtils.getFile(System.getProperty("user.dir") + File.separator + "src/main/resources/" + truststore);
 
 				FileInputStream kfile = new FileInputStream(keystoreF);
 
@@ -283,7 +283,7 @@ public class Server {
 		private static Certificate getServerCertificate() {
 			try {
 
-				File keystoreF = ResourceUtils.getFile("classpath:" + keystore);
+				File keystoreF = ResourceUtils.getFile(System.getProperty("user.dir") + File.separator + "src/main/resources/" + keystore);
 				FileInputStream kfile = new FileInputStream(keystoreF);
 				KeyStore kstore = KeyStore.getInstance(KEYSTORETYPE);
 				kstore.load(kfile, keystorePassword.toCharArray());
@@ -307,7 +307,7 @@ public class Server {
 		private static PublicKey getLabPubKey() {
 			try {
 
-				File truststoreF = ResourceUtils.getFile("classpath:" + truststore);
+				File truststoreF = ResourceUtils.getFile(System.getProperty("user.dir") + File.separator + "src/main/resources/" + truststore);
 				FileInputStream kfile = new FileInputStream(truststoreF);
 				KeyStore kstore = KeyStore.getInstance(KEYSTORETYPE);
 				kstore.load(kfile, truststorePassword.toCharArray());
