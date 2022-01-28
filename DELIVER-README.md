@@ -157,7 +157,7 @@ After the previous installation is complete on your OS..
 --- 
 
 ### It's time to run our amazing project:
---- 
+##  
 0) Unzip file;
 1) Run the following instructions.
 
@@ -184,6 +184,20 @@ apache-maven-3.8.4/bin/mvn spring-boot:run
 ```
 
 Now open your browser in ```https://localhost:8443/``` and enjoy our laboratory system.
+
+--- 
+#### **To run the HOSPITAL:**
+---
+
+Go to ```Medical-Test-Records/jars```directory and run:
+
+```
+java -jar Hospital-Frontend.jar
+```
+
+```
+java -jar Hospital-Backend.jar
+```
 
 ##### Hospital Frontend 10.0.0.4
 To run the Hospital Frontend do:
