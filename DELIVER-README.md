@@ -144,15 +144,16 @@ In order to make the correct installation of **java 17** follow the following in
 
 ## 
 
-After the previous installation is complete on your OS..
+After the previous installation is complete in your OS..
 
 --- 
 
-### It's time to run our amazing project:
+### It's time to run our project:
 ##  
 0) Unzip project;
 1) Run the following instructions.
 
+##
 
 <h3 align="center"> 
 	To run the LABORATORY:
@@ -178,6 +179,8 @@ apache-maven-3.8.4/bin/mvn spring-boot:run
 ```
 
 Now open your browser in ```https://localhost:8443/``` and enjoy our laboratory system.
+
+##
 
 <h3 align="center"> 
 	To run the HOSPITAL:
