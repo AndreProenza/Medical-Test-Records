@@ -53,9 +53,9 @@ if testing via jar files:
 
 ---
 
-## Installing
+## Setup
 
-### Vms
+### VM's
 
 To prepare the environment it is necessary to import the vms. Firstly a new NAT Network must be created in order to successfully setup the network interfaces.
 
@@ -73,7 +73,11 @@ In order to import the vm you should go to:
 After setting up the network, by choosing the created network interface the vm can be turned on and changing MACs. 
 Finally By starting the vm, the code will be running and the server will start without any help.
 
-To access the frontend for both laboratory and hospital, the vm patient should be started. The login is **patient** and password is **patient**. After logging in, when after opening the browser it is possible to see two bookmarks:
+### To access the frontend for both laboratory and hospital, the vm patient should be started. 
+
+The login is **patient** and password is **patient**. 
+
+After logging in, when after opening the browser it is possible to see two bookmarks:
 
 For hospital:
 ```
@@ -142,13 +146,16 @@ In order to make the correct installation of **java 17** follow the following in
 
 ## 
 
-After the previous installation is complete in your OS..
+After the previous installation is complete in your OS, please read the following notes **before** running.
 
 #### Notes about running the application
 
-Before running the application it is necessary note that both Hospital and Laboratory frontends are running on port 8443, and their respective backends are also running in port 3000. Due to this, it is impossible to run both Hospital and Laboratory at the same time. It is still possible to run Hospital Backened server, that is running on port 4000, in order to test the custom protocol.
+If you are testing in your local machine, **Do not run all jars at the same time**.
+Please note, Hospital and Laboratory frontends are running on port 8443, and their respective backends are also running in port 3000. Due to this, it is **impossible** to run both Hospital and Laboratory at the same time. It is still possible to run Hospital Backened server, that is running on port 4000, in order to test the custom protocol.
 
-Summarized:
+But if you deploy the project in the vms, you can run all at the same time (there is no issue with localhost used ports).
+
+Summary:
 + Hospital Frontend: port 8443
 + Hospital Backened: port 3000
 + Laboratory Frontend: port 8443
