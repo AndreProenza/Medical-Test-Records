@@ -161,7 +161,7 @@ network, this is, it creates an extra difficulty to obtain higher/relevant crede
 
 Regarding the system, there is a necessity to create the first admin manually, since the option of creating new user/admins is not available. This is a great advantage in terms of security, but can become a problem in usability, even if it must only be done once.
 
-The Hospital Backend server is able multiple clients (via threads) therefore it possible to easily escalate the system, create multiple laboratories.
+The Hospital Backend server is able to accept multiple clients (via threads) therefore it possible to easily escalate the system, create multiple laboratories.
 
 The credentials for each vm are the the same as the hostname, this is, if hostname is **hosf**, then username is **hosf** and password is **hosf**. The root crentials are root:root
 
