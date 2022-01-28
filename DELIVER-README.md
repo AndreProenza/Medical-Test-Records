@@ -105,9 +105,7 @@ Installing **maven**, compatible with java 17:
 
 ---
 
-### Java 17 Instalation
-
-##
+## Java 17 Instalation
 
 #### LINUX
 ---
