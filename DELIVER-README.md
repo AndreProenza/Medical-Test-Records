@@ -95,7 +95,7 @@ The **root crentials** are root:root
 
 ##
 
-We're gonna use maven. The folder an inclued in our project, so ignore this step. 
+We're gonna use maven. The folder is inclued in our project, so ignore this step. 
 
 But there are the instructions:
 
@@ -154,7 +154,7 @@ After the previous installation is complete on your OS..
 
 ### It's time to run our amazing project:
 ##  
-0) Unzip file;
+0) Unzip project;
 1) Run the following instructions.
 
 
