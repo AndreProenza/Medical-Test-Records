@@ -41,29 +41,86 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
+If testing via vms:
 
 - VirtualBox installed on your machine. [Install here VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 
+if testing via jar files:
+- java 17
+- Maven
 
 ---
 
 ### Installing
 
-Give step-by-step instructions on building and running the application on the development environment. 
+#### Vms
+To prepare the environment it is necessary to import the vms. Firstly a new NAT Network must be created in order to successfully setup the network interfaces.
+To create a Nat Network go to **File > preferences > Network**. Click on the green icon to add a new Nat Network. The name should be "**rede**", Network CIDR: **10.0.0.0/24** and **DHCP** should be **enabled**. With that done we can procede to import the vms.
 
-Describe the step.
+In order to import the vm you should go to **Import**, Choose the correct .ova file and import it into virtualbox. After setting up the network, by choosing the created network interface the vm can be turned on and changing MACs. Finally By starting the vm, the code will be running and the server will start without any help.
 
+The credentials for each vm are the the same as the hostname, this is, if hostname is hosf, then username is hosf and password is hosf. The root crentials are root:root
+
+
+#### Jars and maven
+
+To run the code in a local linux system java 17 and maven must be installed.
+
+Installation of java 17 in linux:
 ```
-Give the command example
+sudo apt install openjdk-17-jre
+sudo apt install openjdk-17-jdk
+
+Change java version to the newer one.
+sudo update-alternatives --config java
 ```
 
-And repeat.
-
+Installing maven, compatible with java 17:
 ```
-until finished
+0) Please go to: https://maven.apache.org/download.cgi
+
+1) Unpack the archive with tar/unzip
+
+The following steps are unedeed but can be useful to install mvn system wide.
+2) A directory called "apache-maven-3.x.y" will be created.
+
+3) Add the apache-maven-3.8.4/bin directory to your PATH, e.g.:
+    export PATH=/usr/local/apache-maven-3.x.y/bin:$PAT
+
+4) Run "mvn --version" to verify that it is correctly installed.
 ```
 
-You can also add screenshots to show expected results, when relevant.
+##### Hospital Frontend 10.0.0.4
+To run the Hospital Frontend do:
+```
+java -jar jars/Hospital-Frontend.jar
+```
+
+##### Hospital Backend 10.0.0.5
+To run the Hospital Backend do:
+```
+java -jar jars/Hospital-Backend.jar
+```
+
+##### Laboratory Frontend 10.0.0.104
+To run the Laboratory Frontend do:
+```
+java -jar jars/Laboratory-Frontend.jar
+```
+
+##### Laboratory Backend 10.0.0.105
+To run the Laboratory Backend do:
+```
+java -jar jars/Laboratory-Backend.jar
+```
+
+##### Hospital Backend Server 10.0.0.6
+To run the Hospital Backend Server do:
+```
+cd Hospital-Backend-Server
+/path/to/apache-maven-3.8.4/bin/mvn clean deploy
+```
+
 
 ---
 
@@ -92,15 +149,23 @@ You can also add screenshots to show expected results, when relevant.
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system e.g. a host or a cloud provider.
+For deploymend on a live system you should have access to a mongodb database account and a suficient ammount of ram.
+The upgrade from iptables into firewall will greatly benefit your network, since with them there comes a better capability
+to obtain logs and information about the network.
 
-Mention virtualization/container tools and commands.
+For virtualization any hyphervisor should suffice, you just need to be able to create isolated internal networks and and have
+access to the internet.
 
-```
-Give an example command
-```
+For a more isolated control of any possible vulnerabilities, the use of docker could add an extra layer of protection against attacks to the 
+network, this is, it creates an extra difficulty to obtain higher/relevant credentials on the computar that manages the docker/s.
 
-Provide instructions for connecting to servers and tell clients how to obtain necessary permissions.
+Regarding the system, there is a necessity to create the first admin manually, since the option of creating new user/admins is not available. This is a great advantage in terms of security, but can become a problem in usability, even if it must only be done once.
+
+The Hospital Backend server is able multiple clients (via threads) therefore it possible to easily escalate the system, create multiple laboratories.
+
+The credentials for each vm are the the same as the hostname, this is, if hostname is **hosf**, then username is **hosf** and password is **hosf**. The root crentials are root:root
+
+Regarding vm and networking, although we had a solution that forwarded all packets from both interfaces via a router, the 
 
 ---
 
