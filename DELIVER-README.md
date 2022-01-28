@@ -146,6 +146,17 @@ In order to make the correct installation of **java 17** follow the following in
 
 After the previous installation is complete in your OS..
 
+#### Notes about running the application
+
+Before running the application it is necessary note that both Hospital and Laboratory frontends are running on port 8443, and their respective backends are also running in port 3000. Due to this, it is impossible to run both Hospital and Laboratory at the same time. It is still possible to run Hospital Backened server, that is running on port 4000, in order to test the custom protocol.
+
+Summarized:
++ Hospital Frontend: port 8443
++ Hospital Backened: port 3000
++ Laboratory Frontend: port 8443
++ Laboratory Backened: port 3000
++ Hospital Backend Server: port 4000
+
 --- 
 
 ### It's time to run our project:
@@ -207,6 +218,8 @@ Now you gotta login in Lab and Hospital.
 
 These are the credentials:
 
+##
+
 ##### ✔︎ HOSPITAL
 ---
 | Admin             | Citizen Card ID       | Password                            
@@ -241,6 +254,8 @@ These are the credentials:
 |:-----------------:|:---------------------:|:------------
 | Mariana Rita      | 18509738              | p$h4M$*x*cHk10q@
 
+##
+
 ##### ✔︎ LABORATORY
 ---
 
@@ -252,18 +267,6 @@ These are the credentials:
 | Admin             | Citizen Card ID       | Password                            
 |:-----------------:|:---------------------:|:------------
 | Paulo Marques     | 15288625              | y20lH%7pk*1@h0Ou
-
-
-#### Notes about running the application
-
-Before running the application it is necessary note that both Hospital and Laboratory frontends are running on port 8443, and their respective backends are also running in port 3000. Due to this, it is impossible to run both Hospital and Laboratory at the same time. It is still possible to run Hospital Backened server, that is running on port 4000, in order to test the custom protocol.
-
-Summarized:
-+ Hospital Frontend: port 8443
-+ Hospital Backened: port 3000
-+ Laboratory Frontend: port 8443
-+ Laboratory Backened: port 3000
-+ Hospital Backend Server: port 4000
 
 
 #### limitations
