@@ -219,11 +219,14 @@ Now open your browser in ```https://localhost:8443/``` and enjoy our hospital sy
 --- 
 ### Citizen card ID and passwords
 
-Now you gotta login in Lab and Hospital. 
+The credentials to access the hospital and laboratory can be found below.
 
 ##
 
 ##### ✔︎ HOSPITAL
+
+##### Note: You can not register in the web site. Only Admin can. Only Doctor/Nurse can create Medical Records. Only Ward Clerks can register patients.
+
 ---
 | Admin             | Citizen Card ID       | Password                            
 |:-----------------:|:---------------------:|:------------
@@ -260,14 +263,15 @@ Now you gotta login in Lab and Hospital.
 ##
 
 ##### ✔︎ LABORATORY
+
+##### Note: You can not register in the web site. Only Admin can. Only Responsible can create Clinical Records and register patients.
+
 ---
-
-
 | Admin             | Citizen Card ID       | Password                            
 |:-----------------:|:---------------------:|:------------
 | André Proenza     | 12345678              | Password123!
 
-| Admin             | Citizen Card ID       | Password                            
+| Responsible       | Citizen Card ID       | Password                            
 |:-----------------:|:---------------------:|:------------
 | Paulo Marques     | 15288625              | y20lH%7pk*1@h0Ou
 
@@ -319,7 +323,7 @@ The Hospital Backend server is able to accept multiple clients (via threads) the
 
 The credentials for each vm are the the same as the hostname, this is, if hostname is **hosf**, then username is **hosf** and password is **hosf**. The root crentials are root:root
 
-Regarding vm and networking, although we had a solution that forwarded all packets from both interfaces via a router, the vms had no internet access, therefore we had to remove the router and put every vm in the same network. The firewall rules were blocking packets that they shouldn't be blocking, so we disabled all firewall rules in all vms, which is a grave security issue.
+Regarding vm and networking, although we had a solution that forwarded all packets from both interfaces via a router, the vms had no internet access, therefore we had to remove the router and put every vm in the same network.
 
 ---
 
