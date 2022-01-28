@@ -21,7 +21,7 @@
 
 ---
 
-### Built With
+## Built With
 
 * [Java](https://openjdk.java.net/) - Programming Language;
 * [Maven](https://maven.apache.org/) - Build Tool and Dependency Management;
@@ -49,11 +49,16 @@ if testing via jar files:
 - java 17
 - Maven
 
+if testing locally:
+- java 17
+- Maven
+
 ---
 
-### Installing
+## Installing
 
-#### Vms
+### Vms
+
 To prepare the environment it is necessary to import the vms. Firstly a new NAT Network must be created in order to successfully setup the network interfaces.
 
 To create a Nat Network go to:
@@ -85,7 +90,7 @@ The credentials for each vm are the the same as the **hostname**, this is, if ho
 The root crentials are root:root
 
 
-#### Jars and maven
+### Jars and maven
 
 To run the code in a local linux system java 17 and maven must be installed.
 
