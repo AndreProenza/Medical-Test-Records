@@ -2,6 +2,10 @@
 
 <img src="https://user-images.githubusercontent.com/78174997/151461968-53e7c3a0-c20c-4043-870a-62e9eea75f1e.jpg" width="700">
 
+## Introduction
+
+A Health care secure system and network that allows secure and confidential access to patient medical records of certain healthcare organizations. It also demonstrates the secure interconnection (sending and receiving of medical records) of partner healthcare organizations. In such manner, a patient will be able to access his medical records of every healthcare organization where he is registered.
+
 ---
 
 ## Problem
