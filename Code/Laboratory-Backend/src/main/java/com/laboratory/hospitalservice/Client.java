@@ -66,8 +66,7 @@ public class Client {
 		clientSocket = null;
 		SocketFactory sf = SocketFactory.getDefault();
 		try {
-			InetAddress serverAddr = InetAddress.getByName("10.0.0.6");
-			clientSocket = (Socket) sf.createSocket(serverAddr, porta);
+			clientSocket = (Socket) sf.createSocket("localhost", porta);
 
 		} catch (UnknownHostException e) {
 			System.out.println("Host não conhecido!");
