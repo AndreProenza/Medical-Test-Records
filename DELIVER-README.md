@@ -39,9 +39,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ---
 
-### Prerequisites
-
-## 
+## Prerequisites
 
 If testing via vms:
 
@@ -91,9 +89,7 @@ The **root crentials** are root:root
 
 ---
 
-### Maven Instalation
-
-##
+## Maven Instalation
 
 We're gonna use maven. The folder is inclued in our project, so ignore this step. 
 
@@ -111,7 +107,7 @@ Installing **maven**, compatible with java 17:
 
 ### Java 17 Instalation
 
-## 
+##
 
 #### LINUX
 ---
@@ -136,7 +132,7 @@ sudo update-alternatives --config java
 
 #### MAC OS
 ---
-In order to make the correst installation of **java 17** following the next instructions:
+In order to make the correct installation of **java 17** follow the following instructions:
 
 0) Download java 17 from [here](https://jdk.java.net/17/) ```NOTE: for Macbook M1 select "macOS/AArch64"```;
 1) Now go to your Downloads ```cd Downloads/```;
@@ -158,9 +154,11 @@ After the previous installation is complete on your OS..
 1) Run the following instructions.
 
 
---- 
-#### **To run the LABORATORY:**
----
+<h3 align="center"> 
+	To run the LABORATORY:
+</h3>
+
+##
 
 Go to ```Medical-Test-Records/jars``` directory and run: 
 
@@ -181,9 +179,11 @@ apache-maven-3.8.4/bin/mvn spring-boot:run
 
 Now open your browser in ```https://localhost:8443/``` and enjoy our laboratory system.
 
---- 
-#### **To run the HOSPITAL:**
----
+<h3 align="center"> 
+	To run the HOSPITAL:
+</h3>
+
+##
 
 Go to ```Medical-Test-Records/jars```directory and run:
 
