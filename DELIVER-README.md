@@ -55,7 +55,7 @@ if testing via jar files:
 
 ## Setup
 
-### VM's
+## VM's
 
 To prepare the environment it is necessary to import the vms. Firstly a new NAT Network must be created in order to successfully setup the network interfaces.
 
@@ -92,6 +92,10 @@ The **credentials for each vm** are the the same as the **hostname**, this is, i
 The **root crentials** are root:root
 
 ---
+
+## Setup in your local machine
+
+### First of all, maven and java are required. So let's install them
 
 ## Maven Instalation
 
