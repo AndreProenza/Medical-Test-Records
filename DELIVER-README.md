@@ -70,6 +70,17 @@ In order to import the vm you should go to:
 After setting up the network, by choosing the created network interface the vm can be turned on and changing MACs. 
 Finally By starting the vm, the code will be running and the server will start without any help.
 
+To access the frontend for both laboratory and hospital, the vm patient should be started. The login is **patient** and password is **patient**. After logging in, when after opening the browser it is possible to see two bookmarks:
+
+For hospital:
+```
+https://10.0.0.4:8443/
+```
+For laboratory
+```
+https://10.0.0.104:8443/
+```
+
 The credentials for each vm are the the same as the **hostname**, this is, if hostname is hosf, then username is hosf and password is hosf. 
 The root crentials are root:root
 
@@ -93,11 +104,11 @@ Installing maven, compatible with java 17:
 
 1) Unpack the archive with tar/unzip
 
-The following steps are unedeed but can be useful to install mvn system wide.
+The following steps are unecessary but can be useful to install mvn system wide.
 2) A directory called "apache-maven-3.x.y" will be created.
 
 3) Add the apache-maven-3.8.4/bin directory to your PATH, e.g.:
-    export PATH=/usr/local/apache-maven-3.x.y/bin:$PAT
+    export PATH=/usr/local/apache-maven-3.x.y/bin:$PATH
 
 4) Run "mvn --version" to verify that it is correctly installed.
 ```
@@ -133,6 +144,21 @@ cd Hospital-Backend-Server
 /path/to/apache-maven-3.8.4/bin/mvn clean deploy
 ```
 
+#### Notes about running the application
+
+Before running the application it is necessary note that both Hospital and Laboratory frontends are running on port 8443, and their respective backends are also running in port 3000. Due to this, it is impossible to run both Hospital and Laboratory at the same time. It is still possible to run Hospital Backened server, that is running on port 4000, in order to test the custom protocol.
+
+Summarized:
++ Hospital Frontend: port 8443
++ Hospital Backened: port 3000
++ Laboratory Frontend: port 8443
++ Laboratory Backened: port 3000
++ Hospital Backend Server: port 4000
+
+
+#### limitations
+
++ Due to lack of time, we were unable to output a error/sucess message to laboratory frontened html, for the sucess/insucess in putting the medical Record of the laboratory in the Hospital database. The message can be seen in the System.Out of the Laboratory backend. 
 
 ---
 
