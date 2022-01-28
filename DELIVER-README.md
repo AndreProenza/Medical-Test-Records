@@ -167,7 +167,7 @@ Summarized:
 ##
 
 <h3 align="center"> 
-	To run the LABORATORY:
+	To run the LABORATORY
 </h3>
 
 ##
@@ -194,7 +194,7 @@ Now open your browser in ```https://localhost:8443/``` and enjoy our laboratory 
 ##
 
 <h3 align="center"> 
-	To run the HOSPITAL:
+	To run the HOSPITAL
 </h3>
 
 ##
@@ -212,11 +212,9 @@ java -jar Hospital-Backend.jar
 Now open your browser in ```https://localhost:8443/``` and enjoy our hospital system.
 
 --- 
-### Citizen card ID and passwords:
+### Citizen card ID and passwords
 
 Now you gotta login in Lab and Hospital. 
-
-These are the credentials:
 
 ##
 
