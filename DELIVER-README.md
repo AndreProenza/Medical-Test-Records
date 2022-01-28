@@ -55,11 +55,23 @@ if testing via jar files:
 
 #### Vms
 To prepare the environment it is necessary to import the vms. Firstly a new NAT Network must be created in order to successfully setup the network interfaces.
-To create a Nat Network go to **File > preferences > Network**. Click on the green icon to add a new Nat Network. The name should be "**rede**", Network CIDR: **10.0.0.0/24** and **DHCP** should be **enabled**. With that done we can procede to import the vms.
 
-In order to import the vm you should go to **Import**, Choose the correct .ova file and import it into virtualbox. After setting up the network, by choosing the created network interface the vm can be turned on and changing MACs. Finally By starting the vm, the code will be running and the server will start without any help.
+To create a Nat Network go to:
+- **File > preferences > Network**. 
+- Click on the green icon to add a new Nat Network. 
+- The name should be "**rede**", Network CIDR: **10.0.0.0/24** and **DHCP** should be **enabled**. 
 
-The credentials for each vm are the the same as the hostname, this is, if hostname is hosf, then username is hosf and password is hosf. The root crentials are root:root
+With that done we can procede to import the vms.
+
+In order to import the vm you should go to:
+
+- **Import**, Choose the correct .ova file and import it into virtualbox. 
+
+After setting up the network, by choosing the created network interface the vm can be turned on and changing MACs. 
+Finally By starting the vm, the code will be running and the server will start without any help.
+
+The credentials for each vm are the the same as the **hostname**, this is, if hostname is hosf, then username is hosf and password is hosf. 
+The root crentials are root:root
 
 
 #### Jars and maven
