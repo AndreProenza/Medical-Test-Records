@@ -102,15 +102,18 @@ Installing maven, compatible with java 17:
 ```
 0) Please go to: https://maven.apache.org/download.cgi
 
-1) Unpack the archive with tar/unzip
+1) Download Binary tar.gz archive
+
+2) Unpack the archive with tar/unzip
+
+3) A directory called "apache-maven-3.x.y" will be created.
 
 The following steps are unecessary but can be useful to install mvn system wide.
-2) A directory called "apache-maven-3.x.y" will be created.
 
-3) Add the apache-maven-3.8.4/bin directory to your PATH, e.g.:
+4) Add the apache-maven-3.8.4/bin directory to your PATH, e.g.:
     export PATH=/usr/local/apache-maven-3.x.y/bin:$PATH
 
-4) Run "mvn --version" to verify that it is correctly installed.
+5) Run "mvn --version" to verify that it is correctly installed.
 ```
 
 ##### Hospital Frontend 10.0.0.4
