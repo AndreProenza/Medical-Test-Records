@@ -195,37 +195,9 @@ java -jar Hospital-Frontend.jar
 java -jar Hospital-Backend.jar
 ```
 
-##### Hospital Frontend 10.0.0.4
-To run the Hospital Frontend do:
-```
-java -jar jars/Hospital-Frontend.jar
-```
+Now open your browser in ```https://localhost:8443/``` and enjoy our hospital system.
 
-##### Hospital Backend 10.0.0.5
-To run the Hospital Backend do:
-```
-java -jar jars/Hospital-Backend.jar
-```
-
-##### Laboratory Frontend 10.0.0.104
-To run the Laboratory Frontend do:
-```
-java -jar jars/Laboratory-Frontend.jar
-```
-
-##### Laboratory Backend 10.0.0.105
-To run the Laboratory Backend do:
-```
-java -jar jars/Laboratory-Backend.jar
-```
-
-##### Hospital Backend Server 10.0.0.6
-To run the Hospital Backend Server do:
-```
-cd Hospital-Backend-Server
-/path/to/apache-maven-3.8.4/bin/mvn clean deploy
-```
-
+--- 
 ### Citizen card ID and passwords:
 
 Now you gotta login in Lab and Hospital. 
