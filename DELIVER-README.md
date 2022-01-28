@@ -99,7 +99,9 @@ The **root crentials** are root:root
 
 ##
 
-We're gonna use maven. The folder an inclued in our project. But there are the instructions:
+We're gonna use maven. The folder an inclued in our project, so ignore this step. 
+
+But there are the instructions:
 
 Installing **maven**, compatible with java 17:
 
