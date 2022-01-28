@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- Style -->
+    <link rel="stylesheet" href="/CSS/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>Hospital</title>
+    
+	<div id="mySidenav" class="sidenav">
+	  <a th:href="@{/home}" id="home">Home</a>
+	  <a th:href="@{/logout}" id="logout">Logout</a>
+	</div>
+  </head>
+  <body>
+  
+	<header class="header">
+        <div>
+			<h1>Hospital Medical Records 🩺 </h1>
+        </div>
+    </header>
+	<br>
+    <h3 class="title-records">Patient Medical Record</h3>
+
+	<div class="row align-items-center justify-content-center search-records">
+	        <form action="#" th:action="@{/medical/records/get}" th:object="${record}" method="get">
+	             <input type="number" placeholder="Search by citizen number" id="search" required th:field="*{cid}">
+	             <button type="submit" class="search-button btn-primary"><i class="fa fa-search"></i></button>
+	        </form>
+	</div>
+	 <div class="row align-items-center justify-content-center ">
+		<p class="alert alert-danger" th:if="${message != ''}" th:text="${message}"></p>
+	</div>
+	
+	<div>	
+    	<table class="table center table-striped records-table w-full overflow-auto rounded-lg shadow">
+	        <thead>
+	          <tr>
+	            <th scope="col">Citizen ID</th>
+	            <th scope="col">First Name</th>
+	            <th scope="col">Last Name</th>
+	            <th scope="col">Birth Date</th>
+	            <th scope="col">Email</th>
+	            <th scope="col">Phone</th>
+	            <th scope="col">City</th>
+	            <th scope="col">Height(kg)</th>
+	            <th scope="col">Weight(cm)</th>
+	            <th scope="col">Blood Type</th>
+	            <th scope="col">Blood Pres.</th>
+	            <th scope="col">Body Temp.</th>
+	             <th scope="col">Diagnosis</th>
+	            <th scope="col">Date</th>
+	          </tr>
+	        </thead>
+	        <tbody>
+	          <tr th:each="record : ${records}">
+	            <th scope="row" th:text="${record.id}"></th>
+	            <td th:text="${record.firstName}"></td>
+	            <td th:text="${record.lastName}"></td>
+	            <td th:text="${record.email}"></td>
+	            <td th:text="${record.phoneNumber}"></td>
+	            <td th:text="${record.birthday}"></td>
+	            <td th:text="${record.city}"></td>
+	            <td th:text="${record.height}"></td>
+	            <td th:text="${record.weight}"></td>
+	            <td th:text="${record.bloodType}"></td>
+	            <td th:text="${record.bloodPressure}"></td>
+	            <td th:text="${record.bloodTemperature}"></td>
+	            <td th:text="${record.diagnosis}"></td>
+	            <td th:text="${record.date}"></td>
+	          </tr>
+	        </tbody>
+	      </table>
+	
+    </div>
+  </body>
+</html>

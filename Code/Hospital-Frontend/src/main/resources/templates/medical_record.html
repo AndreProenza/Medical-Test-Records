@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- Style -->
+    <link rel="stylesheet" href="/CSS/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <title>Hospital</title>
+  </head>
+  <body>
+  
+   <div id="mySidenav" class="sidenav">
+	  <a th:href="@{/home}" id="home">Home</a>
+	  <a th:href="@{/logout}" id="logout">Logout</a>
+	</div>
+
+	<header class="header">
+        <div>
+			<h1>Hospital Medical Records 🩺 </h1>
+        </div>
+    </header>
+    <div class="d-lg-flex half">
+      <div class="bg order-1 order-md-2" style="background-image: url('/IMAGES/diagnosis.jpg');"></div>
+      
+      <div class="contents order-2 order-md-1">
+
+        <h3 class="title1">Patient Medical Record</h3>
+        
+        <div class="container container-diagnosis">
+          <div class="row align-items-center justify-content-center">
+            <div class="col-md-7">
+            
+            	<p class="alert alert-danger" th:if="${message != ''}" th:text="${message}"></p>
+              
+                <form action="#" th:action="@{/patient/medical/record}" th:object="${record}" method="post">
+					
+					
+					<p>Citizen Card</p>
+					<div class="form-group last mb-3">
+	                    <label for="cid">Citizen Card</label>
+	                    <input type="number" class="form-control" placeholder="ex: 15720676" id="cid" required th:field="*{cid}">
+	                </div>
+	                <p class="alert alert-danger" th:if="${#fields.hasErrors('cid')}" th:errors="*{cid}"></p>
+	                
+                    <p>Patient Height(cm's)</p>
+                    <div class="form-group last mb-3">
+                        <label for="height">Height</label>
+                        <input type="number" class="form-control" placeholder="ex: 175" id="height" required th:field="*{height}">
+                    </div>
+                    <p class="alert alert-danger" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></p>
+
+                    <p>Patient Weight(kg's)</p>
+                    <div class="form-group last mb-3">
+                        <label for="weight">Weight</label>
+                        <input type="number" class="form-control" placeholder="ex: 70" id="weight" required th:field="*{weight}">
+                    </div>
+                    <p class="alert alert-danger" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></p>
+                    
+                    <p>Blood Type</p>
+                    <div class="form-group last mb-3">
+                        <label for="blood-a">Blood A</label>
+                        <input type="radio" id="blood-a" name="blood_type" value="A" required th:field="*{bloodType}">
+                        <label for="blood-b">Blood B</label>
+                        <input type="radio" id="blood-b" name="blood_type" value="B" required th:field="*{bloodType}">
+                        <label for="blood-ab">Blood AB</label>
+                        <input type="radio" id="blood-ab" name="blood_type" value="AB" required th:field="*{bloodType}">
+                        <label for="blood-o">Blood O</label>
+                        <input type="radio" id="blood-o" name="blood_type" value="O" required th:field="*{bloodType}">
+                        <!-- <label for="blood-type">Blood Type</label>
+                        <input type="text" class="form-control" placeholder="ex: A" id="blood"> -->
+                    </div>
+                    <p class="alert alert-danger" th:if="${#fields.hasErrors('bloodType')}" th:errors="*{bloodType}"></p>
+
+                    <p>Blood Pressure</p>
+                    <div class="form-group last mb-3">
+                        <label for="blood-pressure">Blood Pressure</label>
+                        <input type="number" class="form-control" placeholder="ex: 150" id="blood-pressure" required th:field="*{bloodPressure}">
+                    </div>
+                    <p class="alert alert-danger" th:if="${#fields.hasErrors('bloodPressure')}" th:errors="*{bloodPressure}"></p>
+
+                    <p>Body Temperature</p>
+                    <div class="form-group last mb-3">
+                        <label for="body-temperature">Body Temperature</label>
+                        <input type="number" class="form-control" placeholder="ex: 38" id="temperature" required th:field="*{bloodTemperature}">
+                    </div>
+                    <p class="alert alert-danger" th:if="${#fields.hasErrors('bloodTemperature')}" th:errors="*{bloodTemperature}"></p>
+
+                    <p>Medical Diagnosis</p>
+                    <div class="form-group last mb-3"> 	
+                        <label for="medical-diagnosis">Diagnosis</label>
+                        <textarea rows="5" cols="25" placeholder="Ex: Diabetes, Fever..." class="form-control" required th:field="*{diagnosis}"></textarea>
+                    </div>
+                    <p class="alert alert-danger" th:if="${#fields.hasErrors('diagnosis')}" th:errors="*{diagnosis}"></p>
+                    
+                    <p>Medical Record Date</p>
+                    <div class="form-group last mb-3">
+                        <label for="medical-diagnosis">Date</label>
+                        <input type="date" class="form-control" placeholder="ex: "  th:field="*{date}">
+                    </div>
+                    <p class="alert alert-danger" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></p>
+
+                    <input type="submit" value="Create" class="btn btn-block btn-primary">
+                    <br>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
