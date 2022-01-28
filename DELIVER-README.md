@@ -53,43 +53,6 @@ if testing via jar files:
 
 ---
 
-
-
-
-##### Hospital Frontend 10.0.0.4
-To run the Hospital Frontend do:
-```
-java -jar jars/Hospital-Frontend.jar
-```
-
-##### Hospital Backend 10.0.0.5
-To run the Hospital Backend do:
-```
-java -jar jars/Hospital-Backend.jar
-```
-
-##### Laboratory Frontend 10.0.0.104
-To run the Laboratory Frontend do:
-```
-java -jar jars/Laboratory-Frontend.jar
-```
-
-##### Laboratory Backend 10.0.0.105
-To run the Laboratory Backend do:
-```
-java -jar jars/Laboratory-Backend.jar
-```
-
-##### Hospital Backend Server 10.0.0.6
-To run the Hospital Backend Server do:
-```
-cd Hospital-Backend-Server
-/path/to/apache-maven-3.8.4/bin/mvn clean deploy
-
-
-
-
-
 ## Setup
 
 ### VM's
@@ -128,11 +91,25 @@ https://10.0.0.104:8443/
 The **credentials for each vm** are the the same as the **hostname**, this is, if hostname is hosf, then **username** is hosf and **password** is hosf. 
 The **root crentials** are root:root
 
+### VM's List of IP's
+
+##### Hospital Frontend 10.0.0.4
+
+##### Hospital Backend 10.0.0.5
+
+##### Laboratory Frontend 10.0.0.104
+
+##### Laboratory Backend 10.0.0.105
+
+##### Hospital Backend Server 10.0.0.6
+
+**Note: Links to vm's can be provided if needed**
+
 ---
 
 ### Setup in your local machine
 
-### First of all, maven and java are required. So let's install them
+First of all, maven and java are required. So let's install them
 
 ## Maven Instalation
 
