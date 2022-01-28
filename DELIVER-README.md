@@ -41,13 +41,17 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
+## 
+
 If testing via vms:
 
 - VirtualBox installed on your machine. [Install here VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 
 if testing via jar files:
-- [Install here java 17] (https://jdk.java.net/17/)
-- [Install here Maven] (https://maven.apache.org/download.cgi)
+- [Install here java 17](https://jdk.java.net/17/) (*)
+- [Install here Maven](https://maven.apache.org/download.cgi) and select the version "apache-maven-3.8.4-bin.tar.gz",
+
+(*) for Macbook M1 select "macOS/AArch64"
 
 if testing locally:
 - java 17
@@ -89,43 +93,95 @@ https://10.0.0.104:8443/
 The **credentials for each vm** are the the same as the **hostname**, this is, if hostname is hosf, then **username** is hosf and **password** is hosf. 
 The **root crentials** are root:root
 
+---
 
-### Jars and maven
+### Maven Instalation
+
+##
+
+We're gonna use maven. The folder an inclued in our project. But there are the instructions:
+
+Installing **maven**, compatible with java 17:
+
+0) Please click [here](https://maven.apache.org/download.cgi) to download maven;
+
+1) Download Binary tar.gz archive: ```apache-maven-3.8.4-bin.tar.gz```;
+
+2) Unpack the archive with tar/unzip;
+
+---
+
+### Java 17 Instalation
+
+## 
+
+#### LINUX
+---
 
 To run the code in a local linux system java 17 and maven must be installed.
 
-Installation of java 17 in linux:
+Installation of **java 17**:
+
 ```
 sudo apt install openjdk-17-jre
+```
+```
 sudo apt install openjdk-17-jdk
+```
 
-Change java version to the newer one.
+Change java version to the newer one:
+```
 sudo update-alternatives --config java
 ```
 
-Installing maven, compatible with java 17:
+## 
+
+#### MAC OS
+---
+In order to make the correst installation of **java 17** following the next instructions:
+
+0) Download java 17 from [here](https://jdk.java.net/17/) ```NOTE: for Macbook M1 select "macOS/AArch64"```;
+1) Now go to your Downloads ```cd Downloads/```;
+2) Make ```sudo mv openjdk-17.0.2_macos-aarch64_bin.tar.gz /Library/Java/JavaVirtualMachines/```;
+3) ```cd /Library/Java/JavaVirtualMachines/```;
+4) ```sudo tar -xzf openjdk-17.0.2_macos-aarch64_bin.tar.gz```;
+5) ```sudo rm openjdk-17.0.2_macos-aarch64_bin.tar.gz```;
+6) ```export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-17.0.2.jdk/Contents/Home```.
+
+## 
+
+After the previous installation is complete on your OS..
+
+--- 
+
+### It's time to run our amazing project:
+--- 
+0) Unzip file;
+1) Run the following instructions.
+
+
+--- 
+#### **To run the LABORATORY:**
+---
+
+Go to ```Medical-Test-Records/jars``` directory and run: 
+
 ```
-0) Please go to: https://maven.apache.org/download.cgi
-
-1) Download Binary tar.gz archive
-
-2) Unpack the archive with tar/unzip
-
-3) A directory called "apache-maven-3.x.y" will be created.
-
-The following steps are unecessary but can be useful to install mvn system wide.
-
-4) Add the apache-maven-3.8.4/bin directory to your PATH, e.g.:
-    export PATH=/usr/local/apache-maven-3.x.y/bin:$PATH
-
-5) Run "mvn --version" to verify that it is correctly installed.
+java -jar Laboratory-Frontend.jar
 ```
 
-## Once installation are done..
+Go to ```Medical-Test-Records/Code/Laboratory-Backend``` directory and run:
+```
+java -jar Laboratory-Backend.jar
+```
 
-1) Unzip file
+Go to ```Medical-Test-Records/Code/Hospital-Backend-Server``` directory and run:
 
-2) Run the following instructions
+```
+apache-maven-3.8.4/bin/mvn spring-boot:run
+```
+
+Now open your browser in ```https://localhost:8443/``` and enjoy our laboratory system.
 
 ##### Hospital Frontend 10.0.0.4
 To run the Hospital Frontend do:
