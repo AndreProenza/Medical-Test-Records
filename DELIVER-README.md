@@ -46,8 +46,8 @@ If testing via vms:
 - VirtualBox installed on your machine. [Install here VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 
 if testing via jar files:
-- java 17
-- Maven
+- [Install here java 17] (https://jdk.java.net/17/)
+- [Install here Maven] (https://maven.apache.org/download.cgi)
 
 if testing locally:
 - java 17
