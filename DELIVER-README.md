@@ -165,7 +165,7 @@ The Hospital Backend server is able multiple clients (via threads) therefore it 
 
 The credentials for each vm are the the same as the hostname, this is, if hostname is **hosf**, then username is **hosf** and password is **hosf**. The root crentials are root:root
 
-Regarding vm and networking, although we had a solution that forwarded all packets from both interfaces via a router, the 
+Regarding vm and networking, although we had a solution that forwarded all packets from both interfaces via a router, the vms had no internet access, therefore we had to remove the router and put every vm in the same network. The firewall rules were blocking packets that they shouldn't be blocking, so we disabled all firewall rules in all vms, which is a grave security issue.
 
 ---
 
