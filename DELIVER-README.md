@@ -225,7 +225,7 @@ The credentials to access the hospital and laboratory can be found below.
 
 ##### ✔︎ HOSPITAL
 
-##### ❗️Note: You can not register in the web site. Only Admin can register personnel. Only Doctor/Nurse can create Medical Records. Only Ward Clerks can register patients.
+##### ❗️Note: You can not register in the web site. Only Admin can register personnel. Only Doctor/Nurse can create Medical Records. Only Ward Clerks can register Patients.
 
 ---
 | Admin             | Citizen Card ID       | Password                            
@@ -264,7 +264,7 @@ The credentials to access the hospital and laboratory can be found below.
 
 ##### ✔︎ LABORATORY
 
-##### ❗️Note:  You can not register in the web site. Only Admin can register personnel. Only Responsible can create Clinical Records and register patients.
+##### ❗️Note:  You can not register in the web site. Only Admin can register personnel. Only Responsible can create Clinical Records and register Patients.
 
 ---
 | Admin             | Citizen Card ID       | Password                            
