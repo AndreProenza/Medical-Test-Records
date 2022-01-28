@@ -148,7 +148,7 @@ In order to make the correct installation of **java 17** follow the following in
 
 After the previous installation is complete in your OS, please read the following notes **before** running.
 
-#### Notes about running the application
+#### ❗️ Notes about running the application ❗️ Mandatory reading ❗️
 
 If you are testing in your local machine, **Do not run all jars at the same time**.
 Please note, Hospital and Laboratory frontends are running on port 8443, and their respective backends are also running in port 3000. Due to this, it is **impossible** to run both Hospital and Laboratory at the same time. It is still possible to run Hospital Backened server, that is running on port 4000, in order to test the custom protocol.
