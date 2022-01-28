@@ -250,7 +250,7 @@ The credentials to access the hospital and laboratory can be found below.
 
 | Volunteer         | Citizen Card ID       | Password                            
 |:-----------------:|:---------------------:|:------------
-| Madalena Afonso   | 17564532              | *Mj0T**p*?Z!yv0u
+| Madalena Afonso   | 17564532              | ```*Mj0T**p*?Z!yv0u```
 
 | Patient_Assistant | Citizen Card ID       | Password                            
 |:-----------------:|:---------------------:|:------------
