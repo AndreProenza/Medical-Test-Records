@@ -41,13 +41,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What kind of **hardware** device and which **operating system** do you need to have to install the software.
 
-In this section also include detailed instructions for installing additiona software the application is dependent upon (such as PostgreSQL database, for example). 
+- VirtualBox installed on your machine. [Install here VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 
-```
-Give installation command examples
-```
 
 ---
 
