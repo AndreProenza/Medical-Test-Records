@@ -86,8 +86,8 @@ For laboratory
 https://10.0.0.104:8443/
 ```
 
-The credentials for each vm are the the same as the **hostname**, this is, if hostname is hosf, then username is hosf and password is hosf. 
-The root crentials are root:root
+The **credentials for each vm** are the the same as the **hostname**, this is, if hostname is hosf, then **username** is hosf and **password** is hosf. 
+The **root crentials** are root:root
 
 
 ### Jars and maven
@@ -121,7 +121,7 @@ The following steps are unecessary but can be useful to install mvn system wide.
 5) Run "mvn --version" to verify that it is correctly installed.
 ```
 
-## Once installation are done
+## Once installation are done..
 
 1) Unzip file
 
@@ -157,6 +157,59 @@ To run the Hospital Backend Server do:
 cd Hospital-Backend-Server
 /path/to/apache-maven-3.8.4/bin/mvn clean deploy
 ```
+
+### Citizen card ID and passwords:
+
+Now you gotta login in Lab and Hospital. 
+
+These are the credentials:
+
+##### ✔︎ HOSPITAL
+---
+| Admin             | Citizen Card ID       | Password                            
+|:-----------------:|:---------------------:|:------------
+| André Proenza     | 12345678              | Password123!
+
+| Doctor            | Citizen Card ID       | Password                            
+|:-----------------:|:---------------------:|:------------
+| Ana Albuquerque   | 19573526              | Fl4%8!Hd10k4Zc*!
+
+| Ward Clerk        | Citizen Card ID       | Password                            
+|:-----------------:|:---------------------:|:------------
+| Hélder Costa      | 15378965              | V322!!P25KM4&f6b
+
+| Patient           | Citizen Card ID       | Password                            
+|:-----------------:|:---------------------:|:------------
+| Amanda Júlio      | 17645234              | pB0K!*vF85!0&@60
+
+| Porter            | Citizen Card ID       | Password                            
+|:-----------------:|:---------------------:|:------------
+| Henrique Jota     | 17564920              | 7u$%4n&B90%8U!6!
+
+| Volunteer         | Citizen Card ID       | Password                            
+|:-----------------:|:---------------------:|:------------
+| Madalena Afonso   | 17564532              | *Mj0T**p*?Z!yv0u
+
+| Patient_Assistant | Citizen Card ID       | Password                            
+|:-----------------:|:---------------------:|:------------
+| Alexandre Pinto   | 14789078              | I&u5lhmt*nO$f?!1
+
+|Clinical_Assistant | Citizen Card ID       | Password                            
+|:-----------------:|:---------------------:|:------------
+| Mariana Rita      | 18509738              | p$h4M$*x*cHk10q@
+
+##### ✔︎ LABORATORY
+---
+
+
+| Admin             | Citizen Card ID       | Password                            
+|:-----------------:|:---------------------:|:------------
+| André Proenza     | 12345678              | Password123!
+
+| Admin             | Citizen Card ID       | Password                            
+|:-----------------:|:---------------------:|:------------
+| Paulo Marques     | 15288625              | y20lH%7pk*1@h0Ou
+
 
 #### Notes about running the application
 
