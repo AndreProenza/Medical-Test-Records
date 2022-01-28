@@ -53,10 +53,6 @@ if testing via jar files:
 
 (*) for Macbook M1 select "macOS/AArch64"
 
-if testing locally:
-- java 17
-- Maven
-
 ---
 
 ## Installing
