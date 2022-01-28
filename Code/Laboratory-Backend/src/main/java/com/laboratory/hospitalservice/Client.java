@@ -105,8 +105,8 @@ public class Client {
 				out.writeObject("OK");
 
 				long nonce = (long) in.readObject();
-
-				File keystoreF = ResourceUtils.getFile("classpath:" + keystore);
+				
+				File keystoreF = ResourceUtils.getFile(System.getProperty("user.dir") + File.separator + "src/main/resources/" + keystore);
 				FileInputStream kfile = new FileInputStream(keystoreF);
 				KeyStore kstore = KeyStore.getInstance(KEYSTORETYPE);
 				kstore.load(kfile, keystorePassword.toCharArray());
@@ -223,7 +223,7 @@ public class Client {
 	private static Key getLabPrivateKey() {
 		try {
 			// para apanhar a private key
-			File keystoreF = ResourceUtils.getFile("classpath:" + keystore);
+			File keystoreF = ResourceUtils.getFile(System.getProperty("user.dir") + File.separator + "src/main/resources/" + keystore);
 			FileInputStream kfile = new FileInputStream(keystoreF);
 			KeyStore kstore = KeyStore.getInstance(KEYSTORETYPE);
 			kstore.load(kfile, keystorePassword.toCharArray());
@@ -250,7 +250,7 @@ public class Client {
 	private static PublicKey getServerPubKey() {
 		try {
 
-			File truststoreF = ResourceUtils.getFile("classpath:" + truststore);
+			File truststoreF = ResourceUtils.getFile(System.getProperty("user.dir") + File.separator + "src/main/resources/" + truststore);
 			FileInputStream kfile = new FileInputStream(truststoreF);
 			KeyStore kstore = KeyStore.getInstance(KEYSTORETYPE);
 			kstore.load(kfile, truststorePassword.toCharArray());
