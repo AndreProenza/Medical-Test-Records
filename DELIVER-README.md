@@ -121,6 +121,12 @@ The following steps are unecessary but can be useful to install mvn system wide.
 5) Run "mvn --version" to verify that it is correctly installed.
 ```
 
+## Once installation are done
+
+1) Unzip file
+
+2) Run the following instructions
+
 ##### Hospital Frontend 10.0.0.4
 To run the Hospital Frontend do:
 ```
