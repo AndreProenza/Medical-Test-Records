@@ -233,14 +233,19 @@ public class Client {
 
 		} catch (NoSuchAlgorithmException e) {
 			System.out.println("getLabPrivateKey: Algoritmo de encriptacao nao existe");
+			e.printStackTrace();
 		} catch (FileNotFoundException e) {
 			System.out.println("getLabPrivateKey: keystore não encontrada");
+			e.printStackTrace();
 		} catch (KeyStoreException e) {
 			System.out.println("getLabPrivateKey: Instancia da keystore diferente da definida");
+			e.printStackTrace();
 		} catch (CertificateException e) {
 			System.out.println("getLabPrivateKey: Password da keystore incorreta");
+			e.printStackTrace();
 		} catch (IOException e) {
 			System.out.println("getLabPrivateKey: Erro na keystore");
+			e.printStackTrace();
 		} catch (UnrecoverableKeyException e) {
 			System.out.println("getLabPrivateKey: Wasnt able to recover private key");
 		}
@@ -261,8 +266,10 @@ public class Client {
 
 		} catch (NoSuchAlgorithmException e) {
 			System.out.println("getLabPubKey: Algoritmo de encriptacao nao existe");
+			e.printStackTrace();
 		} catch (FileNotFoundException e) {
 			System.out.println("getLabPubKey: keystore não encontrada");
+			e.printStackTrace();
 		} catch (KeyStoreException e) {
 			System.out.println("getLabPubKey: Instancia da keystore diferente da definida");
 		} catch (CertificateException e) {
