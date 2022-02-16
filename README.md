@@ -180,4 +180,15 @@ public key. This key is generated so that the communication is done without over
 
 ## References
 
-- [AuthzForce (Community Edition)](https://authzforce.ow2.org/#)
+- [Spring Quickstart Guide. (2022). Spring.](https://spring.io/quickstart)
+- [Building REST services with Spring. (2022). Spring.](https://spring.io/guides/tutorials/rest/)
+- [Securing a Web Application. (2022). Spring.](https://spring.io/guides/gs/securing-web/)
+- [Understand Spring Security Architecture and implement Spring Boot Security | JavaInUse. (2022).](https://www.javainuse.com/webseries/spring-security-jwt/chap3)
+- [RestTemplate (Spring Framework 5.3.15 API). (2022). Spring.](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/client/RestTemplate.html)
+- [Validating Form Input. (2022). Spring.](https://spring.io/guides/gs/validating-form-input/)
+- [KeyStore (Java Platform SE 7). (2020, June 24). Oracle.](https://docs.oracle.com/javase/7/docs/api/java/security/KeyStore.html)
+- [To Use keytool to Create a Server Certificate (The Java EE 6 Tutorial). (2022). Oracle.](https://docs.oracle.com/cd/E19798-01/821-1841/gjrgy/)
+- [Krout, E. (2021, August 20). How to Configure a Firewall with UFW. Linode Guides & Tutorials.](https://www.linode.com/docs/guides/configure-firewall-with-ufw/)
+- [Get Server | Download. (2022). Ubuntu.](https://ubuntu.com/download/server)
+- [Tutorial: Thymeleaf + Spring. (2018). Thymeleaf.](https://www.thymeleaf.org/doc/tutorials/3.0/thymeleafspring.html)
+- [To Use keytool to Create a Server Certificate (The Java EE 6 Tutorial). (2010). Docs.Oracle.Com.](https://docs.oracle.com/cd/E19798-01/821-1841/gjrgy/)
