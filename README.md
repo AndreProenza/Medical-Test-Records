@@ -225,21 +225,32 @@ if testing locally on your machine, you can run the jar files. But first you nee
 
 ## Virtual Machines
 
-To prepare the environment it is necessary to import the vms. Firstly a new NAT Network must be created in order to successfully setup the network interfaces.
+To prepare the environment it is necessary to import the vms. 
+Please donwload them in following links:
 
-To create a Nat Network go to:
-- **File > preferences > Network**. 
-- Click on the green icon to add a new Nat Network. 
-- The name should be "**rede**", Network CIDR: **10.0.0.0/24** and **DHCP** should be **enabled**. 
 
-With that done we can procede to import the vms.
 
-In order to import the vm you should go to:
+With that done we can procede to import the virutal machines (vms).
+In order to import the vms you should go to:
 
 - **Import**, Choose the correct .ova file and import it into virtualbox. 
 
-After setting up the network, by choosing the created network interface the vm can be turned on and changing MACs. 
-Finally By starting the vm, the code will be running and the server will start without any help.
+Import all of them and start them in the green button `start`.
+
+**Note**
+You don't need to login in each vm, you just need to start them in the `start` green button in virtual box.
+If you want to explore each virtual machine in detail, you can login with the following credentials:
+
+The **credentials for each vm** are the the same as the **hostname**, this is, if hostname is hosf, then **username** is hosf and **password** is hosf. 
+The **root crentials** are root:root
+
+| Username          | Password                            
+|:-----------------:|:-------------------
+| hosf              | hosf  
+| hosb              | hosb  
+| labf              | labb  
+| hosbs             | hosbs  
+| patient           | patient  
 
 ### To access the frontend for both laboratory and hospital, the virutal machine `patient` should be started. 
 
@@ -263,22 +274,13 @@ https://10.0.0.104:8443/
 Click on any of the bookmarks, and you will be automatically redirected to the hospital and laboratory web pages, respectively. From here you can explore both websites.
 
 
-The **credentials for each vm** are the the same as the **hostname**, this is, if hostname is hosf, then **username** is hosf and **password** is hosf. 
-The **root crentials** are root:root
-
 ### VM's List of IP's
 
-##### Hospital Frontend 10.0.0.4
-
-##### Hospital Backend 10.0.0.5
-
-##### Laboratory Frontend 10.0.0.104
-
-##### Laboratory Backend 10.0.0.105
-
-##### Hospital Backend Server 10.0.0.6
-
-**Note: Links to vm's can be provided if needed**
+- Hospital Frontend 10.0.0.4
+- Hospital Backend 10.0.0.5
+- Laboratory Frontend 10.0.0.104
+- Laboratory Backend 10.0.0.105
+- Hospital Backend Server 10.0.0.6
 
 ---
 
