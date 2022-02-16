@@ -1,5 +1,7 @@
 # Medical-Test-Records
 
+![med](https://user-images.githubusercontent.com/78174997/154372457-0c44d5fa-cf98-45ba-8437-8ac0920896a0.jpg)
+
 ## Introduction
 
 Health care institutions gather and store sensitive information from patients. The information systems should allow fine-
@@ -23,6 +25,7 @@ certain healthcare organizations. It also demonstrates the secure interconnectio
 of partner healthcare organizations. In such manner, a patient will be able to access his/her medical records in every
 healthcare organization where he/she is registered.
 
+---
 
 ## Problem
 
@@ -30,7 +33,6 @@ healthcare organization where he/she is registered.
 - Patients can not always access their medical records in a secure manner;
 - Information systems do not always ensure fine-grained and contextualized access to medical records for relevant staff;
 - Lack of connection and access to medical records of different partner institutions, with different infrastructures.
-
 
 ---
 
@@ -73,8 +75,9 @@ healthcare institutions, each with its own data storage system and independent w
 sending of confidential patient’s medical records in a secure way from one institution to the other. Authorized hospital and
 laboratory staff as well as patients will be able to access their respective hospital and laboratory remotely or locally.
 
-![image](https://user-images.githubusercontent.com/78174997/146569869-6563902a-f73b-4118-8c51-d9eac52f1a04.png)
+![Medical Test Records (1)](https://user-images.githubusercontent.com/78174997/154372064-b0e2fff3-c3cc-4817-ae9f-3c8bed13eb5a.jpg)
 
+---
 
 ## Spring Security, Security policy language
 
@@ -84,12 +87,13 @@ Spring Security is a framework that focuses on providing both authentication and
 features like Comprehensive and extensible support for both Authentication and Authorization. Protection against attacks like
 session fixation, clickjacking, cross site request forgery, etc...
 
-![image](https://user-images.githubusercontent.com/78174997/146477605-f48aa3c2-85bd-4c03-9e40-32d21c4d4ade.png)
-
+![Medical Test Records](https://user-images.githubusercontent.com/78174997/154372228-c79d47be-b189-4248-87be-3ceb78cf95cf.jpg)
 
 ---
 
-### Deployment
+### Network Overview
+
+![Medical Test Records (3)](https://user-images.githubusercontent.com/78174997/154372192-a75d32e6-d44c-4708-9c72-c8df2cf39d80.jpg)
 
 As you can see, 6 virtual machines running Ubuntu Server and the router running Seed Ubuntu are deployed.
 
@@ -103,8 +107,6 @@ For the configuration of the each vm, the hostname, host, credentials, network w
 laboratory and hospital networks, a static ip was set. The patient is connected via DHCP to the NAT Network.
 For the router, there were added the hospital network, laboratory network and NAT adapters, so that the communication could
 flow between the three interfaces.
-
-![image](https://user-images.githubusercontent.com/78174997/146569662-0b11f253-7375-4a5e-a726-84b5bc438af3.png)
 
 ---
 
@@ -149,6 +151,13 @@ public key. This key is generated so that the communication is done without over
 
 - The symmetric key is temporary and is changed for every medical record that is sent to the hospital server.
 
+
+![Medical Test Records (4)](https://user-images.githubusercontent.com/78174997/154372352-04c97e5d-1998-4a44-bf53-3f87971d095e.jpg)
+
+
+![Medical Test Records (5)](https://user-images.githubusercontent.com/78174997/154372373-9108cc1b-9ba2-45a0-b81b-ca8f99ba9e49.jpg)
+
+
 #### Security properties ensured
 
 - Integrity
@@ -166,21 +175,6 @@ public key. This key is generated so that the communication is done without over
 * [Mongo DB Atlas](https://www.mongodb.com/) - Cloud Database;
 * [Ubuntu Server](https://ubuntu.com/download/server) - Virtual Machines to run the Servers;
 * [UFW - Uncomplicated Firewall](https://www.linux.com/training-tutorials/introduction-uncomplicated-firewall-ufw/) - Firewall.
-
----
-
-## Plan
-
-### Milestones
-
-#### Basic version
-- Design system, set up the login method in Health Institutions frontend servers, set up and configure authentication using Spring Boot Security framework.
-
-#### Intermediate Version
-- Ensure secure communication via TLS, Use asymmetric cryptography for communication establishment, custom protocol development, encrypt server databases
-
-#### Advanced Version
-- Backup servers, database replication,  fault tolerance.
 
 ---
 
