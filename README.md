@@ -1,5 +1,7 @@
 # Medical-Test-Records
 
+A secure healthcare system and network, which aims to interconnect different healthcare institutions and provide patients with secure and confidential access to medical records from different organizations.
+
 ![med](https://user-images.githubusercontent.com/78174997/154372457-0c44d5fa-cf98-45ba-8437-8ac0920896a0.jpg)
 
 ## Introduction
@@ -192,3 +194,276 @@ public key. This key is generated so that the communication is done without over
 - [Get Server | Download. (2022). Ubuntu.](https://ubuntu.com/download/server)
 - [Tutorial: Thymeleaf + Spring. (2018). Thymeleaf.](https://www.thymeleaf.org/doc/tutorials/3.0/thymeleafspring.html)
 - [To Use keytool to Create a Server Certificate (The Java EE 6 Tutorial). (2010). Docs.Oracle.Com.](https://docs.oracle.com/cd/E19798-01/821-1841/gjrgy/)
+
+---
+
+## Getting Started
+
+The following instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+
+---
+
+## Prerequisites
+
+The project can be executed in two ways:
+- Using the virtual machines we provide
+- Locally on your machine.
+
+If testing via virtual machines:
+
+- VirtualBox must be installed on your machine. [Install here VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+
+if testing locally on your machine, you can run the jar files. But first you need to install the following:
+- [Install here java 17](https://jdk.java.net/17/) (*)
+- [Install here Maven](https://maven.apache.org/download.cgi) and select the version "apache-maven-3.8.4-bin.tar.gz",
+
+(*) for Macbook M1 select "macOS/AArch64"
+
+---
+
+## Setup
+
+## Virtual Machines
+
+To prepare the environment it is necessary to import the vms. Firstly a new NAT Network must be created in order to successfully setup the network interfaces.
+
+To create a Nat Network go to:
+- **File > preferences > Network**. 
+- Click on the green icon to add a new Nat Network. 
+- The name should be "**rede**", Network CIDR: **10.0.0.0/24** and **DHCP** should be **enabled**. 
+
+With that done we can procede to import the vms.
+
+In order to import the vm you should go to:
+
+- **Import**, Choose the correct .ova file and import it into virtualbox. 
+
+After setting up the network, by choosing the created network interface the vm can be turned on and changing MACs. 
+Finally By starting the vm, the code will be running and the server will start without any help.
+
+### To access the frontend for both laboratory and hospital, the virutal machine `patient` should be started. 
+
+Patient Virtual machine credentials:
+
+| Username          | Password                            
+|:-----------------:|:-------------------
+| patient           | patient          
+
+After logging in, open a browser and it is possible to see two bookmarks:
+
+For hospital:
+```
+https://10.0.0.4:8443/
+```
+For laboratory
+```
+https://10.0.0.104:8443/
+```
+
+Click on any of the bookmarks, and you will be automatically redirected to the hospital and laboratory web pages, respectively. From here you can explore both websites.
+
+
+The **credentials for each vm** are the the same as the **hostname**, this is, if hostname is hosf, then **username** is hosf and **password** is hosf. 
+The **root crentials** are root:root
+
+### VM's List of IP's
+
+##### Hospital Frontend 10.0.0.4
+
+##### Hospital Backend 10.0.0.5
+
+##### Laboratory Frontend 10.0.0.104
+
+##### Laboratory Backend 10.0.0.105
+
+##### Hospital Backend Server 10.0.0.6
+
+**Note: Links to vm's can be provided if needed**
+
+---
+
+## Setup Locally on your machine
+
+First of all, maven and java are required. So let's install them
+
+## Maven Instalation
+
+We're gonna use maven. The folder is inclued in our project, so ignore this step. 
+
+But there are the instructions:
+
+Installing **maven**, compatible with java 17:
+
+0) Please click [here](https://maven.apache.org/download.cgi) to download maven;
+
+1) Download Binary tar.gz archive: ```apache-maven-3.8.4-bin.tar.gz```;
+
+2) Unpack the archive with tar/unzip;
+
+---
+
+## Java 17 Instalation
+
+#### LINUX
+---
+
+To run the code in a local linux system java 17 and maven must be installed.
+
+Installation of **java 17**:
+
+```
+sudo apt install openjdk-17-jre
+```
+```
+sudo apt install openjdk-17-jdk
+```
+
+Change java version to the newer one:
+```
+sudo update-alternatives --config java
+```
+
+## 
+
+#### MAC OS
+---
+In order to make the correct installation of **java 17** follow the following instructions:
+
+0) Download java 17 from [here](https://jdk.java.net/17/) ```NOTE: for Macbook M1 select "macOS/AArch64"```;
+1) Now go to your Downloads ```cd Downloads/```;
+2) Make ```sudo mv openjdk-17.0.2_macos-aarch64_bin.tar.gz /Library/Java/JavaVirtualMachines/```;
+3) ```cd /Library/Java/JavaVirtualMachines/```;
+4) ```sudo tar -xzf openjdk-17.0.2_macos-aarch64_bin.tar.gz```;
+5) ```sudo rm openjdk-17.0.2_macos-aarch64_bin.tar.gz```;
+6) ```export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-17.0.2.jdk/Contents/Home```.
+
+## 
+
+After the previous installation is complete in your OS, please read the following notes **before** running.
+
+#### ❗️ Notes about running the application ❗️ Mandatory reading ❗️
+
+If you are testing in your local machine, **Do not run all jars at the same time**.
+Please note, Hospital and Laboratory frontends are running on port 8443, and their respective backends are also running in port 3000. Due to this, it is **impossible** to run both Hospital and Laboratory at the same time. It is still possible to run Hospital Backened server, that is running on port 4000, in order to test the custom protocol.
+
+But if you deploy the project in the vms, you can run all at the same time (there is no issue with localhost used ports).
+
+Summary:
++ Hospital Frontend: port 8443
++ Hospital Backened: port 3000
++ Laboratory Frontend: port 8443
++ Laboratory Backened: port 3000
++ Hospital Backend Server: port 4000
+
+--- 
+
+### It's time to run our project:
+##  
+0) Unzip project;
+1) Run the following instructions.
+
+##
+
+<h3 align="center"> 
+	To run the LABORATORY
+</h3>
+
+##
+
+Go to ```Medical-Test-Records/jars``` directory and run: 
+
+```
+java -jar Laboratory-Frontend.jar
+```
+
+Go to ```Medical-Test-Records/Code/Laboratory-Backend``` directory and run:
+```
+java -jar Laboratory-Backend.jar
+```
+
+Go to ```Medical-Test-Records/Code/Hospital-Backend-Server``` directory and run:
+
+```
+apache-maven-3.8.4/bin/mvn spring-boot:run
+```
+
+Now open your browser in ```https://localhost:8443/``` and enjoy our laboratory system.
+
+##
+
+<h3 align="center"> 
+	To run the HOSPITAL
+</h3>
+
+##
+
+Go to ```Medical-Test-Records/jars```directory and run:
+
+```
+java -jar Hospital-Frontend.jar
+```
+
+```
+java -jar Hospital-Backend.jar
+```
+
+Now open your browser in ```https://localhost:8443/``` and enjoy our hospital system.
+
+--- 
+### Citizen card ID and passwords
+
+The credentials to access the hospital and laboratory can be found below.
+
+##
+
+##### ✔︎ HOSPITAL
+
+##### ❗️Note: You can not register in the web site. Only Admin can register personnel. Only Doctor/Nurse can create Medical Records. Only Ward Clerks can register Patients.
+
+---
+| Admin             | Citizen Card ID       | Password                            
+|:-----------------:|:---------------------:|:------------
+| André Proenza     | 12345678              | Password123!
+
+| Doctor            | Citizen Card ID       | Password                            
+|:-----------------:|:---------------------:|:------------
+| Ana Albuquerque   | 19573526              | Fl4%8!Hd10k4Zc*!
+
+| Ward Clerk        | Citizen Card ID       | Password                            
+|:-----------------:|:---------------------:|:------------
+| Hélder Costa      | 15378965              | V322!!P25KM4&f6b
+
+| Patient           | Citizen Card ID       | Password                            
+|:-----------------:|:---------------------:|:------------
+| Amanda Júlio      | 17645234              | pB0K!*vF85!0&@60
+
+| Porter            | Citizen Card ID       | Password                            
+|:-----------------:|:---------------------:|:------------
+| Henrique Jota     | 17564920              | 7u$%4n&B90%8U!6!
+
+| Volunteer         | Citizen Card ID       | Password                            
+|:-----------------:|:---------------------:|:------------
+| Madalena Afonso   | 17564532              | ```*Mj0T**p*?Z!yv0u```
+
+| Patient_Assistant | Citizen Card ID       | Password                            
+|:-----------------:|:---------------------:|:------------
+| Alexandre Pinto   | 14789078              | I&u5lhmt*nO$f?!1
+
+|Clinical_Assistant | Citizen Card ID       | Password                            
+|:-----------------:|:---------------------:|:------------
+| Mariana Rita      | 18509738              | p$h4M$*x*cHk10q@
+
+##
+
+##### ✔︎ LABORATORY
+
+##### ❗️Note:  You can not register in the web site. Only Admin can register personnel. Only Responsible can create Clinical Records and register Patients.
+
+---
+| Admin             | Citizen Card ID       | Password                            
+|:-----------------:|:---------------------:|:------------
+| André Proenza     | 12345678              | Password123!
+
+| Responsible       | Citizen Card ID       | Password                            
+|:-----------------:|:---------------------:|:------------
+| Paulo Marques     | 15288625              | y20lH%7pk*1@h0Ou
