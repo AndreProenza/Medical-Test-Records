@@ -91,11 +91,11 @@ session fixation, clickjacking, cross site request forgery, etc...
 
 ---
 
-### Network Overview
+## Network Overview
 
 ![Medical Test Records (3)](https://user-images.githubusercontent.com/78174997/154372192-a75d32e6-d44c-4708-9c72-c8df2cf39d80.jpg)
 
-As you can see, 6 virtual machines running Ubuntu Server and the router running Seed Ubuntu are deployed.
+As you can see, 7 virtual machines running Ubuntu Server were deployed.
 
 - 1 for the router that will simulate the internet;
 - 1 for Hospital Server, which will receive the clinical records from Partner Lab Backend;
@@ -104,13 +104,13 @@ As you can see, 6 virtual machines running Ubuntu Server and the router running 
 - 1 for local or remote users which will access the frontend servers. To change the location of users on the network, just change the properties of the VM in the hypervisor (VirtualBox, for example). This way we avoid creating multiple VM's for each local and remote user.
 
 For the configuration of the each vm, the hostname, host, credentials, network were configured. For each machine in the
-laboratory and hospital networks, a static ip was set. The patient is connected via DHCP to the NAT Network.
+laboratory and hospital networks, a static ip was set. The patient (Remote user) is connected via DHCP to the NAT Network.
 For the router, there were added the hospital network, laboratory network and NAT adapters, so that the communication could
 flow between the three interfaces.
 
 ---
 
-### Secure channels configured
+## Secure channels configured
 
 #### Who will be communicating?
 
@@ -129,9 +129,9 @@ connection were also configured the application.properties files in the frontend
 
 ---
 
-### Secure custom protocol developed
+## Secure custom protocol developed
 
-#### Who is communicating?
+### Who is communicating?
 
 - Each time a partner Laboratory responsible creates a clinical record, the record is automatically sent to the hospital in a secure and confidential way. To establish this connection, it is necessary to ensure a mutual authentication by both the laboratory and the hospital server;
 
@@ -140,7 +140,7 @@ connection were also configured the application.properties files in the frontend
 - After the exchange of the symmetric key, the laboratory makes a request to the hospital server, asking if the patient exists in the hospital's database. If the patient exists, the clinical record will be sent and then registered in the hospital's database.
 
 
-#### Which keys will exist and how will they be distributed?
+### Which keys will exist and how will they be distributed?
 
 - Each Health Institution is a certifying entity that issues its own certificate. Each of these institutions have an asymmetric key pair, stored in a keystore, which will be used to communicate and establish secure connections and in a truststore the public key of the other service, this is, the hospital backend server has the public key of the laboratory backend. Symmetric keys are generated when establishing a connection between laboratory backend server and hospital server;
 
@@ -158,7 +158,7 @@ public key. This key is generated so that the communication is done without over
 ![Medical Test Records (5)](https://user-images.githubusercontent.com/78174997/154372373-9108cc1b-9ba2-45a0-b81b-ca8f99ba9e49.jpg)
 
 
-#### Security properties ensured
+### Security properties ensured
 
 - Integrity
 - Freshness
