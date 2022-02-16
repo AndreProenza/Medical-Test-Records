@@ -274,7 +274,7 @@ https://10.0.0.104:8443/
 Click on any of the bookmarks, and you will be automatically redirected to the hospital and laboratory web pages, respectively. From here you can explore both websites.
 
 
-### VM's List of IP's
+#### VM's List of IP's
 
 - Hospital Frontend 10.0.0.4
 - Hospital Backend 10.0.0.5
@@ -359,10 +359,7 @@ Summary:
 
 --- 
 
-### It's time to run our project:
-##  
-0) Unzip project;
-1) Run the following instructions.
+### It's time to run the project
 
 ##
 
