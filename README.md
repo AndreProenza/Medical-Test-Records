@@ -2,134 +2,87 @@
 
 ## Introduction
 
-Health care institutions gather and store sensitive information from patients. The information systems should allow fine-grained and contextualized access to the records to the relevant staff, like Doctors and Nurses. Other staff with different data access needs include: clinical assistants (take care of ward housekeeping), patient services assistants (bring meals and drinks), porters (take care of patient lifting and transport), volunteers (help with fundraising and ward visits), and ward clerks (staff the ward reception desks).
+Health care institutions gather and store sensitive information from patients. The information systems should allow fine-
+grained and contextualized access to the records to the relevant staff.
 
-One of the relevant types of data stored are test results. Some of the medical tests can be performed inside a hospital lab, but in many cases, tests are done in partner labs, that have a distinct infrastructure, remote from the infrastructure of the hospital, that need to be interconnected. Also, the medical test data has to be archived in a way such that its authenticity can be verified later, if necessary.
+One of the relevant types of data stored are test results. Some of the medical tests can be performed inside a hospital lab,
+but in many cases, tests are done in partner labs, that have a distinct infrastructure, remote from the infrastructure of the
+hospital, that need to be interconnected. In addition, the privacy clause is a key issue for safe and successful access to
+patient health information. Current approaches do not always provide patients with the ability to establish appropriate rules
+for accessing their information in a secure manner.
 
-It is mandatory that the solution externalizes the security policy with a policy language, like XACML, with separate policy authoring and enforcement points, and different parts of the patient record can be accessed by different people and in different contexts.
-To demonstrate the advantage of this separation, the solution should have a Normal mode of operation and a Pandemic mode, where the rules for data access are significantly different. The switch between modes should be done with changes to the policy documents but without changes to the application code.
+A patient's medical records are extremely sensitive data. The historical records made by doctors facilitate the process of
+diagnosing a patient, ensuring their quality, which helps clinical staff to treat quickly and accordingly.
+This data should be kept private, allowing only the discriminating staff to access it. We believe that all healthcare facilities
+should have access to this type of information so that patients can receive healthcare anywhere and at any time. Therefore,
+the data should be protected from external agents (i.e., outside the medical institutions) and from unauthorized people within
+the institutions.
 
-Suggested references:
-
-- [RFC2753](https://datatracker.ietf.org/doc/html/rfc2753) -- Framework for Policy-based Admission Control
-- [XACML](https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=xacml#other) -- security policy language (there are other languages)
-- [XACML](https://github.com/wso2/balana) library -- example XACML implementation (there are other libraries)
-
-
-## Introdução em Português
-
-As instituições de saúde recolhem e armazenam informação sensível dos doentes. Os sistemas de informação devem permitir o acesso fino e contextualizado aos registos ao pessoal relevante, como Médicos e Enfermeiros. Outro pessoal com diferentes necessidades de acesso aos dados inclui: assistentes clínicos (cuidam da limpeza da enfermaria), assistentes de serviços aos doentes (trazem refeições e bebidas), carregadores (cuidam do levantamento e transporte dos doentes), voluntários (ajudam na angariação de fundos e visitas à enfermaria), e funcionários da enfermaria (pessoal das mesas de recepção da enfermaria).
-
-Um dos tipos de dados relevantes armazenados são os resultados dos testes. Alguns dos testes médicos podem ser realizados dentro de um laboratório hospitalar, mas em muitos casos, os testes são realizados em laboratórios parceiros, que têm uma infra-estrutura distinta, distante da infra-estrutura do hospital, que precisa de estar interligada. Além disso, os dados dos testes médicos têm de ser arquivados de forma a que a sua autenticidade possa ser verificada mais tarde, se necessário.
-
-É obrigatório que a solução externalize a política de segurança com uma linguagem de política, como a XACML, com pontos de autoria e aplicação de políticas separados, e diferentes partes do registo do paciente podem ser acedidas por pessoas diferentes e em contextos diferentes. Para demonstrar a vantagem desta separação, a solução deve ter um modo normal de funcionamento e um modo pandémico, onde as regras de acesso aos dados são significativamente diferentes. A mudança entre modos deve ser feita com alterações aos documentos da apólice, mas sem alterações ao código da aplicação.
-
----
-
-## [Project Overview](https://github.com/tecnico-sec/Project-Overview-2022_1)
-
----
-
-### Technical core requirements
-
-The planned project will need to have, at least:
-
-- a set of separate (virtual) machines, with network isolation;
-- a secure communication tunnel (e.g. TLS, SSH) using correct configuration;
-- the design and deployment of one mechanism using a custom security protocol.
+This project aims to demonstrate a secure system that allows secure and confidential access to patient medical records of
+certain healthcare organizations. It also demonstrates the secure interconnection (sending and receiving of medical records)
+of partner healthcare organizations. In such manner, a patient will be able to access his/her medical records in every
+healthcare organization where he/she is registered.
 
 
 ## Problem
 
-Patient's medical records are extremely sensitive data. The historical records made by doctors
-facilitate the process of diagnosing a patient, ensuring their quality, which helps clinical staff to treat
-quickly and accordingly.
-This data should be kept private, allowing only the discriminating staff to access it. We believe, that
-all healthcare facilities should have access to this type of information so that patients can receive
-healthcare anywhere and at any time. Therefore, the data should be protected from external agents
-(i.e., outside the medical institutions) and from unauthorised people within the institutions.
+- Health care institutions gather and store sensitive information from patients such as medical test records;
+- Patients can not always access their medical records in a secure manner;
+- Information systems do not always ensure fine-grained and contextualized access to medical records for relevant staff;
+- Lack of connection and access to medical records of different partner institutions, with different infrastructures.
+
 
 ---
 
-### Solution Requirements
+## Solution
 
-Since this is a system that protects confidential information, the processing of data must be secure. Therefore, the solution must ensure the following security requirements.
-
-#### Security requirements:
-
-- Ensure confidentiality and integrity of medical records;
-- Ensure confidentiality and integrity of communications with the web application;
-- Ensure that only authorised medical staff and patients have an account;
-- Ensure different “roles” have access to different privileges;
-- Ensure there is only one account per citizen;
-- Prevent access to medical records if the user does not have privileges;
-- Allow user A to change the privileges of user B, if user A is a system administrator;
-- Ensure successful authentication of users;
-- Mitigate brute force attacks on the authentication system (e.g. blocking IP’s);
-- Minimize the impact of failures within the system (solution: do an "I'm alive with timeout" to the backup server);
-- Minimize the impact of attacks inside the system.
-- Users cannot repudiate their actions
+- Provide a secure system to allow safe and confidential access to patient's medical records;
+- Ensure authentication and access control to certain resources for authorized personnel;
+- Ensure secure interconnection (sending and receiving medical records) between partner health organizations.
 
 ---
 
-### Trust assumptions
+## System Features
 
-Fully trusted
-- Hospital Server
-- Partner Lab server
-
-Partially trusted
-- Certified user machine
-
-Not Trusted
-- Not Certified user machine
+-	Ensures confidentiality and integrity of medical records;
+-	Ensures confidentiality and integrity of communications with the web browser;
+-	Ensure successful authentication of citizens;
+-	Authenticates citizens in a secure way;
+-	Ability to change password if citizen is authenticated;
+-	Authenticated user credentials confirmation sent to email;
+-	Ensures that only authorized staff and patients have an account;
+-	Ensures different “roles” have access to different privileges;
+-	Ensures there is only one account per citizen, using citizen ID card number;
+-	Prevents access to medical records if the citizen does not have privileges;
+-	Allows user A to change the privileges of user B, if user A is a system administrator;
+-	Validates and sanitize form input;
+-	Uses HTTPS to encrypt communications;
+-	Stores and manage symmetric and asymmetric keys;
+-	Defines a restricted set of rules on the firewall;
+-	Establishes mutual authentication and shares medical records with partner institutions;
+-	Minimizes the impact of attacks inside the system.
 
 ---
 
-## Proposed solution
 
-### Overview
+## Architecture
 
-In order to simulate real systems and their interconnection, our solution is based on the development of two systems representing healthcare institutions. A hospital and a partner laboratory. The goal is to simulate two institutions sending confidential medical records of patients in a secure way from one side to the other. Authorised hospital and laboratory staff will be able to access their respective hospital and laboratory remotely or locally. Patients will also have remote or local access to the system in order to consult their medical records. To make our vision clearer, we present the following system requirements:
-
-#### As a user (depending on my privilege) I should be able to:
-
-- Read/write medical records (send requests to the system);
-- Receive responses from the system (receive replies from the system).
-
-#### As a Doctor, Nurse I should be able to:
-
-- Read/Update medical records
-
-#### As a Patient service assistants, Porters I should be able to:
-
-- Read patients specific information in the medical records
-
-#### As a Ward clerk I should be able to:
-
-- Register a patient in the system
-
-#### As a Patient service assistants, Volunteers I should be able to:
-
-- Read specific information.
-
-#### As a Patient I should be able to:
-
-- Read my medical record
-
-#### As the system administrator I should be able to:
-
-- Modify/set user privileges.
-- Create new personnel records within the institutions
-
-## Solution Architecture
+In order to simulate real systems and their interconnection, our solution is based on the development of two systems representing
+healthcare institutions. A hospital and a partner laboratory. The goal is to have two completely independent and functional
+healthcare institutions, each with its own data storage system and independent web platform, and simultaneously simulate the
+sending of confidential patient’s medical records in a secure way from one institution to the other. Authorized hospital and
+laboratory staff as well as patients will be able to access their respective hospital and laboratory remotely or locally.
 
 ![image](https://user-images.githubusercontent.com/78174997/146569869-6563902a-f73b-4118-8c51-d9eac52f1a04.png)
 
 
-## Security Policy AuthzForce
+## Spring Security, Security policy language
 
-In the AuthzForce area, the service analyses the request and then generates an XACML authorisation request, which is "fed" into the AuthzForce PDP Engine. Then the PDP evaluates the request according to the policies it is configured with, and, if necessary, also retrieves other attribute values from the database in order to execute its decision (PIP). This decision is then sent back from the engine, and depending on the result, the server generates a response and sends it to the client application
+Spring Security is a powerful and highly customizable authentication and access-control framework. It is the de-facto standard
+for securing Spring-based applications.
+Spring Security is a framework that focuses on providing both authentication and authorization to Java applications. It has
+features like Comprehensive and extensible support for both Authentication and Authorization. Protection against attacks like
+session fixation, clickjacking, cross site request forgery, etc...
 
 ![image](https://user-images.githubusercontent.com/78174997/146477605-f48aa3c2-85bd-4c03-9e40-32d21c4d4ade.png)
 
@@ -138,48 +91,81 @@ In the AuthzForce area, the service analyses the request and then generates an X
 
 ### Deployment
 
-4 virtual machines will be deployed.
-- 1 for the router that will simulate the internet
-- 1 for the hospital, where the frontend, backend and database servers will run.
-- 1 for the partner laboratory, where the frontend, backend and database servers will run.
-- 1 for local or remote users which will access the frontend servers. To change the location of users on the network, just change the properties of the vm in the hypervisor (VirtualBox for example). This way we avoid creating multiple VM's for each local and remote user.
+As you can see, 6 virtual machines running Ubuntu Server and the router running Seed Ubuntu are deployed.
+
+- 1 for the router that will simulate the internet;
+- 1 for Hospital Server, which will receive the clinical records from Partner Lab Backend;
+- 2 for the hospital and laboratory respective frontends;
+- 2 for the hospital and laboratory respective backends;
+- 1 for local or remote users which will access the frontend servers. To change the location of users on the network, just change the properties of the VM in the hypervisor (VirtualBox, for example). This way we avoid creating multiple VM's for each local and remote user.
+
+For the configuration of the each vm, the hostname, host, credentials, network were configured. For each machine in the
+laboratory and hospital networks, a static ip was set. The patient is connected via DHCP to the NAT Network.
+For the router, there were added the hospital network, laboratory network and NAT adapters, so that the communication could
+flow between the three interfaces.
 
 ![image](https://user-images.githubusercontent.com/78174997/146569662-0b11f253-7375-4a5e-a726-84b5bc438af3.png)
 
 ---
 
-### Secure channel(s) to configure
+### Secure channels configured
 
-Who will be communicating?
+#### Who will be communicating?
 
-- The health institutions (Hospital and Laboratory) via secure TLS communication, to send medical records securely.
-- The remote and local users with the health institutions, (Hospital and Laboratory) via TLS secure communication, to perform a certain action. (For example, consulting medical records, etc...)
+A user accesses any of the health institution platforms through the HTTPS protocol, thus encrypting the communication and
+making it secure. Each of the health institutions has a frontend that authenticates a user according to his/her "role",
+processes, validates, sanitizes form data and makes requests to the api of the respective backend institution to authenticate
+users, or to fetch a user or a medical/clinical specific information, which then makes a request to the respective database.
+The connections to the databases, as well as the connections from frontends to backends, use the HTTPS protocol, thus
+ensuring content integrity and confidentiality
 
-Which keys will exist and how will they be distributed?
+#### SSL certificates
 
-- Each Health Institution will be a certifying entity that issues its own certificate. Each of these institutions will also have an asymmetric key pair, which will be used to communicate and establish secure connections. The keys and certificates are stored in their respective health institutions virtual machines.
-
-- The virtual machine, where users will access the webservers, will also have an asymmetric key pair and a certificate.
-
----
-
-### Secure protocol(s) to develop
-
-Who will be communicating?
-
-- The health institutions (Hospital and Laboratory) via this secure communication, to send medical records securely.
-
-Security properties to ensure
-- The Protocol must ensure integrity, confidentiality and non-repudiation.
+By default, the backends connect to their databases via HTTPS. SSL is configured in the backends application.properties.
+For the frontends and backends, self-signed certificates were created with the help of the keytool. To establish the HTTPS
+connection were also configured the application.properties files in the frontends and backends of both institutions.
 
 ---
 
-## Considered technologies
+### Secure custom protocol developed
 
-- Frontend: Java Spring Boot
-- Backend: Java Spring Boot
-- Database: MongoDB
-- Security policy language: Spring Boot Security
+#### Who is communicating?
+
+- Each time a partner Laboratory responsible creates a clinical record, the record is automatically sent to the hospital in a secure and confidential way. To establish this connection, it is necessary to ensure a mutual authentication by both the laboratory and the hospital server;
+
+- When the connection is first requested, the hospital server and the laboratory must both authenticate each other and exchange a symmetric key in order to encrypt the messages that will be sent;
+
+- After the exchange of the symmetric key, the laboratory makes a request to the hospital server, asking if the patient exists in the hospital's database. If the patient exists, the clinical record will be sent and then registered in the hospital's database.
+
+
+#### Which keys will exist and how will they be distributed?
+
+- Each Health Institution is a certifying entity that issues its own certificate. Each of these institutions have an asymmetric key pair, stored in a keystore, which will be used to communicate and establish secure connections and in a truststore the public key of the other service, this is, the hospital backend server has the public key of the laboratory backend. Symmetric keys are generated when establishing a connection between laboratory backend server and hospital server;
+
+- When the connection is first requested by the laboratory, the hospital server sends its signed certificate, so the laboratory can verify its legitimacy. The second step is laboratory is to verify the server legitimacy, in order to do this, the server sends a random string to the laboratory, so that the laboratory can sign that string with its private key and the server can verify the laboratory authenticity by decrypting the same random string using the laboratory public key;
+
+- If the authentication is successful, the laboratory creates a symmetric key that is sent to the laboratory, encrypted with its
+public key. This key is generated so that the communication is done without overexposing the private keys;
+
+- The symmetric key is temporary and is changed for every medical record that is sent to the hospital server.
+
+#### Security properties ensured
+
+- Integrity
+- Freshness
+- Confidentiality
+
+---
+
+## Used Technologies
+
+* [Java](https://openjdk.java.net/) - Programming Language;
+* [Maven](https://maven.apache.org/) - Build Tool and Dependency Management;
+* [Spring Boot](https://spring.io/projects/spring-boot) - Create Java stand-alone Spring applications;
+* [Spring Boot Security](https://spring.io/projects/spring-security) - A highly customizable authentication and access-control framework;
+* [Mongo DB Atlas](https://www.mongodb.com/) - Cloud Database;
+* [Ubuntu Server](https://ubuntu.com/download/server) - Virtual Machines to run the Servers;
+* [UFW - Uncomplicated Firewall](https://www.linux.com/training-tutorials/introduction-uncomplicated-firewall-ufw/) - Firewall.
 
 ---
 
