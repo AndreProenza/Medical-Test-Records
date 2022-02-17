@@ -7,6 +7,15 @@ A secure healthcare system and network, which aims to interconnect different hea
 # Table of Contents
 1. [Introduction](#introduction)
 2. [Problem](#problem)
+3. [Solution](#solution)
+4. [System Features](#system-features)
+5. [Architecture](#architecture)
+6. [Network Overview](#network-overview)
+7. [Secure channels](#secure-channels-configured)
+8. [Secure custom protocol](#secure-custom-protocol-developed)
+9. [Used Technologies](#used-technologies)
+10. [References](#references)
+11. [Getting Started](#getting-started)
 
 ## Introduction
 
