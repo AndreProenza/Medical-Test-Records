@@ -16,6 +16,11 @@ A secure healthcare system and network, which aims to interconnect different hea
 9. [Used Technologies](#used-technologies)
 10. [References](#references)
 11. [Getting Started](#getting-started)
+12. [Prerequisites](#prerequisites)
+13. [Setup Virtual Machines](#setup-virtual-machines)
+14. [Setup Locally on your machine](#setup-locally-on-your-machine)
+15. [Additional Information](#additional-information)
+16. [Authors](#authors)
 
 ## Introduction
 
@@ -234,9 +239,7 @@ if testing locally on your machine, you can run the jar files. But first you nee
 
 ---
 
-## Setup
-
-## Virtual Machines
+## Setup Virtual Machines
 
 To prepare the environment it is necessary to import the vms. 
 Please donwload them in following links:
@@ -500,7 +503,7 @@ Regarding vms and networking, although we had a solution that forwarded all pack
 
 ---
 
-### Authors
+## Authors
 
 * **Ana Albuquerque** - [GitHub](https://github.com/albuana)
 * **André Proença** - [GitHub](https://github.com/AndreProenza)
