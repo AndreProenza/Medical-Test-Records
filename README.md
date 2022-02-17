@@ -4,6 +4,11 @@ A secure healthcare system and network, which aims to interconnect different hea
 
 ![med](https://user-images.githubusercontent.com/78174997/154372457-0c44d5fa-cf98-45ba-8437-8ac0920896a0.jpg)
 
+## Index
+1. [Introduction](Introduction)
+2. [Problem](Problem)
+
+
 ## Introduction
 
 Health care institutions gather and store sensitive information from patients. The information systems should allow fine-
