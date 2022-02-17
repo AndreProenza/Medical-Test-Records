@@ -105,7 +105,7 @@ healthcare institutions, each with its own data storage system and independent w
 sending of confidential patient’s medical records in a secure way from one institution to the other. Authorized hospital and
 laboratory staff as well as patients will be able to access their respective hospital and laboratory remotely or locally.
 
-![Medical Test Records (1)](https://user-images.githubusercontent.com/78174997/154372064-b0e2fff3-c3cc-4817-ae9f-3c8bed13eb5a.jpg)
+![Medical Test Records (6)](https://user-images.githubusercontent.com/78174997/154532620-4d308740-545f-4656-bf80-88dccad63ed5.jpg)
 
 ---
 
