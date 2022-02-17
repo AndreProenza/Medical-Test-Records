@@ -26,7 +26,9 @@ A secure healthcare system and network, which aims to interconnect different hea
 
 ---
 
-## Video 
+## Video live system (Setup - virtual machines)
+
+https://user-images.githubusercontent.com/78174997/154493862-8d8dc3a7-d7fb-4ae2-a46c-24f538e21382.mp4
 
 ---
 
