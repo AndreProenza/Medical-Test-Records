@@ -312,7 +312,8 @@ Click on any of the bookmarks, and you will be automatically redirected to the h
 
 ## Setup Locally on your machine
 
-First of all, maven and java are required. So let's install them
+First of all, download the ready to execute folder: [Medical-Test-Records](https://drive.google.com/drive/folders/1UpfKsnA9aQQDwUPoirttpSWe_TlspJwn?usp=sharing)
+then, install maven and java. Let's install them
 
 ## Maven Instalation
 
