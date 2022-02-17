@@ -40,12 +40,10 @@ sudo ufw allow from 10.0.0.4 to any proto tcp port 3000
 
 # para ambos lab e hospital
 
-#TODO
-
 
 #--- crontab
 
-crontab -e # criar
+crontab -e # create
 
 @reboot /path/to/bash-script
 
