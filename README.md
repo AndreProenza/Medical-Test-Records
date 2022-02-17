@@ -199,7 +199,7 @@ public key. This key is generated so that the communication is done without over
 
 ## Getting Started
 
-The following instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+The following instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See Additional Information on the bottom of this document to see additional information.
 
 ---
 
@@ -466,3 +466,31 @@ The credentials to access the hospital and laboratory can be found below.
 | Responsible       | Citizen Card ID       | Password                            
 |:-----------------:|:---------------------:|:------------
 | Paulo Marques     | 15288625              | y20lH%7pk*1@h0Ou
+
+---
+
+## Additional Information
+
+For deploymend on a live system you should have access to a mongodb database account and a suficient ammount of ram.
+
+For virtualization any hyphervisor should suffice, you just need to be able to create isolated internal networks and and have
+access to the internet.
+
+For a more isolated control of any possible vulnerabilities, the use of docker could add an extra layer of protection against attacks to the 
+network, this is, it creates an extra difficulty to obtain higher/relevant credentials on the computar that manages the docker/s.
+
+Regarding the system, there is a necessity to create the first admin manually, since the option of creating new user/admins is not available. This is a great advantage in terms of security, but can become a problem in usability, even if it must only be done once.
+
+The Hospital Backend server is able to accept multiple clients (via threads) therefore it possible to easily escalate the system, create multiple laboratories.
+
+Regarding vms and networking, although we had a solution that forwarded all packets from both interfaces via a router, the vms had no internet access, therefore we had to remove the router and put every vm in the same network.
+
+---
+
+### Authors
+
+* **Ana Albuquerque** - ** ist1102209 ** - [GitHub](https://github.com/albuana)
+* **André Proença** - ** ist1102327 ** - [GitHub](https://github.com/AndreProenza)
+* **Joel Russo** -  ** ist1102098 ** - [GitHub](https://github.com/jolick)
+
+---
