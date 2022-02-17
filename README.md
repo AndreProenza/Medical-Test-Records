@@ -117,7 +117,7 @@ Spring Security is a framework that focuses on providing both authentication and
 features like Comprehensive and extensible support for both Authentication and Authorization. Protection against attacks like
 session fixation, clickjacking, cross site request forgery, etc...
 
-![Medical Test Records](https://user-images.githubusercontent.com/78174997/154372228-c79d47be-b189-4248-87be-3ceb78cf95cf.jpg)
+![Medical Test Records (7)](https://user-images.githubusercontent.com/78174997/154533159-d270aa5b-0b6e-455d-8b09-112c645ab9ca.jpg)
 
 ---
 
