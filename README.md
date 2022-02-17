@@ -489,8 +489,8 @@ Regarding vms and networking, although we had a solution that forwarded all pack
 
 ### Authors
 
-* **Ana Albuquerque** - ** ist1102209 ** - [GitHub](https://github.com/albuana)
-* **André Proença** - ** ist1102327 ** - [GitHub](https://github.com/AndreProenza)
-* **Joel Russo** -  ** ist1102098 ** - [GitHub](https://github.com/jolick)
+* **Ana Albuquerque** - [GitHub](https://github.com/albuana)
+* **André Proença** - [GitHub](https://github.com/AndreProenza)
+* **Joel Russo** - [GitHub](https://github.com/jolick)
 
 ---
