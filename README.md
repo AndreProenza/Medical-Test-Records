@@ -59,22 +59,35 @@ healthcare organization where he/she is registered.
 
 ## Problem
 
+<details>
+  <summary align="left"><b>&nbsp;show more</b></summary>
+	
 - Health care institutions gather and store sensitive information from patients such as medical test records;
 - Patients can not always access their medical records in a secure manner;
 - Information systems do not always ensure fine-grained and contextualized access to medical records for relevant staff;
 - Lack of connection and access to medical records of different partner institutions, with different infrastructures.
 
+</details>
+
 ---
 
 ## Solution
 
+<details>
+  <summary align="left"><b>&nbsp;show more</b></summary>
+	
 - Provide a secure system to allow safe and confidential access to patient's medical records;
 - Ensure authentication and access control to certain resources for authorized personnel;
 - Ensure secure interconnection (sending and receiving medical records) between partner health organizations.
 
+</details>
+
 ---
 
 ## System Features
+
+<details>
+  <summary align="left"><b>&nbsp;show more</b></summary>
 
 -	Ensures confidentiality and integrity of medical records;
 -	Ensures confidentiality and integrity of communications with the web browser;
@@ -94,11 +107,16 @@ healthcare organization where he/she is registered.
 -	Establishes mutual authentication and shares medical records with partner institutions;
 -	Minimizes the impact of attacks inside the system.
 
+</details>
+
 ---
 
 
 ## Architecture
 
+<details>
+  <summary align="left"><b>&nbsp;show more</b></summary>
+	
 In order to simulate real systems and their interconnection, our solution is based on the development of two systems representing
 healthcare institutions. A hospital and a partner laboratory. The goal is to have two completely independent and functional
 healthcare institutions, each with its own data storage system and independent web platform, and simultaneously simulate the
@@ -107,10 +125,15 @@ laboratory staff as well as patients will be able to access their respective hos
 
 ![Medical Test Records (6)](https://user-images.githubusercontent.com/78174997/154532620-4d308740-545f-4656-bf80-88dccad63ed5.jpg)
 
+</details>
+
 ---
 
 ## Spring Security, Security policy language
 
+<details>
+  <summary align="left"><b>&nbsp;show more</b></summary>
+	
 Spring Security is a powerful and highly customizable authentication and access-control framework. It is the de-facto standard
 for securing Spring-based applications.
 Spring Security is a framework that focuses on providing both authentication and authorization to Java applications. It has
@@ -119,9 +142,14 @@ session fixation, clickjacking, cross site request forgery, etc...
 
 ![Medical Test Records (7)](https://user-images.githubusercontent.com/78174997/154533159-d270aa5b-0b6e-455d-8b09-112c645ab9ca.jpg)
 
+</details>
+
 ---
 
 ## Network Overview
+
+<details>
+  <summary align="left"><b>&nbsp;show more</b></summary>
 
 ![Medical Test Records (3)](https://user-images.githubusercontent.com/78174997/154372192-a75d32e6-d44c-4708-9c72-c8df2cf39d80.jpg)
 
@@ -138,11 +166,16 @@ laboratory and hospital networks, a static ip was set. The patient (Remote user)
 For the router, there were added the hospital network, laboratory network and NAT adapters, so that the communication could
 flow between the three interfaces.
 
+</details>
+
 ---
 
 ## Secure channels configured
 
 #### Who will be communicating?
+
+<details>
+  <summary align="left"><b>&nbsp;show more</b></summary>
 
 A user accesses any of the health institution platforms through the HTTPS protocol, thus encrypting the communication and
 making it secure. Each of the health institutions has a frontend that authenticates a user according to his/her "role",
@@ -151,11 +184,18 @@ users, or to fetch a user or a medical/clinical specific information, which then
 The connections to the databases, as well as the connections from frontends to backends, use the HTTPS protocol, thus
 ensuring content integrity and confidentiality
 
+</details>
+
 #### SSL certificates
+
+<details>
+  <summary align="left"><b>&nbsp;show more</b></summary>
 
 By default, the backends connect to their databases via HTTPS. SSL is configured in the backends application.properties.
 For the frontends and backends, self-signed certificates were created with the help of the keytool. To establish the HTTPS
 connection were also configured the application.properties files in the frontends and backends of both institutions.
+
+</details>
 
 ---
 
@@ -163,14 +203,21 @@ connection were also configured the application.properties files in the frontend
 
 ### Who is communicating?
 
+<details>
+  <summary align="left"><b>&nbsp;show more</b></summary>
+
 - Each time a partner Laboratory responsible creates a clinical record, the record is automatically sent to the hospital in a secure and confidential way. To establish this connection, it is necessary to ensure a mutual authentication by both the laboratory and the hospital server;
 
 - When the connection is first requested, the hospital server and the laboratory must both authenticate each other and exchange a symmetric key in order to encrypt the messages that will be sent;
 
 - After the exchange of the symmetric key, the laboratory makes a request to the hospital server, asking if the patient exists in the hospital's database. If the patient exists, the clinical record will be sent and then registered in the hospital's database.
 
+</details>
 
 ### Which keys will exist and how will they be distributed?
+
+<details>
+  <summary align="left"><b>&nbsp;show more</b></summary>
 
 - Each Health Institution is a certifying entity that issues its own certificate. Each of these institutions have an asymmetric key pair, stored in a keystore, which will be used to communicate and establish secure connections and in a truststore the public key of the other service, this is, the hospital backend server has the public key of the laboratory backend. Symmetric keys are generated when establishing a connection between laboratory backend server and hospital server;
 
@@ -187,12 +234,18 @@ public key. This key is generated so that the communication is done without over
 
 ![Medical Test Records (5)](https://user-images.githubusercontent.com/78174997/154372373-9108cc1b-9ba2-45a0-b81b-ca8f99ba9e49.jpg)
 
+</details>
 
 ### Security properties ensured
+
+<details>
+  <summary align="left"><b>&nbsp;show more</b></summary>
 
 - Integrity
 - Freshness
 - Confidentiality
+
+</details>
 
 ---
 
@@ -251,6 +304,9 @@ if testing locally on your machine, you can run the jar files. But first you nee
 
 ## Setup Virtual Machines
 
+<details>
+  <summary align="left"><b>&nbsp;show more</b></summary>
+
 To prepare the environment it is necessary to import the vms. 
 Please donwload them in following links:
 
@@ -308,9 +364,14 @@ Click on any of the bookmarks, and you will be automatically redirected to the h
 - Laboratory Backend 10.0.0.105
 - Hospital Backend Server 10.0.0.6
 
+</details>
+
 ---
 
 ## Setup Locally on your machine
+
+<details>
+  <summary align="left"><b>&nbsp;show more</b></summary>
 
 First of all, download the ready to execute folder [Medical-Test-Records](https://drive.google.com/file/d/1LIi3zaEA7fo2x6gVz3EmzDbYnbCunzF5/view?usp=sharing)
 
@@ -495,9 +556,14 @@ The credentials to access the hospital and laboratory can be found below.
 |:-----------------:|:---------------------:|:------------
 | Paulo Marques     | 15288625              | y20lH%7pk*1@h0Ou
 
+</details>
+
 ---
 
 ## Additional Information
+
+<details>
+  <summary align="left"><b>&nbsp;show more</b></summary>
 
 For deploymend on a live system you should have access to a mongodb database account and a suficient ammount of ram.
 
@@ -512,6 +578,8 @@ Regarding the system, there is a necessity to create the first admin manually, s
 The Hospital Backend server is able to accept multiple clients (via threads) therefore it possible to easily escalate the system, create multiple laboratories.
 
 Regarding vms and networking, although we had a solution that forwarded all packets from both interfaces via a router, the vms had no internet access, therefore we had to remove the router and put every vm in the same network.
+
+</details>
 
 ---
 
